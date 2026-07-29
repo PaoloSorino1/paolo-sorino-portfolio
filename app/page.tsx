@@ -188,7 +188,7 @@ const invitedTalks = [
     year: "2022",
     event: "IEEE BHI-BSN 2022 · Invited Speech",
     title:
-      "Composizione musicale in tempo reale basata sul riconoscimento delle emozioni AI",
+      "Real-Time Music Composition Based on AI-Driven Emotion Recognition",
     context:
       "Workshop on enabling technologies for paediatric rehabilitation · Ioannina, Greece · 27–30 September 2022",
   },
@@ -235,26 +235,30 @@ export default function Home() {
           <a href="#teaching">Teaching</a>
         </nav>
 
-        <a className="header-cta" href="mailto:paolo.sorino@poliba.it">
-          Connect <span aria-hidden="true">↗</span>
+        <a
+          aria-label="Email Paolo Sorino"
+          className="header-cta"
+          href="mailto:paolo.sorino@poliba.it"
+        >
+          <span aria-hidden="true">✉</span>
         </a>
       </header>
 
       <section className="hero section-shell" id="top">
         <div className="hero-copy">
           <div className="hero-prelude">
-            <p className="eyebrow">Paolo Sorino · Research portfolio</p>
+            <p className="eyebrow">Paolo Sorino, PhD</p>
             <span className="availability">
               <i aria-hidden="true" />
               Open to research collaborations
             </span>
           </div>
           <h1>
-            <span className="hero-name">Paolo Sorino,</span>
-            <em>PhD</em>
+            <span className="hero-name">Postdoctoral</span>
+            <em>Researcher</em>
           </h1>
           <p className="hero-role">
-            Postdoctoral Researcher in Information Processing Systems
+            Information Processing Systems
             <span>Politecnico di Bari</span>
           </p>
           <p className="hero-statement">
@@ -287,14 +291,31 @@ export default function Home() {
             <span>01 — 03</span>
           </div>
           <div className="hero-art-frame">
-            <Image
-              alt="Editorial collage illustrating explainable artificial intelligence, clinical decision support, and human–machine interaction"
-              height={933}
-              priority
-              sizes="(max-width: 1080px) 92vw, 48vw"
-              src={publicAsset("/assets/editorial-scientific-collage-v2.webp")}
-              width={1400}
-            />
+            <div className="hero-science-layer" aria-hidden="true">
+              <Image
+                alt=""
+                fill
+                priority
+                sizes="(max-width: 1080px) 92vw, 48vw"
+                src={publicAsset("/assets/editorial-scientific-collage-v2.webp")}
+              />
+            </div>
+            <div className="hero-portrait-layer">
+              <Image
+                alt="Paolo Sorino during a scientific presentation"
+                fill
+                priority
+                sizes="(max-width: 560px) 78vw, (max-width: 1080px) 520px, 32vw"
+                src={publicAsset("/assets/paolo-sorino-portrait-v3.jpg")}
+              />
+            </div>
+            <div className="hero-data-card" aria-hidden="true">
+              <small>Research focus</small>
+              <strong>XAI</strong>
+              <span>Healthcare · HMI</span>
+            </div>
+            <span className="hero-node hero-node-one" aria-hidden="true" />
+            <span className="hero-node hero-node-two" aria-hidden="true" />
           </div>
           <figcaption>
             <span className="hero-art-caption-label">Research directions</span>

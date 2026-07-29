@@ -1,4 +1,7 @@
 import type { Metadata, Viewport } from "next";
+import "@fontsource/poppins/400.css";
+import "@fontsource/poppins/500.css";
+import "@fontsource/poppins/600.css";
 import "./globals.css";
 
 const publicBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
@@ -43,7 +46,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   colorScheme: "light",
-  themeColor: "#f3efe6",
+  themeColor: "#f3f5f4",
   width: "device-width",
   initialScale: 1,
 };
