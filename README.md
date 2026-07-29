@@ -11,8 +11,9 @@ Portfolio accademico responsive realizzato con Next.js, React e TypeScript.
 - hero con ritratto di Paolo scontornato e integrato nel collage scientifico,
   senza sfondo fotografico rettangolare;
 - switch persistente `EN / IT` che traduce homepage e pagina Publications;
-- Research Visual Atlas con topic distribuiti dedicati ad Artificial
-  Intelligence, Machine Learning, XAI, Healthcare e HMI;
+- Research Visual Atlas con knowledge graph editoriale dedicato ad Artificial
+  Intelligence, Machine Learning, XAI, Healthcare, HMI, Knowledge Graphs e
+  Clinical Decision Support;
 - card delle tre prospettive di ricerca ridisegnate con finitura premium,
   angoli arrotondati e layout mobile a colonna;
 - XAI in healthcare, AI in healthcare e Human-Machine Interaction;

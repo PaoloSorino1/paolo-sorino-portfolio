@@ -349,30 +349,122 @@ export default function Home() {
                 src={publicAsset("/assets/paolo-sorino-portrait-cutout-hero-v4.png")}
               />
             </div>
-            <div className="hero-topic-cloud" aria-hidden="true">
-              <span className="hero-topic hero-topic-ai">
-                {t("Artificial Intelligence")}
-              </span>
-              <span className="hero-topic hero-topic-ml">
-                {t("Machine Learning")}
-              </span>
-              <span className="hero-topic hero-topic-health">
-                {t("AI and Machine Learning in Healthcare")}
-              </span>
-              <span className="hero-topic hero-topic-xai">
-                {t("Explainable AI")}
-              </span>
-              <span className="hero-topic hero-topic-hmi">
-                {t("Human–Machine Interaction")}
-              </span>
-            </div>
+            <svg
+              aria-hidden="true"
+              className="hero-knowledge-graph"
+              preserveAspectRatio="xMidYMid meet"
+              viewBox="0 0 640 600"
+            >
+              <g className="graph-edges">
+                <path d="M250 270 105 130" />
+                <path d="M250 270 100 425" />
+                <path d="M250 270 355 105" />
+                <path d="M250 270 510 235" />
+                <path d="M250 270 190 515" />
+                <path d="M250 270 430 455" />
+                <path d="M105 130 100 425" />
+                <path d="M105 130 355 105" />
+                <path d="M100 425 430 455" />
+                <path d="M100 425 510 235" />
+                <path d="M355 105 190 515" />
+                <path d="M355 105 430 455" />
+                <path d="M510 235 430 455" />
+              </g>
+
+              <g className="graph-satellites">
+                <circle cx="42" cy="265" r="5" />
+                <circle cx="62" cy="72" r="3.5" />
+                <circle cx="160" cy="56" r="4" />
+                <circle cx="306" cy="44" r="3" />
+                <circle cx="468" cy="64" r="5" />
+                <circle cx="584" cy="152" r="3.5" />
+                <circle cx="594" cy="354" r="4.5" />
+                <circle cx="548" cy="530" r="3" />
+                <circle cx="325" cy="555" r="4" />
+                <circle cx="54" cy="525" r="3.5" />
+              </g>
+
+              <g className="graph-node graph-node-core">
+                <circle className="graph-node-halo" cx="250" cy="270" r="55" />
+                <circle cx="250" cy="270" r="39" />
+                <text x="250" y="276">
+                  AI
+                </text>
+              </g>
+
+              <g className="graph-node">
+                <circle cx="105" cy="130" r="18" />
+                <text className="graph-node-code" x="105" y="134">
+                  ML
+                </text>
+                <text className="graph-node-label" x="132" y="134">
+                  {t("Machine Learning")}
+                </text>
+              </g>
+
+              <g className="graph-node">
+                <circle cx="100" cy="425" r="18" />
+                <text className="graph-node-code" x="100" y="429">
+                  H
+                </text>
+                <text className="graph-node-label" x="127" y="429">
+                  {t("Healthcare")}
+                </text>
+              </g>
+
+              <g className="graph-node">
+                <circle cx="355" cy="105" r="18" />
+                <text className="graph-node-code" x="355" y="109">
+                  XAI
+                </text>
+                <text className="graph-node-label" x="382" y="109">
+                  {t("Explainable AI")}
+                </text>
+              </g>
+
+              <g className="graph-node">
+                <circle cx="510" cy="235" r="18" />
+                <text className="graph-node-code" x="510" y="239">
+                  HMI
+                </text>
+                <text
+                  className="graph-node-label graph-label-centred"
+                  x="510"
+                  y="270"
+                >
+                  {t("Human–Machine Interaction")}
+                </text>
+              </g>
+
+              <g className="graph-node">
+                <circle cx="190" cy="515" r="15" />
+                <text className="graph-node-code" x="190" y="519">
+                  KG
+                </text>
+                <text className="graph-node-label" x="213" y="519">
+                  {t("Knowledge Graphs")}
+                </text>
+              </g>
+
+              <g className="graph-node">
+                <circle cx="430" cy="455" r="16" />
+                <text className="graph-node-code" x="430" y="459">
+                  CDS
+                </text>
+                <text
+                  className="graph-node-label graph-label-centred"
+                  x="430"
+                  y="489"
+                >
+                  {t("Clinical Decision Support")}
+                </text>
+              </g>
+            </svg>
             <div className="hero-data-card" aria-hidden="true">
               <small>{t("Research atlas")}</small>
               <strong>AI · ML</strong>
               <span>{t("Healthcare · XAI · HMI")}</span>
             </div>
-            <span className="hero-node hero-node-one" aria-hidden="true" />
-            <span className="hero-node hero-node-two" aria-hidden="true" />
           </div>
         </figure>
       </section>

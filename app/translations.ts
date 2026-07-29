@@ -21,6 +21,9 @@ const italian: Record<string, string> = {
   "AI and Machine Learning in Healthcare":
     "IA e machine learning per la sanità",
   "Explainable AI": "IA spiegabile",
+  "Healthcare": "Sanità",
+  "Knowledge Graphs": "Knowledge graph",
+  "Clinical Decision Support": "Supporto alle decisioni cliniche",
   "Healthcare · XAI · HMI": "Sanità · XAI · HMI",
   "Three connected perspectives.": "Tre prospettive connesse.",
   "From model development to explanation and interaction, each line of research is grounded in responsible, clinically meaningful use.":
