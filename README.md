@@ -6,6 +6,10 @@ Portfolio accademico responsive realizzato con Next.js, React e TypeScript.
 
 - homepage editoriale in stile premium, ottimizzata anche per smartphone da
   320 px senza scorrimento orizzontale;
+- layout `Editorial Tech Split` con palette blu scientifica `#0d5194`,
+  tipografia Poppins e titoli editoriali;
+- hero con ritratto di Paolo scontornato e integrato nel collage scientifico,
+  senza sfondo fotografico rettangolare;
 - card delle tre prospettive di ricerca ridisegnate con finitura premium,
   angoli arrotondati e layout mobile a colonna;
 - XAI in healthcare, AI in healthcare e Human-Machine Interaction;
@@ -16,7 +20,7 @@ Portfolio accademico responsive realizzato con Next.js, React e TypeScript.
 - 43 pubblicazioni: 21 journal e 22 conference/workshop;
 - 41 DOI cliccabili e 2 link ufficiali CEUR-WS;
 - profili ORCID, Google Scholar, Scopus, GitHub e LinkedIn;
-- foto personale quadrata e CV completo scaricabile;
+- foto personale quadrata, ritratto hero trasparente e CV completo scaricabile;
 - favicon personalizzato con monogramma `PS` in stile blu scientifico;
 - esportazione statica e workflow GitHub Pages già configurati;
 - gestione automatica del percorso della repository GitHub.

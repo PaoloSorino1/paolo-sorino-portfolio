@@ -216,6 +216,65 @@ function ProfileLink({
   );
 }
 
+function MailIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      fill="none"
+      height="20"
+      viewBox="0 0 24 24"
+      width="20"
+    >
+      <rect height="14" rx="1.5" stroke="currentColor" strokeWidth="1.5" width="18" x="3" y="5" />
+      <path
+        d="m4.5 7 7.5 6 7.5-6"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.5"
+      />
+    </svg>
+  );
+}
+
+function ResearchIcon({ number }: { number: string }) {
+  if (number === "01") {
+    return (
+      <svg aria-hidden="true" fill="none" viewBox="0 0 48 48">
+        <path
+          d="M18.5 35.5c-5.8 0-10.5-4.7-10.5-10.5 0-4.2 2.5-7.9 6.1-9.5A10 10 0 0 1 33 14.3a8.5 8.5 0 0 1 2.5 16.6"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeWidth="1.8"
+        />
+        <circle cx="17" cy="23" r="2.4" stroke="currentColor" strokeWidth="1.6" />
+        <circle cx="27.5" cy="18" r="2.4" stroke="currentColor" strokeWidth="1.6" />
+        <circle cx="31.5" cy="29" r="2.4" stroke="currentColor" strokeWidth="1.6" />
+        <path d="m19.2 21.9 6.1-2.9m3.1 1.3 2.2 6.3m-11.7-1.4 10.2 3.1M23 34v6m0-6 5-3" stroke="currentColor" strokeLinecap="round" strokeWidth="1.6" />
+      </svg>
+    );
+  }
+
+  if (number === "02") {
+    return (
+      <svg aria-hidden="true" fill="none" viewBox="0 0 48 48">
+        <rect height="30" rx="3" stroke="currentColor" strokeWidth="1.8" width="27" x="10.5" y="10" />
+        <path d="M19 10V7.5h10V10M24 18v13m-6.5-6.5h13" stroke="currentColor" strokeLinecap="round" strokeWidth="1.8" />
+        <path d="M16 35.5h16" stroke="currentColor" strokeLinecap="round" strokeWidth="1.6" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg aria-hidden="true" fill="none" viewBox="0 0 48 48">
+      <circle cx="17" cy="18" r="5" stroke="currentColor" strokeWidth="1.8" />
+      <circle cx="32" cy="18" r="5" stroke="currentColor" strokeWidth="1.8" />
+      <path d="M7.5 38v-4.5c0-5.2 4.3-9.5 9.5-9.5s9.5 4.3 9.5 9.5V38m-2-9.7A9.5 9.5 0 0 1 41 34.5V38" stroke="currentColor" strokeLinecap="round" strokeWidth="1.8" />
+      <path d="M21.5 17.5h6" stroke="currentColor" strokeDasharray="2.5 2.5" strokeLinecap="round" strokeWidth="1.5" />
+    </svg>
+  );
+}
+
 export default function Home() {
   return (
     <main>
@@ -240,27 +299,19 @@ export default function Home() {
           className="header-cta"
           href="mailto:paolo.sorino@poliba.it"
         >
-          <span aria-hidden="true">✉</span>
+          <MailIcon />
         </a>
       </header>
 
       <section className="hero section-shell" id="top">
+        <span className="hero-dot-field" aria-hidden="true" />
+        <span className="hero-orbit" aria-hidden="true" />
         <div className="hero-copy">
-          <div className="hero-prelude">
-            <p className="eyebrow">Paolo Sorino, PhD</p>
-            <span className="availability">
-              <i aria-hidden="true" />
-              Open to research collaborations
-            </span>
-          </div>
+          <p className="eyebrow">Paolo Sorino, PhD</p>
           <h1>
             <span className="hero-name">Postdoctoral</span>
             <em>Researcher</em>
           </h1>
-          <p className="hero-role">
-            Information Processing Systems
-            <span>Politecnico di Bari</span>
-          </p>
           <p className="hero-statement">
             Designing explainable, human-centred AI for healthcare.
           </p>
@@ -273,23 +324,9 @@ export default function Home() {
               View publications <span aria-hidden="true">→</span>
             </Link>
           </div>
-
-          <div className="profile-links" aria-label="Academic and professional profiles">
-            {profileLinks.map((profile) => (
-              <ProfileLink
-                key={profile.label}
-                profile={profile}
-                showArrow
-              />
-            ))}
-          </div>
         </div>
 
         <figure className="hero-art">
-          <div className="hero-art-meta" aria-hidden="true">
-            <span>Research visual atlas</span>
-            <span>01 — 03</span>
-          </div>
           <div className="hero-art-frame">
             <div className="hero-science-layer" aria-hidden="true">
               <Image
@@ -306,7 +343,7 @@ export default function Home() {
                 fill
                 priority
                 sizes="(max-width: 560px) 78vw, (max-width: 1080px) 520px, 32vw"
-                src={publicAsset("/assets/paolo-sorino-portrait-v3.jpg")}
+                src={publicAsset("/assets/paolo-sorino-portrait-cutout-hero-v4.png")}
               />
             </div>
             <div className="hero-data-card" aria-hidden="true">
@@ -317,24 +354,43 @@ export default function Home() {
             <span className="hero-node hero-node-one" aria-hidden="true" />
             <span className="hero-node hero-node-two" aria-hidden="true" />
           </div>
-          <figcaption>
-            <span className="hero-art-caption-label">Research directions</span>
-            <span className="hero-art-topics">
-              <span>
-                <small>01</small>
-                XAI in healthcare
-              </span>
-              <span>
-                <small>02</small>
-                Clinical AI
-              </span>
-              <span>
-                <small>03</small>
-                Human–machine interaction
-              </span>
-            </span>
-          </figcaption>
         </figure>
+      </section>
+
+      <section className="research section-shell" id="research">
+        <div className="section-heading">
+          <div>
+            <p className="section-kicker">Research focus</p>
+            <h2>Three connected perspectives.</h2>
+          </div>
+          <p>
+            From model development to explanation and interaction, each line of
+            research is grounded in responsible, clinically meaningful use.
+          </p>
+        </div>
+
+        <div className="research-grid">
+          {primaryResearch.map((item) => (
+            <article className="research-card" key={item.number}>
+              <div className="research-card-topline">
+                <span className="research-card-icon">
+                  <ResearchIcon number={item.number} />
+                </span>
+                <span className="card-number">{item.number}</span>
+              </div>
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+            </article>
+          ))}
+        </div>
+
+        <div className="secondary-lines">
+          <span>Secondary research lines</span>
+          <p>
+            Graph learning & knowledge graphs · Multimodal and privacy-aware AI
+            · Brain–computer interfaces & biosignals
+          </p>
+        </div>
       </section>
 
       <section className="metrics section-shell" aria-label="Academic highlights">
@@ -399,37 +455,6 @@ export default function Home() {
               View institutional profile <span aria-hidden="true">↗</span>
             </a>
           </div>
-        </div>
-      </section>
-
-      <section className="research section-shell" id="research">
-        <div className="section-heading">
-          <div>
-            <p className="section-kicker">Research focus</p>
-            <h2>Three connected perspectives.</h2>
-          </div>
-          <p>
-            From model development to explanation and interaction, each line of
-            research is grounded in responsible, clinically meaningful use.
-          </p>
-        </div>
-
-        <div className="research-grid">
-          {primaryResearch.map((item) => (
-            <article className="research-card" key={item.number}>
-              <span className="card-number">{item.number}</span>
-              <h3>{item.title}</h3>
-              <p>{item.description}</p>
-            </article>
-          ))}
-        </div>
-
-        <div className="secondary-lines">
-          <span>Secondary research lines</span>
-          <p>
-            Graph learning & knowledge graphs · Multimodal and privacy-aware AI
-            · Brain–computer interfaces & biosignals
-          </p>
         </div>
       </section>
 
