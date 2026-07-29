@@ -10,6 +10,9 @@ Portfolio accademico responsive realizzato con Next.js, React e TypeScript.
   tipografia Poppins e titoli editoriali;
 - hero con ritratto di Paolo scontornato e integrato nel collage scientifico,
   senza sfondo fotografico rettangolare;
+- switch persistente `EN / IT` che traduce homepage e pagina Publications;
+- Research Visual Atlas con topic distribuiti dedicati ad Artificial
+  Intelligence, Machine Learning, XAI, Healthcare e HMI;
 - card delle tre prospettive di ricerca ridisegnate con finitura premium,
   angoli arrotondati e layout mobile a colonna;
 - XAI in healthcare, AI in healthcare e Human-Machine Interaction;
@@ -20,7 +23,7 @@ Portfolio accademico responsive realizzato con Next.js, React e TypeScript.
 - 43 pubblicazioni: 21 journal e 22 conference/workshop;
 - 41 DOI cliccabili e 2 link ufficiali CEUR-WS;
 - profili ORCID, Google Scholar, Scopus, GitHub e LinkedIn;
-- foto personale quadrata, ritratto hero trasparente e CV completo scaricabile;
+- un solo ritratto hero trasparente e CV completo scaricabile;
 - favicon personalizzato con monogramma `PS` in stile blu scientifico;
 - esportazione statica e workflow GitHub Pages già configurati;
 - gestione automatica del percorso della repository GitHub.

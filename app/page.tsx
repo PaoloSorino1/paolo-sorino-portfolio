@@ -1,5 +1,11 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { LanguageSwitch } from "./language-switch";
+import { MailIcon } from "./mail-icon";
+import { translate } from "./translations";
+import { useLanguage } from "./language-context";
 
 const publicBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const publicAsset = (path: string) => `${publicBasePath}${path}`;
@@ -216,27 +222,6 @@ function ProfileLink({
   );
 }
 
-function MailIcon() {
-  return (
-    <svg
-      aria-hidden="true"
-      fill="none"
-      height="20"
-      viewBox="0 0 24 24"
-      width="20"
-    >
-      <rect height="14" rx="1.5" stroke="currentColor" strokeWidth="1.5" width="18" x="3" y="5" />
-      <path
-        d="m4.5 7 7.5 6 7.5-6"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="1.5"
-      />
-    </svg>
-  );
-}
-
 function ResearchIcon({ number }: { number: string }) {
   if (number === "01") {
     return (
@@ -276,31 +261,45 @@ function ResearchIcon({ number }: { number: string }) {
 }
 
 export default function Home() {
+  const { language } = useLanguage();
+  const t = (text: string) => translate(language, text);
+
   return (
     <main>
       <header className="site-header">
-        <a className="brand" href="#top" aria-label="Paolo Sorino — Home">
+        <a
+          className="brand"
+          href="#top"
+          aria-label={
+            language === "it"
+              ? "Paolo Sorino — Pagina iniziale"
+              : "Paolo Sorino — Home"
+          }
+        >
           <span className="brand-mark" aria-hidden="true">
             PS
           </span>
           <span className="brand-name">Paolo Sorino</span>
         </a>
 
-        <nav className="main-nav" aria-label="Primary navigation">
-          <a href="#about">About</a>
-          <a href="#research">Research</a>
-          <a href="#projects">Projects</a>
-          <Link href="/publications">Publications</Link>
-          <a href="#teaching">Teaching</a>
+        <nav className="main-nav" aria-label={t("Primary navigation")}>
+          <a href="#about">{t("About")}</a>
+          <a href="#research">{t("Research")}</a>
+          <a href="#projects">{t("Projects")}</a>
+          <Link href="/publications">{t("Publications")}</Link>
+          <a href="#teaching">{t("Teaching")}</a>
         </nav>
 
-        <a
-          aria-label="Email Paolo Sorino"
-          className="header-cta"
-          href="mailto:paolo.sorino@poliba.it"
-        >
-          <MailIcon />
-        </a>
+        <div className="header-tools">
+          <LanguageSwitch />
+          <a
+            aria-label={t("Email Paolo Sorino")}
+            className="header-cta"
+            href="mailto:paolo.sorino@poliba.it"
+          >
+            <MailIcon />
+          </a>
+        </div>
       </header>
 
       <section className="hero section-shell" id="top">
@@ -309,19 +308,19 @@ export default function Home() {
         <div className="hero-copy">
           <p className="eyebrow">Paolo Sorino, PhD</p>
           <h1>
-            <span className="hero-name">Postdoctoral</span>
-            <em>Researcher</em>
+            <span className="hero-name">{t("Postdoctoral")}</span>
+            <em>{t("Researcher")}</em>
           </h1>
           <p className="hero-statement">
-            Designing explainable, human-centred AI for healthcare.
+            {t("Designing explainable, human-centred AI for healthcare.")}
           </p>
 
           <div className="hero-actions">
             <a className="button button-primary" href="#research">
-              Explore research <span aria-hidden="true">→</span>
+              {t("Explore research")} <span aria-hidden="true">→</span>
             </a>
             <Link className="button button-text" href="/publications">
-              View publications <span aria-hidden="true">→</span>
+              {t("View publications")} <span aria-hidden="true">→</span>
             </Link>
           </div>
         </div>
@@ -339,17 +338,38 @@ export default function Home() {
             </div>
             <div className="hero-portrait-layer">
               <Image
-                alt="Paolo Sorino during a scientific presentation"
+                alt={
+                  language === "it"
+                    ? "Paolo Sorino durante una presentazione scientifica"
+                    : "Paolo Sorino during a scientific presentation"
+                }
                 fill
                 priority
                 sizes="(max-width: 560px) 78vw, (max-width: 1080px) 520px, 32vw"
                 src={publicAsset("/assets/paolo-sorino-portrait-cutout-hero-v4.png")}
               />
             </div>
+            <div className="hero-topic-cloud" aria-hidden="true">
+              <span className="hero-topic hero-topic-ai">
+                {t("Artificial Intelligence")}
+              </span>
+              <span className="hero-topic hero-topic-ml">
+                {t("Machine Learning")}
+              </span>
+              <span className="hero-topic hero-topic-health">
+                {t("AI and Machine Learning in Healthcare")}
+              </span>
+              <span className="hero-topic hero-topic-xai">
+                {t("Explainable AI")}
+              </span>
+              <span className="hero-topic hero-topic-hmi">
+                {t("Human–Machine Interaction")}
+              </span>
+            </div>
             <div className="hero-data-card" aria-hidden="true">
-              <small>Research focus</small>
-              <strong>XAI</strong>
-              <span>Healthcare · HMI</span>
+              <small>{t("Research atlas")}</small>
+              <strong>AI · ML</strong>
+              <span>{t("Healthcare · XAI · HMI")}</span>
             </div>
             <span className="hero-node hero-node-one" aria-hidden="true" />
             <span className="hero-node hero-node-two" aria-hidden="true" />
@@ -360,12 +380,13 @@ export default function Home() {
       <section className="research section-shell" id="research">
         <div className="section-heading">
           <div>
-            <p className="section-kicker">Research focus</p>
-            <h2>Three connected perspectives.</h2>
+            <p className="section-kicker">{t("Research focus")}</p>
+            <h2>{t("Three connected perspectives.")}</h2>
           </div>
           <p>
-            From model development to explanation and interaction, each line of
-            research is grounded in responsible, clinically meaningful use.
+            {t(
+              "From model development to explanation and interaction, each line of research is grounded in responsible, clinically meaningful use.",
+            )}
           </p>
         </div>
 
@@ -378,73 +399,61 @@ export default function Home() {
                 </span>
                 <span className="card-number">{item.number}</span>
               </div>
-              <h3>{item.title}</h3>
-              <p>{item.description}</p>
+              <h3>{t(item.title)}</h3>
+              <p>{t(item.description)}</p>
             </article>
           ))}
         </div>
 
         <div className="secondary-lines">
-          <span>Secondary research lines</span>
+          <span>{t("Secondary research lines")}</span>
           <p>
-            Graph learning & knowledge graphs · Multimodal and privacy-aware AI
-            · Brain–computer interfaces & biosignals
+            {t(
+              "Graph learning & knowledge graphs · Multimodal and privacy-aware AI · Brain–computer interfaces & biosignals",
+            )}
           </p>
         </div>
       </section>
 
-      <section className="metrics section-shell" aria-label="Academic highlights">
+      <section
+        className="metrics section-shell"
+        aria-label={t("Academic highlights")}
+      >
         <div>
           <strong>43</strong>
-          <span>Scientific publications</span>
+          <span>{t("Scientific publications")}</span>
         </div>
         <div>
           <strong>25+</strong>
-          <span>Supervised theses</span>
+          <span>{t("Supervised theses")}</span>
         </div>
         <div>
           <strong>6+</strong>
-          <span>Research projects</span>
+          <span>{t("Research projects")}</span>
         </div>
         <div>
           <strong>01</strong>
-          <span>Granted national patent</span>
+          <span>{t("Granted national patent")}</span>
         </div>
       </section>
 
       <section className="about section-shell" id="about">
-        <p className="section-kicker">About</p>
+        <p className="section-kicker">{t("About")}</p>
         <div className="about-grid">
           <h2>
-            Research at the intersection of{" "}
-            <em>intelligence, health, and people.</em>
+            {t("Research at the intersection of")}{" "}
+            <em>{t("intelligence, health, and people.")}</em>
           </h2>
-          <figure className="about-portrait">
-            <div className="about-portrait-frame">
-              <Image
-                alt="Paolo Sorino during a scientific presentation"
-                height={720}
-                sizes="(max-width: 560px) 220px, (max-width: 860px) 240px, 270px"
-                src={publicAsset("/assets/paolo-sorino-portrait-v3.jpg")}
-                width={720}
-              />
-              <figcaption>
-                <span>Paolo Sorino</span>
-                <small>Researcher · Lecturer</small>
-              </figcaption>
-            </div>
-          </figure>
           <div className="about-copy">
             <p>
-              I am a postdoctoral researcher at the Department of Electrical
-              and Information Engineering of Politecnico di Bari, and a member
-              of SisInfLab.
+              {t(
+                "I am a postdoctoral researcher at the Department of Electrical and Information Engineering of Politecnico di Bari, and a member of SisInfLab.",
+              )}
             </p>
             <p>
-              My work connects artificial intelligence with real healthcare
-              needs: building predictive methods, making their reasoning
-              understandable, and designing interaction models that support
-              informed human decisions.
+              {t(
+                "My work connects artificial intelligence with real healthcare needs: building predictive methods, making their reasoning understandable, and designing interaction models that support informed human decisions.",
+              )}
             </p>
             <a
               className="inline-link"
@@ -452,7 +461,8 @@ export default function Home() {
               rel="noreferrer"
               target="_blank"
             >
-              View institutional profile <span aria-hidden="true">↗</span>
+              {t("View institutional profile")}{" "}
+              <span aria-hidden="true">↗</span>
             </a>
           </div>
         </div>
@@ -461,17 +471,19 @@ export default function Home() {
       <section className="projects section-shell" id="projects">
         <div className="section-heading projects-heading">
           <div>
-            <p className="section-kicker">Research projects</p>
-            <h2>From methods to deployed research.</h2>
+            <p className="section-kicker">{t("Research projects")}</p>
+            <h2>{t("From methods to deployed research.")}</h2>
           </div>
           <div>
             <p>
-              I contribute to interdisciplinary projects where AI must remain
-              scientifically rigorous, understandable, and useful to the people
-              who rely on it.
+              {t(
+                "I contribute to interdisciplinary projects where AI must remain scientifically rigorous, understandable, and useful to the people who rely on it.",
+              )}
             </p>
             <p className="project-note">
-              Additional collaborations include LIFE, MISTRAL, and DEMETRA.
+              {t(
+                "Additional collaborations include LIFE, MISTRAL, and DEMETRA.",
+              )}
             </p>
           </div>
         </div>
@@ -480,14 +492,14 @@ export default function Home() {
           {projects.map((project) => (
             <article className="project-row" key={project.name}>
               <div className="project-meta">
-                <span>{project.year}</span>
-                <small>{project.accent}</small>
+                <span>{t(project.year)}</span>
+                <small>{t(project.accent)}</small>
               </div>
               <div>
                 <h3>{project.name}</h3>
-                <p className="project-role">{project.role}</p>
+                <p className="project-role">{t(project.role)}</p>
               </div>
-              <p className="project-description">{project.description}</p>
+              <p className="project-description">{t(project.description)}</p>
             </article>
           ))}
         </div>
@@ -497,14 +509,15 @@ export default function Home() {
         <div className="section-shell">
           <div className="publications-topline">
             <div>
-              <p className="section-kicker">Selected publications</p>
-              <h2>Research, made readable.</h2>
+              <p className="section-kicker">{t("Selected publications")}</p>
+              <h2>{t("Research, made readable.")}</h2>
             </div>
             <Link
               className="button button-light"
               href="/publications"
             >
-              Complete publication list <span aria-hidden="true">→</span>
+              {t("Complete publication list")}{" "}
+              <span aria-hidden="true">→</span>
             </Link>
           </div>
 
@@ -519,12 +532,12 @@ export default function Home() {
               >
                 <span className="publication-year">{publication.year}</span>
                 <div className="publication-main">
-                  <span>{publication.type}</span>
+                  <span>{t(publication.type)}</span>
                   <h3>{publication.title}</h3>
                   <p>{publication.venue}</p>
                 </div>
                 <div className="publication-focus">
-                  <span>{publication.focus}</span>
+                  <span>{t(publication.focus)}</span>
                   <strong aria-hidden="true">↗</strong>
                 </div>
               </a>
@@ -535,14 +548,14 @@ export default function Home() {
 
       <section className="teaching section-shell" id="teaching">
         <div className="teaching-intro">
-          <p className="section-kicker">Teaching & supervision</p>
+          <p className="section-kicker">{t("Teaching & supervision")}</p>
           <h2>
-            Making complex ideas <em>work in practice.</em>
+            {t("Making complex ideas")} <em>{t("work in practice.")}</em>
           </h2>
           <p>
-            Teaching connects my research to the next generation of engineers:
-            from machine learning foundations to software design and applied
-            artificial intelligence.
+            {t(
+              "Teaching connects my research to the next generation of engineers: from machine learning foundations to software design and applied artificial intelligence.",
+            )}
           </p>
         </div>
 
@@ -551,20 +564,22 @@ export default function Home() {
             <article key={`${item.period}-${item.course}`}>
               <span>{item.period}</span>
               <div>
-                <p>{item.role}</p>
-                <h3>{item.course}</h3>
-                <small>{item.context}</small>
+                <p>{t(item.role)}</p>
+                <h3>{t(item.course)}</h3>
+                <small>{t(item.context)}</small>
               </div>
             </article>
           ))}
           <div className="teaching-stats">
             <div>
               <strong>200+</strong>
-              <span>Hours of specialist training</span>
+              <span>{t("Hours of specialist training")}</span>
             </div>
             <div>
               <strong>25+</strong>
-              <span>Bachelor’s and Master’s theses supervised</span>
+              <span>
+                {t("Bachelor’s and Master’s theses supervised")}
+              </span>
             </div>
           </div>
         </div>
@@ -573,42 +588,47 @@ export default function Home() {
       <section className="service">
         <div className="section-shell service-grid">
           <div>
-            <p className="section-kicker">Academic service</p>
-            <h2>Contributing beyond publications.</h2>
+            <p className="section-kicker">{t("Academic service")}</p>
+            <h2>{t("Contributing beyond publications.")}</h2>
           </div>
           <div className="service-items">
             <article>
-              <span>Editorial</span>
-              <h3>Guest Editor</h3>
+              <span>{t("Editorial")}</span>
+              <h3>{t("Guest Editor")}</h3>
               <p>
                 Sensors Special Issue on Advances in Sensorized AI-Driven
                 Intelligent Systems in Healthcare and Beyond.
               </p>
             </article>
             <article>
-              <span>Research community</span>
-              <h3>International engagement</h3>
+              <span>{t("Research community")}</span>
+              <h3>{t("International engagement")}</h3>
               <p>
-                Invited lectures, workshop organization, programme committees,
-                and session leadership across AI, HMI, and healthcare research.
+                {t(
+                  "Invited lectures, workshop organization, programme committees, and session leadership across AI, HMI, and healthcare research.",
+                )}
               </p>
             </article>
             <article>
-              <span>Innovation</span>
-              <h3>Granted patent</h3>
+              <span>{t("Innovation")}</span>
+              <h3>{t("Granted patent")}</h3>
               <p>
-                Machine-learning method for validating NAFLD diagnosis without
-                imaging technologies.
+                {t(
+                  "Machine-learning method for validating NAFLD diagnosis without imaging technologies.",
+                )}
               </p>
             </article>
           </div>
 
           <div className="invited-talks">
             <div className="invited-talks-intro">
-              <p className="section-kicker">Invited talks & lectures</p>
+              <p className="section-kicker">
+                {t("Invited talks & lectures")}
+              </p>
               <p>
-                International invitations spanning explainable healthcare AI,
-                human–machine systems, and brain–computer interaction.
+                {t(
+                  "International invitations spanning explainable healthcare AI, human–machine systems, and brain–computer interaction.",
+                )}
               </p>
             </div>
 
@@ -622,13 +642,19 @@ export default function Home() {
                   <div>
                     <p className="invited-talk-event">{talk.event}</p>
                     <h3>{talk.title}</h3>
-                    <p className="invited-talk-context">{talk.context}</p>
+                    <p className="invited-talk-context">
+                      {t(talk.context)}
+                    </p>
                   </div>
                   {talk.href ? (
                     <a
                       className="invited-talk-link"
                       href={talk.href}
-                      aria-label={`Open the ${talk.event} website`}
+                      aria-label={
+                        language === "it"
+                          ? `Apri il sito web di ${talk.event}`
+                          : `Open the ${talk.event} website`
+                      }
                       rel="noreferrer"
                       target="_blank"
                     >
@@ -650,17 +676,18 @@ export default function Home() {
       </section>
 
       <section className="contact section-shell" id="contact">
-        <p className="section-kicker">Let’s connect</p>
+        <p className="section-kicker">{t("Let’s connect")}</p>
         <div className="contact-main">
           <h2>
-            Interested in explainable,
+            {t("Interested in explainable,")}
             <br />
-            human-centred <em>healthcare AI?</em>
+            {t("human-centred")} <em>{t("healthcare AI?")}</em>
           </h2>
           <div>
             <p>
-              I am open to research collaborations, invited talks, and projects
-              that bring transparent AI into meaningful real-world settings.
+              {t(
+                "I am open to research collaborations, invited talks, and projects that bring transparent AI into meaningful real-world settings.",
+              )}
             </p>
             <a className="contact-email" href="mailto:paolo.sorino@poliba.it">
               paolo.sorino@poliba.it <span aria-hidden="true">↗</span>
@@ -670,9 +697,11 @@ export default function Home() {
               href={publicAsset("/Paolo_Sorino_CV_2026.pdf")}
               download
             >
-              Download full CV <span aria-hidden="true">↓</span>
+              {t("Download full CV")} <span aria-hidden="true">↓</span>
             </a>
-            <p className="cv-meta">Full academic CV · updated July 2026 · PDF</p>
+            <p className="cv-meta">
+              {t("Full academic CV · updated July 2026 · PDF")}
+            </p>
           </div>
         </div>
 

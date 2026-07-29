@@ -1,6 +1,11 @@
-import type { Metadata } from "next";
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { LanguageSwitch } from "../language-switch";
+import { useLanguage } from "../language-context";
+import { MailIcon } from "../mail-icon";
+import { translate } from "../translations";
 import {
   conferencePublications,
   journalPublications,
@@ -9,12 +14,6 @@ import {
 
 const publicBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const publicAsset = (path: string) => `${publicBasePath}${path}`;
-
-export const metadata: Metadata = {
-  title: "Publications",
-  description:
-    "Complete scientific publication list of Paolo Sorino, with verified DOI and official publisher links.",
-};
 
 const profileLinks = [
   {
@@ -35,19 +34,26 @@ const profileLinks = [
 ];
 
 function PublicationGroup({
+  id,
   eyebrow,
   publications,
   startAt,
 }: {
+  id: string;
   eyebrow: string;
   publications: Publication[];
   startAt: number;
 }) {
+  const { language } = useLanguage();
+  const t = (text: string) => translate(language, text);
+
   return (
-    <section className="bibliography-group" id={eyebrow === "Journal articles" ? "journals" : "conferences"}>
+    <section className="bibliography-group" id={id}>
       <div className="bibliography-group-heading">
-        <p>{eyebrow}</p>
-        <span>{publications.length.toString().padStart(2, "0")} records</span>
+        <p>{t(eyebrow)}</p>
+        <span>
+          {publications.length.toString().padStart(2, "0")} {t("records")}
+        </span>
       </div>
 
       <div className="bibliography-list">
@@ -68,8 +74,10 @@ function PublicationGroup({
               <span>{publication.venue}</span>
             </span>
             <span className="bibliography-link">
-              <small>{publication.doi ? "DOI" : "Official record"}</small>
-              <span>{publication.doi ?? "Publisher page"}</span>
+              <small>
+                {publication.doi ? "DOI" : t("Official record")}
+              </small>
+              <span>{publication.doi ?? t("Publisher page")}</span>
               <strong aria-hidden="true">↗</strong>
             </span>
           </a>
@@ -80,53 +88,70 @@ function PublicationGroup({
 }
 
 export default function PublicationsPage() {
+  const { language } = useLanguage();
+  const t = (text: string) => translate(language, text);
   const publicationCount =
     journalPublications.length + conferencePublications.length;
 
   return (
     <main className="bibliography-page">
       <header className="site-header">
-        <Link className="brand" href="/" aria-label="Paolo Sorino — Home">
+        <Link
+          className="brand"
+          href="/"
+          aria-label={
+            language === "it"
+              ? "Paolo Sorino — Pagina iniziale"
+              : "Paolo Sorino — Home"
+          }
+        >
           <span className="brand-mark" aria-hidden="true">
             PS
           </span>
           <span className="brand-name">Paolo Sorino</span>
         </Link>
 
-        <nav className="main-nav" aria-label="Primary navigation">
-          <Link href="/#about">About</Link>
-          <Link href="/#research">Research</Link>
-          <Link href="/#projects">Projects</Link>
+        <nav className="main-nav" aria-label={t("Primary navigation")}>
+          <Link href="/#about">{t("About")}</Link>
+          <Link href="/#research">{t("Research")}</Link>
+          <Link href="/#projects">{t("Projects")}</Link>
           <Link aria-current="page" href="/publications">
-            Publications
+            {t("Publications")}
           </Link>
-          <Link href="/#teaching">Teaching</Link>
+          <Link href="/#teaching">{t("Teaching")}</Link>
         </nav>
 
-        <a className="header-cta" href="mailto:paolo.sorino@poliba.it">
-          Connect <span aria-hidden="true">↗</span>
-        </a>
+        <div className="header-tools">
+          <LanguageSwitch />
+          <a
+            aria-label={t("Email Paolo Sorino")}
+            className="header-cta"
+            href="mailto:paolo.sorino@poliba.it"
+          >
+            <MailIcon />
+          </a>
+        </div>
       </header>
 
       <section className="bibliography-hero section-shell">
         <Link className="bibliography-back" href="/">
-          <span aria-hidden="true">←</span> Back to portfolio
+          <span aria-hidden="true">←</span> {t("Back to portfolio")}
         </Link>
         <div>
-          <p className="section-kicker">Complete bibliography</p>
+          <p className="section-kicker">{t("Complete bibliography")}</p>
           <h1>
-            Publications,
+            {t("Publications,")}
             <br />
-            <em>with direct access.</em>
+            <em>{t("with direct access.")}</em>
           </h1>
         </div>
         <div className="bibliography-intro">
           <p>
-            The complete publication list from my current academic CV. Every
-            DOI opens the canonical publication record; entries without a DOI
-            point to the official proceedings page.
+            {t(
+              "The complete publication list from my current academic CV. Every DOI opens the canonical publication record; entries without a DOI point to the official proceedings page.",
+            )}
           </p>
-          <div className="profile-links" aria-label="Academic profiles">
+          <div className="profile-links" aria-label={t("Academic profiles")}>
             {profileLinks.map((profile) => (
               <a
                 href={profile.href}
@@ -144,42 +169,47 @@ export default function PublicationsPage() {
               </a>
             ))}
           </div>
-          <nav className="bibliography-jumps" aria-label="Publication categories">
-            <a href="#journals">Journal articles</a>
-            <a href="#conferences">Conferences & workshops</a>
+          <nav
+            className="bibliography-jumps"
+            aria-label={t("Publication categories")}
+          >
+            <a href="#journals">{t("Journal articles")}</a>
+            <a href="#conferences">{t("Conferences & workshops")}</a>
           </nav>
         </div>
       </section>
 
       <section
-        aria-label="Publication overview"
+        aria-label={t("Publication overview")}
         className="bibliography-overview section-shell"
       >
         <div>
           <strong>{publicationCount}</strong>
-          <span>Scientific publications</span>
+          <span>{t("Scientific publications")}</span>
         </div>
         <div>
           <strong>{journalPublications.length}</strong>
-          <span>Journal articles</span>
+          <span>{t("Journal articles")}</span>
         </div>
         <div>
           <strong>{conferencePublications.length}</strong>
-          <span>Conference & workshop papers</span>
+          <span>{t("Conference & workshop papers")}</span>
         </div>
         <div>
           <strong>2019—2026</strong>
-          <span>Publication period</span>
+          <span>{t("Publication period")}</span>
         </div>
       </section>
 
       <div className="bibliography-content section-shell">
         <PublicationGroup
+          id="journals"
           eyebrow="Journal articles"
           publications={journalPublications}
           startAt={1}
         />
         <PublicationGroup
+          id="conferences"
           eyebrow="Conference & workshop publications"
           publications={conferencePublications}
           startAt={journalPublications.length + 1}
@@ -188,11 +218,12 @@ export default function PublicationsPage() {
 
       <footer className="bibliography-footer section-shell">
         <p>
-          Bibliography based on the current academic CV. DOI and publisher
-          links have been individually verified.
+          {t(
+            "Bibliography based on the current academic CV. DOI and publisher links have been individually verified.",
+          )}
         </p>
         <Link href="/">
-          Return to portfolio <span aria-hidden="true">→</span>
+          {t("Return to portfolio")} <span aria-hidden="true">→</span>
         </Link>
       </footer>
     </main>
