@@ -38,21 +38,18 @@ const primaryResearch = [
     title: "Explainable AI in Healthcare",
     description:
       "Interpretable machine learning and deep learning methods that make clinical predictions transparent, inspectable, and actionable.",
-    tags: ["XAI", "SHAP", "Clinical trust"],
   },
   {
     number: "02",
     title: "AI for Clinical Decision Support",
     description:
       "Human-centred predictive systems for risk assessment, patient stratification, and evidence-informed clinical workflows.",
-    tags: ["Healthcare AI", "Predictive models", "CDSS"],
   },
   {
     number: "03",
     title: "Human–Machine Interaction",
     description:
       "Interfaces and interaction models that help people understand, question, and confidently use intelligent systems.",
-    tags: ["HMI", "Human-centred AI", "Usability"],
   },
 ];
 
@@ -140,16 +137,60 @@ const teaching = [
   },
   {
     period: "2026",
-    role: "Adjunct Professor",
-    course: "Artificial Intelligence and Data Science",
+    role: "Adjunct Professor · Module E",
+    course:
+      "2nd-Level Master’s Degree in Artificial Intelligence and Data Science",
     context:
-      "2nd-Level Master’s Degree · lectures, laboratories, and tutoring",
+      "Politecnico di Bari · 200 hours of lectures, laboratory sessions, and tutoring",
   },
   {
     period: "2022—2025",
     role: "Assistant Lecturer",
     course: "Foundations of Machine Learning",
     context: "Master’s degree in Computer Engineering · Politecnico di Bari",
+  },
+];
+
+const invitedTalks = [
+  {
+    year: "2026",
+    event: "ISACT 2026 · IEEE ICHMS 2026",
+    title: "AI for BCI with Applications",
+    context:
+      "Nanyang Technological University, Singapore · 1–3 July 2026",
+    href: "https://isact-org.github.io/",
+  },
+  {
+    year: "2026",
+    event: "WOA 2026 · Mini-School Lecture",
+    title:
+      "Artificial Intelligence and Explainable AI in Clinical Decision Support Systems: Innovation, Interpretability, and Trust",
+    context: "27th Workshop “From Objects to Agents” · Salerno · 17 June 2026",
+    href: "https://sites.google.com/view/woa2026",
+  },
+  {
+    year: "2025",
+    event: "IEEE SMC · 15th BMI Systems Workshop",
+    title: "Brain Computer Interfaces for Neural Games",
+    context:
+      "Special event: Integrative Approaches to EEG Signal Analysis",
+    href: "https://sites.google.com/view/smc-bmi-workshop2025/",
+  },
+  {
+    year: "2024",
+    event: "ISACT 2024 · IEEE SMC Society",
+    title: "Artificial Intelligence for Brain-Computer Interaction",
+    context:
+      "Hosted by University of Naples Federico II · 10–13 December 2024",
+    href: "https://isact-org.github.io/",
+  },
+  {
+    year: "2022",
+    event: "IEEE BHI-BSN 2022 · Invited Speech",
+    title:
+      "Composizione musicale in tempo reale basata sul riconoscimento delle emozioni AI",
+    context:
+      "Workshop on enabling technologies for paediatric rehabilitation · Ioannina, Greece · 27–30 September 2022",
   },
 ];
 
@@ -358,11 +399,6 @@ export default function Home() {
               <span className="card-number">{item.number}</span>
               <h3>{item.title}</h3>
               <p>{item.description}</p>
-              <ul aria-label={`${item.title} topics`}>
-                {item.tags.map((tag) => (
-                  <li key={tag}>{tag}</li>
-                ))}
-              </ul>
             </article>
           ))}
         </div>
@@ -504,11 +540,11 @@ export default function Home() {
               </p>
             </article>
             <article>
-              <span>Dissemination</span>
-              <h3>Invited speaker</h3>
+              <span>Research community</span>
+              <h3>International engagement</h3>
               <p>
-                ISACT 2026 on AI for BCI with Applications and WOA 2026 on AI
-                and XAI in Clinical Decision Support Systems.
+                Invited lectures, workshop organization, programme committees,
+                and session leadership across AI, HMI, and healthcare research.
               </p>
             </article>
             <article>
@@ -519,6 +555,50 @@ export default function Home() {
                 imaging technologies.
               </p>
             </article>
+          </div>
+
+          <div className="invited-talks">
+            <div className="invited-talks-intro">
+              <p className="section-kicker">Invited talks & lectures</p>
+              <p>
+                International invitations spanning explainable healthcare AI,
+                human–machine systems, and brain–computer interaction.
+              </p>
+            </div>
+
+            <div className="invited-talks-list">
+              {invitedTalks.map((talk) => (
+                <article
+                  className="invited-talk"
+                  key={`${talk.year}-${talk.title}`}
+                >
+                  <span className="invited-talk-year">{talk.year}</span>
+                  <div>
+                    <p className="invited-talk-event">{talk.event}</p>
+                    <h3>{talk.title}</h3>
+                    <p className="invited-talk-context">{talk.context}</p>
+                  </div>
+                  {talk.href ? (
+                    <a
+                      className="invited-talk-link"
+                      href={talk.href}
+                      aria-label={`Open the ${talk.event} website`}
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      ↗
+                    </a>
+                  ) : (
+                    <span
+                      className="invited-talk-link invited-talk-link-muted"
+                      aria-hidden="true"
+                    >
+                      —
+                    </span>
+                  )}
+                </article>
+              ))}
+            </div>
           </div>
         </div>
       </section>

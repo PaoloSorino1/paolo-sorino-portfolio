@@ -25,8 +25,13 @@ export const metadata: Metadata = {
     "codex-preview": "development",
   },
   icons: {
-    icon: `${publicBasePath}/favicon.svg`,
-    shortcut: `${publicBasePath}/favicon.svg`,
+    icon: [
+      {
+        url: `${publicBasePath}/favicon-ps.svg`,
+        type: "image/svg+xml",
+      },
+    ],
+    shortcut: `${publicBasePath}/favicon-ps.svg`,
   },
   openGraph: {
     title: "Paolo Sorino, PhD | Research Portfolio",

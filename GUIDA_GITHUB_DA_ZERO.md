@@ -96,6 +96,9 @@ Al primo accesso esegui un aggiornamento forzato:
 - macOS: `Cmd + Shift + R`
 - Windows: `Ctrl + F5`
 
+L'aggiornamento forzato è utile anche dopo il primo deploy per sostituire nella
+scheda del browser il vecchio favicon azzurro con il nuovo monogramma `PS`.
+
 ## Controlli importanti
 
 - `app` e `public` devono essere direttamente alla radice della repository.

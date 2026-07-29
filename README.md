@@ -4,13 +4,18 @@ Portfolio accademico responsive realizzato con Next.js, React e TypeScript.
 
 ## Contenuti
 
-- homepage editoriale in stile premium;
+- homepage editoriale in stile premium, ottimizzata anche per smartphone da
+  320 px senza scorrimento orizzontale;
 - XAI in healthcare, AI in healthcare e Human-Machine Interaction;
 - progetti, teaching e academic service;
+- esperienza didattica nel Master di II livello in Artificial Intelligence and
+  Data Science, Module E, per 200 ore;
+- sezione completa con 5 invited talks e lecture internazionali;
 - 43 pubblicazioni: 21 journal e 22 conference/workshop;
 - 41 DOI cliccabili e 2 link ufficiali CEUR-WS;
 - profili ORCID, Google Scholar, Scopus, GitHub e LinkedIn;
 - foto personale quadrata e CV completo scaricabile;
+- favicon personalizzato con monogramma `PS` in stile borgogna e bronzo;
 - esportazione statica e workflow GitHub Pages già configurati;
 - gestione automatica del percorso della repository GitHub.
 
