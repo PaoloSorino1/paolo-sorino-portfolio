@@ -26,6 +26,8 @@ Portfolio accademico responsive realizzato con Next.js, React e TypeScript.
 - profili ORCID, Google Scholar, Scopus, GitHub e LinkedIn;
 - un solo ritratto hero trasparente e CV completo scaricabile;
 - favicon personalizzato con monogramma `PS` in stile blu scientifico;
+- SEO tecnico completo con canonical URL, sitemap, robots, verifica Google
+  Search Console e dati strutturati `ProfilePage` / `Person`;
 - esportazione statica e workflow GitHub Pages già configurati;
 - gestione automatica del percorso della repository GitHub.
 
@@ -57,5 +59,21 @@ Con questo nome il sito sarà disponibile su:
 
 `https://paolosorino1.github.io/paolo-sorino-portfolio/`
 
-Il workflow calcola automaticamente il percorso corretto anche se la repository
-viene rinominata.
+Il workflow calcola automaticamente il percorso tecnico corretto. Se la
+repository viene rinominata, aggiornare anche `SITE_URL` in
+`app/site-config.ts` per mantenere corretti canonical, sitemap e dati
+strutturati.
+
+## Indicizzazione Google
+
+Dopo il deployment:
+
+1. aprire Google Search Console;
+2. verificare la proprietà con prefisso URL
+   `https://paolosorino1.github.io/paolo-sorino-portfolio/`;
+3. inviare la sitemap
+   `https://paolosorino1.github.io/paolo-sorino-portfolio/sitemap.xml`;
+4. usare Controllo URL per richiedere l'indicizzazione della homepage e di
+   `/publications/`.
+
+Il tag di verifica Google è già configurato nel progetto.

@@ -371,7 +371,17 @@ small,
   font-weight: 400;
   letter-spacing: -0.058em;
   line-height: 0.86;
-  margin: 1.75rem 0 2rem;
+  margin: 0 0 2rem;
+}
+
+.hero h1 .hero-identity {
+  display: block;
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-weight: 650;
+  letter-spacing: 0.25em;
+  line-height: 1.2;
+  margin-bottom: 1.75rem;
 }
 
 .hero-name,

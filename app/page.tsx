@@ -6,9 +6,52 @@ import { LanguageSwitch } from "./language-switch";
 import { MailIcon } from "./mail-icon";
 import { translate } from "./translations";
 import { useLanguage } from "./language-context";
+import {
+  PROFILE_IMAGE_URL,
+  PROFILE_LINKS,
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  SITE_URL,
+} from "./site-config";
 
 const publicBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const publicAsset = (path: string) => `${publicBasePath}${path}`;
+
+const profileStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "@id": `${SITE_URL}/#profile-page`,
+  url: `${SITE_URL}/`,
+  name: SITE_NAME,
+  description: SITE_DESCRIPTION,
+  inLanguage: ["en", "it"],
+  mainEntity: {
+    "@type": "Person",
+    "@id": `${SITE_URL}/#paolo-sorino`,
+    name: "Paolo Sorino",
+    givenName: "Paolo",
+    familyName: "Sorino",
+    honorificSuffix: "PhD",
+    url: `${SITE_URL}/`,
+    image: PROFILE_IMAGE_URL,
+    jobTitle: "Postdoctoral Researcher",
+    description:
+      "Researcher in explainable artificial intelligence, artificial intelligence for healthcare, human-machine interaction, and clinical decision support systems.",
+    affiliation: {
+      "@type": "CollegeOrUniversity",
+      name: "Politecnico di Bari",
+      url: "https://www.poliba.it/",
+    },
+    sameAs: PROFILE_LINKS,
+    knowsAbout: [
+      "Artificial Intelligence in Healthcare",
+      "Explainable Artificial Intelligence",
+      "Machine Learning",
+      "Human-Machine Interaction",
+      "Clinical Decision Support Systems",
+    ],
+  },
+};
 
 const profileLinks = [
   {
@@ -274,6 +317,12 @@ export default function Home() {
 
   return (
     <main>
+      <script
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(profileStructuredData).replace(/</g, "\\u003c"),
+        }}
+        type="application/ld+json"
+      />
       <header className="site-header">
         <a
           className="brand"
@@ -314,8 +363,8 @@ export default function Home() {
         <span className="hero-dot-field" aria-hidden="true" />
         <span className="hero-orbit" aria-hidden="true" />
         <div className="hero-copy">
-          <p className="eyebrow">Paolo Sorino, PhD</p>
           <h1>
+            <span className="eyebrow hero-identity">Paolo Sorino, PhD</span>
             <span className="hero-name">{t("Postdoctoral")}</span>
             <em>{t("Researcher")}</em>
           </h1>

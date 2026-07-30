@@ -99,6 +99,25 @@ Al primo accesso esegui un aggiornamento forzato:
 L'aggiornamento forzato è utile anche dopo il primo deploy per sostituire nella
 scheda del browser il vecchio favicon azzurro con il nuovo monogramma `PS`.
 
+## Collegare il sito a Google
+
+1. Apri `https://search.google.com/search-console/`.
+2. Aggiungi una proprietà di tipo `Prefisso URL`.
+3. Inserisci:
+
+   `https://paolosorino1.github.io/paolo-sorino-portfolio/`
+
+4. Scegli il metodo `Tag HTML` e premi `Verifica`: il codice ricevuto da Google
+   è già presente nel progetto.
+5. Apri `Sitemap` e invia:
+
+   `https://paolosorino1.github.io/paolo-sorino-portfolio/sitemap.xml`
+
+6. In `Controllo URL`, richiedi l'indicizzazione di:
+
+   - `https://paolosorino1.github.io/paolo-sorino-portfolio/`
+   - `https://paolosorino1.github.io/paolo-sorino-portfolio/publications/`
+
 ## Controlli importanti
 
 - `app` e `public` devono essere direttamente alla radice della repository.
