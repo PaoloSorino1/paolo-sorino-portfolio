@@ -38,6 +38,14 @@ const profileLinks = [
   },
 ];
 
+const heroTopics = [
+  "AI in Healthcare",
+  "Machine Learning",
+  "Explainable AI",
+  "Human–Machine Interaction",
+  "Clinical Decision Support",
+];
+
 const primaryResearch = [
   {
     number: "01",
@@ -327,15 +335,134 @@ export default function Home() {
 
         <figure className="hero-art">
           <div className="hero-art-frame">
-            <div className="hero-science-layer" aria-hidden="true">
-              <Image
-                alt=""
-                fill
-                priority
-                sizes="(max-width: 1080px) 92vw, 48vw"
-                src={publicAsset("/assets/editorial-scientific-collage-v2.webp")}
-              />
-            </div>
+            <div className="hero-science-layer" aria-hidden="true" />
+            <svg
+              aria-hidden="true"
+              className="hero-visual-data"
+              preserveAspectRatio="none"
+              viewBox="0 0 640 600"
+            >
+              <defs>
+                <linearGradient
+                  id="atlas-area-gradient"
+                  x1="0"
+                  x2="0"
+                  y1="0"
+                  y2="1"
+                >
+                  <stop offset="0%" stopColor="#0d5194" stopOpacity="0.16" />
+                  <stop offset="58%" stopColor="#5f91bf" stopOpacity="0.07" />
+                  <stop offset="100%" stopColor="#f7f9f8" stopOpacity="0" />
+                </linearGradient>
+              </defs>
+
+              <g className="atlas-area-chart">
+                <path
+                  className="atlas-area-fill"
+                  d="M-24 302 C54 283 118 300 183 274 S309 251 378 282 S510 328 670 277 L670 360 C518 398 433 348 362 333 S237 311 165 333 S51 359 -24 341 Z"
+                />
+                <path
+                  className="atlas-area-edge"
+                  d="M-24 302 C54 283 118 300 183 274 S309 251 378 282 S510 328 670 277"
+                />
+                <path
+                  className="atlas-area-guide"
+                  d="M-24 341 C51 359 93 352 165 333 S290 318 362 333 S518 398 670 360"
+                />
+              </g>
+
+              <g className="atlas-line-chart">
+                <path d="M-26 208 C42 255 77 257 116 201 S173 95 217 169 S281 264 331 181 S389 139 429 207 S493 245 552 188 S624 119 678 153" />
+                <path d="M-20 242 C62 215 111 229 173 219 S296 197 365 221 S493 259 668 225" />
+              </g>
+
+              <g className="atlas-radial-chart" transform="translate(515 164)">
+                <circle className="atlas-radial-guide" r="112" />
+                <circle className="atlas-radial-guide atlas-radial-dotted" r="82" />
+                <circle className="atlas-radial-guide atlas-radial-soft" r="52" />
+                <circle
+                  className="atlas-radial-ring atlas-radial-progress"
+                  r="96"
+                />
+                <path
+                  className="atlas-radial-arc"
+                  d="M0 -68 A68 68 0 0 1 64 23"
+                />
+              </g>
+
+              <g className="atlas-scatter">
+                <circle cx="176" cy="328" r="3.2" />
+                <circle cx="195" cy="344" r="2.4" />
+                <circle cx="205" cy="319" r="2.8" />
+                <circle cx="218" cy="361" r="3.6" />
+                <circle cx="229" cy="338" r="2.3" />
+                <circle cx="239" cy="376" r="2.9" />
+                <circle cx="250" cy="351" r="3.8" />
+                <circle cx="262" cy="331" r="2.4" />
+                <circle cx="274" cy="368" r="3.2" />
+                <circle cx="288" cy="345" r="2.6" />
+                <circle cx="301" cy="384" r="3.5" />
+                <circle cx="315" cy="358" r="2.2" />
+                <circle cx="327" cy="337" r="3" />
+                <circle cx="341" cy="374" r="2.8" />
+              </g>
+
+              <g className="atlas-data-matrix">
+                <rect x="320" y="36" width="8" height="8" rx="2" />
+                <rect x="334" y="36" width="8" height="8" rx="2" />
+                <rect x="348" y="36" width="8" height="8" rx="2" />
+                <rect x="362" y="36" width="8" height="8" rx="2" />
+                <rect x="376" y="36" width="8" height="8" rx="2" />
+                <rect x="320" y="50" width="8" height="8" rx="2" />
+                <rect x="334" y="50" width="8" height="8" rx="2" />
+                <rect x="348" y="50" width="8" height="8" rx="2" />
+                <rect x="362" y="50" width="8" height="8" rx="2" />
+                <rect x="376" y="50" width="8" height="8" rx="2" />
+                <rect x="320" y="64" width="8" height="8" rx="2" />
+                <rect x="334" y="64" width="8" height="8" rx="2" />
+                <rect x="348" y="64" width="8" height="8" rx="2" />
+                <rect x="362" y="64" width="8" height="8" rx="2" />
+                <rect x="376" y="64" width="8" height="8" rx="2" />
+                <rect x="320" y="78" width="8" height="8" rx="2" />
+                <rect x="334" y="78" width="8" height="8" rx="2" />
+                <rect x="348" y="78" width="8" height="8" rx="2" />
+                <rect x="362" y="78" width="8" height="8" rx="2" />
+                <rect x="376" y="78" width="8" height="8" rx="2" />
+              </g>
+
+              <g className="atlas-bar-chart">
+                <path className="atlas-bar-axis" d="M302 553 H414" />
+                <rect x="312" y="516" width="10" height="37" rx="3" />
+                <rect x="330" y="482" width="10" height="71" rx="3" />
+                <rect x="348" y="506" width="10" height="47" rx="3" />
+                <rect x="366" y="458" width="10" height="95" rx="3" />
+                <rect x="384" y="489" width="10" height="64" rx="3" />
+                <rect x="402" y="474" width="10" height="79" rx="3" />
+                <path
+                  className="atlas-bar-trend"
+                  d="M317 505 335 470 353 493 371 446 389 477 407 461"
+                />
+              </g>
+
+              <g className="atlas-network">
+                <path d="M8 439 66 477 112 433 171 474 226 431 282 487" />
+                <path d="M8 439 19 528 92 557 171 474 188 579" />
+                <path d="M66 477 92 557 145 522 226 431 252 554" />
+                <path d="M112 433 145 522 204 530 282 487" />
+                <circle cx="8" cy="439" r="5" />
+                <circle cx="19" cy="528" r="4" />
+                <circle cx="66" cy="477" r="5.5" />
+                <circle cx="92" cy="557" r="4.5" />
+                <circle cx="112" cy="433" r="4" />
+                <circle cx="145" cy="522" r="6" />
+                <circle cx="171" cy="474" r="5" />
+                <circle cx="188" cy="579" r="4" />
+                <circle cx="204" cy="530" r="4.5" />
+                <circle cx="226" cy="431" r="5.5" />
+                <circle cx="252" cy="554" r="4" />
+                <circle cx="282" cy="487" r="5" />
+              </g>
+            </svg>
             <div className="hero-portrait-layer">
               <Image
                 alt={
@@ -349,121 +476,15 @@ export default function Home() {
                 src={publicAsset("/assets/paolo-sorino-portrait-cutout-hero-v4.png")}
               />
             </div>
-            <svg
-              aria-hidden="true"
-              className="hero-knowledge-graph"
-              preserveAspectRatio="xMidYMid meet"
-              viewBox="0 0 640 600"
-            >
-              <g className="graph-edges">
-                <path d="M250 270 105 130" />
-                <path d="M250 270 100 425" />
-                <path d="M250 270 355 105" />
-                <path d="M250 270 510 235" />
-                <path d="M250 270 190 515" />
-                <path d="M250 270 430 455" />
-                <path d="M105 130 100 425" />
-                <path d="M105 130 355 105" />
-                <path d="M100 425 430 455" />
-                <path d="M100 425 510 235" />
-                <path d="M355 105 190 515" />
-                <path d="M355 105 430 455" />
-                <path d="M510 235 430 455" />
-              </g>
-
-              <g className="graph-satellites">
-                <circle cx="42" cy="265" r="5" />
-                <circle cx="62" cy="72" r="3.5" />
-                <circle cx="160" cy="56" r="4" />
-                <circle cx="306" cy="44" r="3" />
-                <circle cx="468" cy="64" r="5" />
-                <circle cx="584" cy="152" r="3.5" />
-                <circle cx="594" cy="354" r="4.5" />
-                <circle cx="548" cy="530" r="3" />
-                <circle cx="325" cy="555" r="4" />
-                <circle cx="54" cy="525" r="3.5" />
-              </g>
-
-              <g className="graph-node graph-node-core">
-                <circle className="graph-node-halo" cx="250" cy="270" r="55" />
-                <circle cx="250" cy="270" r="39" />
-                <text x="250" y="276">
-                  AI
-                </text>
-              </g>
-
-              <g className="graph-node">
-                <circle cx="105" cy="130" r="18" />
-                <text className="graph-node-code" x="105" y="134">
-                  ML
-                </text>
-                <text className="graph-node-label" x="132" y="134">
-                  {t("Machine Learning")}
-                </text>
-              </g>
-
-              <g className="graph-node">
-                <circle cx="100" cy="425" r="18" />
-                <text className="graph-node-code" x="100" y="429">
-                  H
-                </text>
-                <text className="graph-node-label" x="127" y="429">
-                  {t("Healthcare")}
-                </text>
-              </g>
-
-              <g className="graph-node">
-                <circle cx="355" cy="105" r="18" />
-                <text className="graph-node-code" x="355" y="109">
-                  XAI
-                </text>
-                <text className="graph-node-label" x="382" y="109">
-                  {t("Explainable AI")}
-                </text>
-              </g>
-
-              <g className="graph-node">
-                <circle cx="510" cy="235" r="18" />
-                <text className="graph-node-code" x="510" y="239">
-                  HMI
-                </text>
-                <text
-                  className="graph-node-label graph-label-centred"
-                  x="510"
-                  y="270"
+            <div className="hero-topic-bubbles">
+              {heroTopics.map((topic, index) => (
+                <span
+                  className={`hero-topic-bubble hero-topic-bubble-${index + 1}`}
+                  key={topic}
                 >
-                  {t("Human–Machine Interaction")}
-                </text>
-              </g>
-
-              <g className="graph-node">
-                <circle cx="190" cy="515" r="15" />
-                <text className="graph-node-code" x="190" y="519">
-                  KG
-                </text>
-                <text className="graph-node-label" x="213" y="519">
-                  {t("Knowledge Graphs")}
-                </text>
-              </g>
-
-              <g className="graph-node">
-                <circle cx="430" cy="455" r="16" />
-                <text className="graph-node-code" x="430" y="459">
-                  CDS
-                </text>
-                <text
-                  className="graph-node-label graph-label-centred"
-                  x="430"
-                  y="489"
-                >
-                  {t("Clinical Decision Support")}
-                </text>
-              </g>
-            </svg>
-            <div className="hero-data-card" aria-hidden="true">
-              <small>{t("Research atlas")}</small>
-              <strong>AI · ML</strong>
-              <span>{t("Healthcare · XAI · HMI")}</span>
+                  {t(topic)}
+                </span>
+              ))}
             </div>
           </div>
         </figure>

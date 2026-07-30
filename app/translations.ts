@@ -18,6 +18,7 @@ const italian: Record<string, string> = {
   "Research atlas": "Atlante della ricerca",
   "Artificial Intelligence": "Intelligenza artificiale",
   "Machine Learning": "Machine learning",
+  "AI in Healthcare": "IA per la sanità",
   "AI and Machine Learning in Healthcare":
     "IA e machine learning per la sanità",
   "Explainable AI": "IA spiegabile",

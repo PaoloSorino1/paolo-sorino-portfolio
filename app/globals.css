@@ -583,41 +583,60 @@ small,
 
 .hero-science-layer {
   background:
-    linear-gradient(135deg, rgba(227, 239, 249, 0.94), rgba(251, 252, 251, 0.82)),
-    var(--paper);
+    linear-gradient(
+      122deg,
+      transparent 0 58%,
+      rgba(143, 192, 235, 0.14) 58.2% 72%,
+      rgba(13, 81, 148, 0.19) 72.2% 100%
+    ),
+    linear-gradient(
+      155deg,
+      transparent 0 66%,
+      rgba(8, 59, 109, 0.08) 66.2% 78%,
+      transparent 78.2%
+    ),
+    radial-gradient(circle at 23% 32%, rgba(255, 255, 255, 0.96), transparent 35%),
+    linear-gradient(135deg, #f7f9f8, #eef3f6 72%, #e2edf5);
   inset: 0;
   overflow: hidden;
   position: absolute;
 }
 
+.hero-science-layer::before {
+  background-image:
+    linear-gradient(rgba(13, 81, 148, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(13, 81, 148, 0.055) 1px, transparent 1px);
+  background-size: 4.2rem 4.2rem;
+  content: "";
+  inset: 0;
+  mask-image: linear-gradient(90deg, black 0 72%, transparent 94%);
+  position: absolute;
+}
+
 .hero-science-layer::after {
   background:
-    linear-gradient(90deg, rgba(251, 252, 251, 0.04), rgba(251, 252, 251, 0.38)),
-    linear-gradient(180deg, rgba(251, 252, 251, 0.02), rgba(8, 59, 109, 0.09));
+    radial-gradient(circle at 15% 14%, rgba(255, 255, 255, 0.72), transparent 23%),
+    linear-gradient(90deg, rgba(251, 252, 251, 0.05), rgba(251, 252, 251, 0.18)),
+    linear-gradient(180deg, transparent 63%, rgba(8, 59, 109, 0.05));
   content: "";
   inset: 0;
   position: absolute;
 }
 
-.hero-science-layer img {
-  filter: grayscale(1) sepia(0.2) hue-rotate(168deg) saturate(2.4) contrast(0.92);
-  object-fit: cover;
-  opacity: 0.43;
-  transform: scale(1.04);
-}
-
 .hero-portrait-layer {
-  bottom: -1.5%;
-  height: 96%;
+  bottom: -1.2%;
+  height: 94%;
   overflow: visible;
   position: absolute;
-  right: 0.5%;
-  width: 70%;
-  z-index: 2;
+  right: 0;
+  width: 67%;
+  z-index: 3;
 }
 
 .hero-portrait-layer::after {
-  background: linear-gradient(180deg, transparent 74%, rgba(8, 59, 109, 0.1));
+  background:
+    linear-gradient(180deg, transparent 76%, rgba(8, 59, 109, 0.07)),
+    linear-gradient(90deg, rgba(251, 252, 251, 0.08), transparent 18%);
   content: "";
   inset: 0;
   pointer-events: none;
@@ -625,134 +644,212 @@ small,
 }
 
 .hero-portrait-layer img {
-  filter: grayscale(0.18) saturate(0.74) contrast(1.03);
+  filter: grayscale(0.08) saturate(0.86) contrast(1.025);
   object-fit: contain;
   object-position: bottom right;
 }
 
-.hero-knowledge-graph {
-  color: var(--burgundy);
-  height: 102%;
-  inset: -1%;
-  opacity: 0.76;
+.hero-visual-data {
+  height: 100%;
+  inset: 0;
   pointer-events: none;
   position: absolute;
-  width: 102%;
+  width: 100%;
   z-index: 1;
 }
 
-.graph-edges path {
+.atlas-area-fill {
+  fill: url("#atlas-area-gradient");
+}
+
+.atlas-area-edge,
+.atlas-area-guide {
   fill: none;
-  stroke: rgba(13, 81, 148, 0.32);
-  stroke-dasharray: 3 5;
+  stroke: rgba(13, 81, 148, 0.14);
   stroke-linecap: round;
   stroke-width: 1.25;
   vector-effect: non-scaling-stroke;
 }
 
-.graph-edges path:nth-child(2n) {
-  stroke: rgba(95, 145, 191, 0.42);
-  stroke-dasharray: none;
+.atlas-area-guide {
+  stroke: rgba(95, 145, 191, 0.11);
+  stroke-dasharray: 3 9;
 }
 
-.graph-satellites circle {
-  fill: rgba(13, 81, 148, 0.58);
-}
-
-.graph-node > circle:not(.graph-node-halo) {
-  fill: rgba(251, 252, 251, 0.9);
-  stroke: rgba(13, 81, 148, 0.72);
-  stroke-width: 1.35;
+.atlas-line-chart path {
+  fill: none;
+  stroke: rgba(13, 81, 148, 0.18);
+  stroke-linecap: round;
+  stroke-width: 1.6;
   vector-effect: non-scaling-stroke;
 }
 
-.graph-node-halo {
-  animation: graph-pulse 4.8s ease-in-out infinite;
-  fill: rgba(13, 81, 148, 0.06);
-  stroke: rgba(13, 81, 148, 0.14);
+.atlas-line-chart path:last-child {
+  stroke: rgba(95, 145, 191, 0.13);
+  stroke-dasharray: 4 8;
+}
+
+.atlas-radial-guide,
+.atlas-radial-ring,
+.atlas-radial-arc {
+  fill: none;
+  vector-effect: non-scaling-stroke;
+}
+
+.atlas-radial-guide {
+  stroke: rgba(13, 81, 148, 0.115);
+  stroke-width: 1.05;
+}
+
+.atlas-radial-dotted {
+  stroke-dasharray: 2 9;
+}
+
+.atlas-radial-soft {
+  stroke: rgba(95, 145, 191, 0.14);
+}
+
+.atlas-radial-progress {
+  animation: atlas-ring-drift 18s linear infinite;
+  stroke: rgba(13, 81, 148, 0.22);
+  stroke-dasharray: 146 457;
+  stroke-linecap: round;
+  stroke-width: 1.25;
+}
+
+.atlas-radial-arc {
+  stroke: rgba(95, 145, 191, 0.2);
+  stroke-linecap: round;
+  stroke-width: 1.25;
+}
+
+.atlas-scatter circle {
+  fill: rgba(13, 81, 148, 0.27);
+}
+
+.atlas-scatter circle:nth-child(3n) {
+  fill: rgba(95, 145, 191, 0.17);
+}
+
+.atlas-data-matrix rect {
+  fill: rgba(13, 81, 148, 0.055);
+}
+
+.atlas-data-matrix rect:nth-child(3n + 1) {
+  fill: rgba(13, 81, 148, 0.14);
+}
+
+.atlas-data-matrix rect:nth-child(4n + 2) {
+  fill: rgba(95, 145, 191, 0.18);
+}
+
+.atlas-data-matrix rect:nth-child(7n) {
+  fill: rgba(8, 59, 109, 0.23);
+}
+
+.atlas-bar-axis {
+  fill: none;
+  stroke: rgba(13, 81, 148, 0.09);
   stroke-width: 1;
-  transform-box: fill-box;
-  transform-origin: center;
   vector-effect: non-scaling-stroke;
 }
 
-.graph-node text {
-  dominant-baseline: middle;
-  fill: var(--burgundy-dark);
-  font-family: var(--sans);
-  text-anchor: middle;
+.atlas-bar-chart rect {
+  fill: rgba(13, 81, 148, 0.095);
 }
 
-.graph-node-core text {
-  fill: var(--burgundy);
-  font-family: var(--serif);
-  font-size: 27px;
-  letter-spacing: -0.04em;
+.atlas-bar-chart rect:nth-of-type(even) {
+  fill: rgba(95, 145, 191, 0.13);
 }
 
-.graph-node-code {
-  font-size: 8px;
-  font-weight: 600;
-  letter-spacing: 0.03em;
+.atlas-bar-trend {
+  fill: none;
+  stroke: rgba(13, 81, 148, 0.17);
+  stroke-dasharray: 2 7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.25;
+  vector-effect: non-scaling-stroke;
 }
 
-.graph-node-label {
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.035em;
-  text-anchor: start !important;
+.atlas-network path {
+  fill: none;
+  stroke: rgba(13, 81, 148, 0.2);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.15;
+  vector-effect: non-scaling-stroke;
 }
 
-.graph-label-centred {
-  text-anchor: middle !important;
+.atlas-network circle {
+  fill: rgba(247, 249, 248, 0.92);
+  stroke: rgba(13, 81, 148, 0.34);
+  stroke-width: 1.15;
+  vector-effect: non-scaling-stroke;
 }
 
-@keyframes graph-pulse {
-  0%,
-  100% {
-    opacity: 0.7;
-    transform: scale(0.94);
+.atlas-network circle:nth-of-type(3n) {
+  fill: rgba(13, 81, 148, 0.25);
+}
+
+@keyframes atlas-ring-drift {
+  to {
+    stroke-dashoffset: -603;
   }
-  50% {
-    opacity: 1;
-    transform: scale(1.06);
-  }
 }
 
-.hero-data-card {
-  backdrop-filter: blur(12px);
-  background: rgba(8, 45, 78, 0.88);
-  border: 1px solid rgba(251, 252, 251, 0.44);
-  border-radius: 0.42rem;
-  bottom: 6%;
-  color: var(--paper);
-  display: flex;
-  flex-direction: column;
-  min-width: 10.2rem;
-  padding: 1.05rem 1.2rem 1.1rem;
+.hero-topic-bubbles {
+  inset: 0;
+  pointer-events: none;
   position: absolute;
-  right: 4%;
   z-index: 4;
 }
 
-.hero-data-card small {
-  font-size: 0.55rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+.hero-topic-bubble {
+  align-items: center;
+  backdrop-filter: blur(12px);
+  background: rgba(251, 252, 251, 0.76);
+  border: 1px solid rgba(143, 192, 235, 0.72);
+  border-radius: 999px;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.92) inset,
+    0 10px 30px rgba(8, 59, 109, 0.035);
+  color: var(--burgundy-dark);
+  display: inline-flex;
+  font-size: clamp(0.68rem, 0.88vw, 0.83rem);
+  font-weight: 500;
+  justify-content: center;
+  letter-spacing: -0.012em;
+  line-height: 1.2;
+  min-height: 2.55rem;
+  padding: 0.62rem 1.2rem;
+  position: absolute;
+  white-space: nowrap;
 }
 
-.hero-data-card strong {
-  font-family: var(--serif);
-  font-size: 2rem;
-  font-weight: 400;
-  line-height: 1;
-  margin: 0.5rem 0 0.35rem;
+.hero-topic-bubble-1 {
+  left: 7%;
+  top: 8%;
 }
 
-.hero-data-card span {
-  color: #dceaf6;
-  font-size: 0.58rem;
-  letter-spacing: 0.06em;
+.hero-topic-bubble-2 {
+  left: 30%;
+  top: 18%;
+}
+
+.hero-topic-bubble-3 {
+  left: 6%;
+  top: 29%;
+}
+
+.hero-topic-bubble-4 {
+  left: 18%;
+  top: 40%;
+}
+
+.hero-topic-bubble-5 {
+  left: 4.5%;
+  top: 57%;
 }
 
 .metrics {
@@ -2201,27 +2298,66 @@ small,
   }
 
   .hero-portrait-layer {
-    height: 95%;
-    right: -1%;
-    width: 76%;
+    height: 92%;
+    right: -2%;
+    width: 64%;
   }
 
-  .hero-data-card {
-    bottom: 4.5%;
-    min-width: 8.8rem;
-    padding: 0.8rem 0.9rem;
-    right: 3%;
+  .hero-topic-bubble {
+    backdrop-filter: blur(9px);
+    font-size: clamp(0.52rem, 2.25vw, 0.68rem);
+    line-height: 1.22;
+    max-width: 48%;
+    min-height: 2rem;
+    padding: 0.43rem 0.68rem;
+    text-align: center;
+    white-space: normal;
   }
 
-  .hero-data-card strong {
-    font-size: 1.65rem;
+  .hero-topic-bubble-1 {
+    left: 4%;
+    top: 6%;
   }
 
-  .hero-knowledge-graph {
-    height: 104%;
-    inset: -2% -6%;
-    opacity: 0.7;
-    width: 112%;
+  .hero-topic-bubble-2 {
+    left: 18%;
+    top: 18%;
+  }
+
+  .hero-topic-bubble-3 {
+    left: 4%;
+    top: 29%;
+  }
+
+  .hero-topic-bubble-4 {
+    left: 5%;
+    top: 41%;
+  }
+
+  .hero-topic-bubble-5 {
+    left: 3%;
+    top: 57%;
+  }
+
+  .hero-visual-data {
+    transform: scale(1.04);
+    transform-origin: center;
+  }
+
+  .atlas-area-chart {
+    opacity: 0.66;
+  }
+
+  .atlas-radial-chart {
+    opacity: 0.58;
+  }
+
+  .atlas-data-matrix {
+    opacity: 0.52;
+  }
+
+  .atlas-bar-chart {
+    opacity: 0.48;
   }
 
   .metrics > div {
@@ -2473,18 +2609,29 @@ small,
   }
 
   .hero-portrait-layer {
-    height: 93%;
-    width: 80%;
+    height: 91%;
+    right: -3%;
+    width: 65%;
   }
 
-  .hero-data-card {
-    min-width: 8.1rem;
-    padding: 0.7rem 0.78rem;
+  .hero-topic-bubble {
+    font-size: clamp(0.49rem, 2.15vw, 0.6rem);
+    max-width: 49%;
+    min-height: 1.85rem;
+    padding: 0.36rem 0.58rem;
   }
 
-  .hero-data-card small,
-  .hero-data-card span {
-    font-size: 0.5rem;
+  .hero-topic-bubble-2 {
+    left: 15%;
+  }
+
+  .atlas-data-matrix,
+  .atlas-bar-chart {
+    display: none;
+  }
+
+  .atlas-radial-chart {
+    opacity: 0.42;
   }
 
   .metrics > div {
