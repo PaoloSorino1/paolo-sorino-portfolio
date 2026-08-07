@@ -144,8 +144,8 @@ const italian: Record<string, string> = {
   "I am open to research collaborations, invited talks, and projects that bring transparent AI into meaningful real-world settings.":
     "Sono disponibile per collaborazioni di ricerca, invited talk e progetti che portino un’IA trasparente in contesti reali e significativi.",
   "Download full CV": "Scarica il CV completo",
-  "Full academic CV · updated July 2026 · PDF":
-    "CV accademico completo · aggiornato a luglio 2026 · PDF",
+  "Full academic CV · updated August 2026 · PDF":
+    "CV accademico completo · aggiornato ad agosto 2026 · PDF",
   "Complete bibliography": "Bibliografia completa",
   "Back to portfolio": "Torna al portfolio",
   "Publications,": "Pubblicazioni,",

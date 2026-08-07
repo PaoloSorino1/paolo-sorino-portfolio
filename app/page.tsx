@@ -873,7 +873,7 @@ export default function Home() {
               {t("Download full CV")} <span aria-hidden="true">↓</span>
             </a>
             <p className="cv-meta">
-              {t("Full academic CV · updated July 2026 · PDF")}
+              {t("Full academic CV · updated August 2026 · PDF")}
             </p>
           </div>
         </div>
