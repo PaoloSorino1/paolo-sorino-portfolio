@@ -1785,15 +1785,11 @@ small,
 
 .service-items article {
   border-bottom: 1px solid var(--rule-dark);
-  padding: 1.7rem 0 1.9rem;
-}
-
-.service-items .service-item-highlight {
-  padding-left: 1.25rem;
+  padding: 1.7rem 0 1.9rem 1.25rem;
   position: relative;
 }
 
-.service-items .service-item-highlight::before {
+.service-items article::before {
   background: var(--burgundy);
   bottom: 1.9rem;
   content: "";
