@@ -754,6 +754,17 @@ export default function Home() {
             <h2>{t("Contributing beyond publications.")}</h2>
           </div>
           <div className="service-items">
+            <article className="service-item-highlight">
+              <span>
+                {t("Editorial board")} · {t("2026—present")}
+              </span>
+              <h3>{t("Associate Editor")}</h3>
+              <p>
+                {t(
+                  "IEEE Journal of Biomedical and Health Informatics (J-BHI) · Public Health Informatics Section · Q1 journal.",
+                )}
+              </p>
+            </article>
             <article>
               <span>{t("Editorial")}</span>
               <h3>{t("Guest Editor")}</h3>

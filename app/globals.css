@@ -1788,6 +1788,21 @@ small,
   padding: 1.7rem 0 1.9rem;
 }
 
+.service-items .service-item-highlight {
+  padding-left: 1.25rem;
+  position: relative;
+}
+
+.service-items .service-item-highlight::before {
+  background: var(--burgundy);
+  bottom: 1.9rem;
+  content: "";
+  left: 0;
+  position: absolute;
+  top: 1.7rem;
+  width: 3px;
+}
+
 .service-items article > span {
   color: var(--burgundy);
   font-size: 0.62rem;

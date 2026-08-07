@@ -110,6 +110,10 @@ const italian: Record<string, string> = {
   "Contributing beyond publications.":
     "Contribuire oltre le pubblicazioni.",
   "Editorial": "Attività editoriale",
+  "Editorial board": "Comitato editoriale",
+  "Associate Editor": "Associate Editor",
+  "IEEE Journal of Biomedical and Health Informatics (J-BHI) · Public Health Informatics Section · Q1 journal.":
+    "IEEE Journal of Biomedical and Health Informatics (J-BHI) · Sezione Public Health Informatics · Rivista scientifica Q1.",
   "Guest Editor": "Guest Editor",
   "Research community": "Comunità scientifica",
   "International engagement": "Impegno internazionale",
