@@ -6,6 +6,8 @@ import { LanguageSwitch } from "./language-switch";
 import { MailIcon } from "./mail-icon";
 import { translate } from "./translations";
 import { useLanguage } from "./language-context";
+import { featuredPublications, publicationCount } from "./publications";
+import siteContent from "../content/site.json";
 import {
   PROFILE_IMAGE_URL,
   PROFILE_LINKS,
@@ -142,45 +144,6 @@ const projects = [
     description:
       "AI/XAI methods and interactive systems for early detection, biological treatments, and collaborative research in plant health.",
     accent: "XAI · Interactive systems",
-  },
-];
-
-const selectedPublications = [
-  {
-    year: "2026",
-    type: "Journal article",
-    title:
-      "AMIUgraph: analysis and modeling of interactions for utility-driven benchmarking of graph-based models in healthcare",
-    venue: "BMC Medical Informatics and Decision Making",
-    href: "https://doi.org/10.1186/s12911-026-03717-5",
-    focus: "Graph AI · Healthcare benchmarking",
-  },
-  {
-    year: "2025",
-    type: "Journal article",
-    title:
-      "Detecting label noise in longitudinal Alzheimer’s data with explainable artificial intelligence",
-    venue: "Brain Informatics",
-    href: "https://doi.org/10.1186/s40708-025-00261-2",
-    focus: "Explainable AI · Alzheimer’s disease",
-  },
-  {
-    year: "2025",
-    type: "Journal article",
-    title:
-      "MORIX: Machine learning-aided framework for lethality detection and mortality inference with explainable artificial intelligence",
-    venue: "Computer Methods and Programs in Biomedicine Update",
-    href: "https://doi.org/10.1016/j.cmpbup.2024.100176",
-    focus: "Clinical prediction · XAI",
-  },
-  {
-    year: "2024",
-    type: "Conference paper",
-    title:
-      "ARIEL: Brain–Computer Interfaces meet Large Language Models for Emotional Support Conversation",
-    venue: "ACM UMAP Adjunct",
-    href: "https://doi.org/10.1145/3631700.3665193",
-    focus: "Human-centred AI · HMI",
   },
 ];
 
@@ -582,7 +545,7 @@ export default function Home() {
         aria-label={t("Academic highlights")}
       >
         <div>
-          <strong>43</strong>
+          <strong>{publicationCount}</strong>
           <span>{t("Scientific publications")}</span>
         </div>
         <div>
@@ -684,7 +647,7 @@ export default function Home() {
           </div>
 
           <div className="publication-list">
-            {selectedPublications.map((publication) => (
+            {featuredPublications.map((publication) => (
               <a
                 className="publication-row"
                 href={publication.href}
@@ -694,12 +657,22 @@ export default function Home() {
               >
                 <span className="publication-year">{publication.year}</span>
                 <div className="publication-main">
-                  <span>{t(publication.type)}</span>
+                  <span>
+                    {t(
+                      publication.category === "journal"
+                        ? "Journal article"
+                        : "Conference paper",
+                    )}
+                  </span>
                   <h3>{publication.title}</h3>
                   <p>{publication.venue}</p>
                 </div>
                 <div className="publication-focus">
-                  <span>{t(publication.focus)}</span>
+                  <span>
+                    {language === "it"
+                      ? (publication.focusIt ?? publication.focusEn)
+                      : publication.focusEn}
+                  </span>
                   <strong aria-hidden="true">↗</strong>
                 </div>
               </a>
@@ -867,13 +840,13 @@ export default function Home() {
             </a>
             <a
               className="button button-primary cv-button"
-              href={publicAsset("/Paolo_Sorino_CV_2026.pdf")}
+              href={publicAsset(siteContent.cvFile)}
               download
             >
               {t("Download full CV")} <span aria-hidden="true">↓</span>
             </a>
             <p className="cv-meta">
-              {t("Full academic CV · updated August 2026 · PDF")}
+              {language === "it" ? siteContent.cvMetaIt : siteContent.cvMetaEn}
             </p>
           </div>
         </div>

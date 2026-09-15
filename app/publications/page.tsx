@@ -9,6 +9,8 @@ import { translate } from "../translations";
 import {
   conferencePublications,
   journalPublications,
+  publicationCount,
+  publicationPeriod,
   type Publication,
 } from "../publications";
 
@@ -90,8 +92,6 @@ function PublicationGroup({
 export default function PublicationsPage() {
   const { language } = useLanguage();
   const t = (text: string) => translate(language, text);
-  const publicationCount =
-    journalPublications.length + conferencePublications.length;
 
   return (
     <main className="bibliography-page">
@@ -196,7 +196,7 @@ export default function PublicationsPage() {
           <span>{t("Conference & workshop papers")}</span>
         </div>
         <div>
-          <strong>2019—2026</strong>
+          <strong>{publicationPeriod}</strong>
           <span>{t("Publication period")}</span>
         </div>
       </section>

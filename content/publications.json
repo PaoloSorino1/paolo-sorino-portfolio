@@ -1,0 +1,433 @@
+{
+  "publications": [
+    {
+      "year": "2026",
+      "category": "journal",
+      "title": "AMIUgraph: analysis and modeling of interactions for utility-driven benchmarking of graph-based models in healthcare",
+      "venue": "BMC Medical Informatics and Decision Making",
+      "doi": "10.1186/s12911-026-03717-5",
+      "href": "https://doi.org/10.1186/s12911-026-03717-5",
+      "featured": true,
+      "focusEn": "Graph AI · Healthcare benchmarking",
+      "focusIt": "Graph AI · Benchmarking in sanità"
+    },
+    {
+      "year": "2026",
+      "category": "journal",
+      "title": "A Reproducibility-Oriented Survival Analysis Framework with Integrated Interpretability and Role-Based Graphical Interaction",
+      "venue": "IEEE Access",
+      "doi": "10.1109/ACCESS.2026.3731426",
+      "href": "https://doi.org/10.1109/ACCESS.2026.3731426",
+      "featured": false
+    },
+    {
+      "year": "2025",
+      "category": "journal",
+      "title": "Detecting label noise in longitudinal Alzheimer’s data with explainable artificial intelligence",
+      "venue": "Brain Informatics, 12(1), 15",
+      "doi": "10.1186/s40708-025-00261-2",
+      "href": "https://doi.org/10.1186/s40708-025-00261-2",
+      "featured": true,
+      "focusEn": "Explainable AI · Alzheimer’s disease",
+      "focusIt": "IA spiegabile · Malattia di Alzheimer"
+    },
+    {
+      "year": "2025",
+      "category": "journal",
+      "title": "MORIX: Machine learning-aided framework for lethality detection and MORtality inference with eXplainable artificial intelligence in MAFLD subjects",
+      "venue": "Computer Methods and Programs in Biomedicine Update, 100176",
+      "doi": "10.1016/j.cmpbup.2024.100176",
+      "href": "https://doi.org/10.1016/j.cmpbup.2024.100176",
+      "featured": true,
+      "focusEn": "Clinical prediction · XAI",
+      "focusIt": "Predizione clinica · XAI"
+    },
+    {
+      "year": "2024",
+      "category": "journal",
+      "title": "NeuralPMG: A Neural Polyphonic Music Generation System Based on Machine Learning Algorithms",
+      "venue": "Cognitive Computation, 16, 2779–2802",
+      "doi": "10.1007/s12559-024-10280-6",
+      "href": "https://doi.org/10.1007/s12559-024-10280-6",
+      "featured": false
+    },
+    {
+      "year": "2024",
+      "category": "journal",
+      "title": "NeuroSense: A Novel EEG Dataset Utilizing Low-Cost, Sparse Electrode Devices for Emotion Exploration",
+      "venue": "IEEE Access, 12, 159296–159315",
+      "doi": "10.1109/ACCESS.2024.3487932",
+      "href": "https://doi.org/10.1109/ACCESS.2024.3487932",
+      "featured": false
+    },
+    {
+      "year": "2022",
+      "category": "journal",
+      "title": "Combining biomechanical features and machine learning approaches to identify fencers’ levels for training support",
+      "venue": "Applied Sciences, 12(23), 12350",
+      "doi": "10.3390/app122312350",
+      "href": "https://doi.org/10.3390/app122312350",
+      "featured": false
+    },
+    {
+      "year": "2022",
+      "category": "journal",
+      "title": "A low glycemic index Mediterranean diet combined with aerobic physical activity rearranges the gut microbiota signature in NAFLD patients",
+      "venue": "Nutrients, 14(9), 1773",
+      "doi": "10.3390/nu14091773",
+      "href": "https://doi.org/10.3390/nu14091773",
+      "featured": false
+    },
+    {
+      "year": "2022",
+      "category": "journal",
+      "title": "The Effect of Low Glycemic Index Mediterranean Diet and Combined Exercise Program on Metabolic-Associated Fatty Liver Disease: A Joint Modeling Approach",
+      "venue": "Journal of Clinical Medicine, 11(15), 4339",
+      "doi": "10.3390/jcm11154339",
+      "href": "https://doi.org/10.3390/jcm11154339",
+      "featured": false
+    },
+    {
+      "year": "2022",
+      "category": "journal",
+      "title": "Effects of weight change on all causes, digestive system and other causes mortality in Southern Italy: a competing risk approach",
+      "venue": "International Journal of Obesity, 46(1), 113–120",
+      "doi": "10.1038/s41366-021-00954-8",
+      "href": "https://doi.org/10.1038/s41366-021-00954-8",
+      "featured": false
+    },
+    {
+      "year": "2022",
+      "category": "journal",
+      "title": "Dietary patterns associated with diabetes in an older population from Southern Italy using an unsupervised learning approach",
+      "venue": "Sensors, 22(6), 2193",
+      "doi": "10.3390/s22062193",
+      "href": "https://doi.org/10.3390/s22062193",
+      "featured": false
+    },
+    {
+      "year": "2022",
+      "category": "journal",
+      "title": "FDF-DB: A Database of Traditional Fermented Dairy Foods and Their Associated Microbiota",
+      "venue": "Nutrients, 14(21), 4581",
+      "doi": "10.3390/nu14214581",
+      "href": "https://doi.org/10.3390/nu14214581",
+      "featured": false
+    },
+    {
+      "year": "2021",
+      "category": "journal",
+      "title": "Physical Activity Reduction and the Worsening of Gastrointestinal Health Status during the Second COVID-19 Home Confinement in Southern Italy",
+      "venue": "International Journal of Environmental Research and Public Health, 18(18), 9554",
+      "doi": "10.3390/ijerph18189554",
+      "href": "https://doi.org/10.3390/ijerph18189554",
+      "featured": false
+    },
+    {
+      "year": "2021",
+      "category": "journal",
+      "title": "The effect of the Mediterranean Diet on lifespan: a treatment-effect survival analysis of a population-based prospective cohort study in Southern Italy",
+      "venue": "International Journal of Epidemiology, 50(1), 245–255",
+      "doi": "10.1093/ije/dyaa222",
+      "href": "https://doi.org/10.1093/ije/dyaa222",
+      "featured": false
+    },
+    {
+      "year": "2021",
+      "category": "journal",
+      "title": "Decreased levels of physical activity: results from a cross-sectional study in southern Italy during the COVID-19 lockdown",
+      "venue": "The Journal of Sports Medicine and Physical Fitness, 61(2), 294–300",
+      "doi": "10.23736/S0022-4707.20.11536-6",
+      "href": "https://doi.org/10.23736/S0022-4707.20.11536-6",
+      "featured": false
+    },
+    {
+      "year": "2021",
+      "category": "journal",
+      "title": "Physical activity and low glycemic index Mediterranean diet: Main and modification effects on NAFLD score. Results from a randomized clinical trial",
+      "venue": "Nutrients, 13(1), 66",
+      "doi": "10.3390/nu13010066",
+      "href": "https://doi.org/10.3390/nu13010066",
+      "featured": false
+    },
+    {
+      "year": "2021",
+      "category": "journal",
+      "title": "Modified WCRF/AICR score and all-cause, digestive system, cardiovascular, cancer and other-cause-related mortality: a competing risk analysis of two cohort studies conducted in Southern Italy",
+      "venue": "Nutrients, 13(11), 4002",
+      "doi": "10.3390/nu13114002",
+      "href": "https://doi.org/10.3390/nu13114002",
+      "featured": false
+    },
+    {
+      "year": "2021",
+      "category": "journal",
+      "title": "Development and validation of a neural network for NAFLD diagnosis",
+      "venue": "Scientific Reports, 11(1), 20240",
+      "doi": "10.1038/s41598-021-99400-y",
+      "href": "https://doi.org/10.1038/s41598-021-99400-y",
+      "featured": false
+    },
+    {
+      "year": "2020",
+      "category": "journal",
+      "title": "Remnant cholesterol as a risk factor for cardiovascular, cancer or other causes mortality: a competing risks analysis",
+      "venue": "Nutrition, Metabolism and Cardiovascular Diseases, 30(11), 2093–2102",
+      "doi": "10.1016/j.numecd.2020.07.002",
+      "href": "https://doi.org/10.1016/j.numecd.2020.07.002",
+      "featured": false
+    },
+    {
+      "year": "2020",
+      "category": "journal",
+      "title": "The effect of three Mediterranean diets on remnant cholesterol and non-alcoholic fatty liver disease: a secondary analysis",
+      "venue": "Nutrients, 12(6), 1674",
+      "doi": "10.3390/nu12061674",
+      "href": "https://doi.org/10.3390/nu12061674",
+      "featured": false
+    },
+    {
+      "year": "2020",
+      "category": "journal",
+      "title": "Selecting the best machine learning algorithm to support the diagnosis of Non-Alcoholic Fatty Liver Disease: A meta learner study",
+      "venue": "PLOS ONE, 15(10), e0240867",
+      "doi": "10.1371/journal.pone.0240867",
+      "href": "https://doi.org/10.1371/journal.pone.0240867",
+      "featured": false
+    },
+    {
+      "year": "2019",
+      "category": "journal",
+      "title": "Effects of some food components on non-alcoholic fatty liver disease severity: results from a cross-sectional study",
+      "venue": "Nutrients, 11(11), 2744",
+      "doi": "10.3390/nu11112744",
+      "href": "https://doi.org/10.3390/nu11112744",
+      "featured": false
+    },
+    {
+      "year": "2026",
+      "category": "conference",
+      "title": "Passenger experience on an automated shuttle service: a survey study on a real test ride in Italy",
+      "venue": "Transportation Research Procedia, 95, 808–815",
+      "doi": "10.1016/j.trpro.2026.02.102",
+      "href": "https://doi.org/10.1016/j.trpro.2026.02.102",
+      "featured": false
+    },
+    {
+      "year": "2026",
+      "category": "conference",
+      "title": "Energy-Efficient Federated Learning for Space Observation via Neuromorphic Computing: A Use Case",
+      "venue": "2026 IEEE Conference on Artificial Intelligence (CAI), 396–402",
+      "doi": "10.1109/CAI68641.2026.11536327",
+      "href": "https://doi.org/10.1109/CAI68641.2026.11536327",
+      "featured": false
+    },
+    {
+      "year": "2026",
+      "category": "conference",
+      "title": "MMFCyberDetector: A Multimodal Skeleton-Based Framework for Cyberbullying Action Detection",
+      "venue": "2026 IEEE International Conference on Human-Machine Systems (ICHMS), 588–593",
+      "doi": "10.1109/ICHMS69701.2026.11602148",
+      "href": "https://doi.org/10.1109/ICHMS69701.2026.11602148",
+      "featured": false
+    },
+    {
+      "year": "2026",
+      "category": "conference",
+      "title": "EEGScope: A Framework for the Real Time Acquisition, Processing, Sonification and Analysis of EEG Data",
+      "venue": "Brain Informatics (BI 2025), Lecture Notes in Computer Science, vol. 16347, Springer, 188–204",
+      "doi": "10.1007/978-981-95-9575-4_15",
+      "href": "https://doi.org/10.1007/978-981-95-9575-4_15",
+      "featured": false
+    },
+    {
+      "year": "2025",
+      "category": "conference",
+      "title": "WeBIUM 2025: 2nd Workshop on Wearable Devices and Brain-Computer Interfaces for User Modelling",
+      "venue": "ACM UMAP 2025 Adjunct, 467–470",
+      "doi": "10.1145/3708319.3727555",
+      "href": "https://doi.org/10.1145/3708319.3727555",
+      "featured": false
+    },
+    {
+      "year": "2025",
+      "category": "conference",
+      "title": "Neural Musical Instruments through Brain-Computer Interface and Biofeedback",
+      "venue": "ACM UMAP 2025 Adjunct, 489–494",
+      "doi": "10.1145/3708319.3733644",
+      "href": "https://doi.org/10.1145/3708319.3733644",
+      "featured": false
+    },
+    {
+      "year": "2025",
+      "category": "conference",
+      "title": "Enhancing EEG-Based Limbs Movement Classification through Advanced Machine Learning Techniques for Motor Imagery",
+      "venue": "IEEE ICHMS 2025, 332–337",
+      "doi": "10.1109/ICHMS65439.2025.11154223",
+      "href": "https://doi.org/10.1109/ICHMS65439.2025.11154223",
+      "featured": false
+    },
+    {
+      "year": "2025",
+      "category": "conference",
+      "title": "Assessing the Short-Term Impact of Air Pollution and Socioeconomic Factors on the Overall Mortality of Taranto: an eXplainable Machine Learning Approach",
+      "venue": "IEEE SMC 2025, 4906–4911",
+      "doi": "10.1109/SMC58881.2025.11343281",
+      "href": "https://doi.org/10.1109/SMC58881.2025.11343281",
+      "featured": false
+    },
+    {
+      "year": "2025",
+      "category": "conference",
+      "title": "Explainable Machine Learning for Clinical Prediction of High-Flow Nasal Cannula Therapy in Pediatric Bronchiolitis",
+      "venue": "IEEE SMC 2025, 4912–4917",
+      "doi": "10.1109/SMC58881.2025.11343071",
+      "href": "https://doi.org/10.1109/SMC58881.2025.11343071",
+      "featured": false
+    },
+    {
+      "year": "2024",
+      "category": "conference",
+      "title": "Towards a Neurofeedback Tool For Emotion Recognition Using Brain Computer Interface",
+      "venue": "ICWE 2024 Workshops, Springer, 89–98",
+      "doi": "10.1007/978-3-031-75110-3_8",
+      "href": "https://doi.org/10.1007/978-3-031-75110-3_8",
+      "featured": false
+    },
+    {
+      "year": "2024",
+      "category": "conference",
+      "title": "Wearable Devices and Brain-Computer Interfaces for User Modelling (WeBIUM)",
+      "venue": "ACM UMAP 2024 Adjunct, 597–600",
+      "doi": "10.1145/3631700.3658529",
+      "href": "https://doi.org/10.1145/3631700.3658529",
+      "featured": false
+    },
+    {
+      "year": "2024",
+      "category": "conference",
+      "title": "EmoSynth Real Time Emotion-Driven Sound Texture Synthesis via Brain-Computer Interface",
+      "venue": "ACM UMAP 2024 Adjunct, 616–621",
+      "doi": "10.1145/3631700.3665196",
+      "href": "https://doi.org/10.1145/3631700.3665196",
+      "featured": false
+    },
+    {
+      "year": "2024",
+      "category": "conference",
+      "title": "Integrating eXplainable AI in Healthcare: A Web Application Framework for Advancing the One Health Paradigm",
+      "venue": "ICWE 2024 Workshops, Springer, 77–88",
+      "doi": "10.1007/978-3-031-75110-3_7",
+      "href": "https://doi.org/10.1007/978-3-031-75110-3_7",
+      "featured": false
+    },
+    {
+      "year": "2024",
+      "category": "conference",
+      "title": "Towards a Federated Intrusion Detection System based on Neuromorphic Computing",
+      "venue": "IEEE SpliTech 2024, 1–5",
+      "doi": "10.23919/SpliTech61897.2024.10612534",
+      "href": "https://doi.org/10.23919/SpliTech61897.2024.10612534",
+      "featured": false
+    },
+    {
+      "year": "2024",
+      "category": "conference",
+      "title": "ARIEL: Brain-Computer Interfaces meet Large Language Models for Emotional Support Conversation",
+      "venue": "ACM UMAP 2024 Adjunct, 601–609",
+      "doi": "10.1145/3631700.3665193",
+      "href": "https://doi.org/10.1145/3631700.3665193",
+      "featured": true,
+      "focusEn": "Human-centred AI · HMI",
+      "focusIt": "IA centrata sulle persone · HMI"
+    },
+    {
+      "year": "2024",
+      "category": "conference",
+      "title": "An Explainable Machine Learning Approach for Heartbeat Classification Through Signal-Based Features",
+      "venue": "IEEE SMC 2024, 1–6",
+      "doi": "10.1109/SMC54092.2024.10831926",
+      "href": "https://doi.org/10.1109/SMC54092.2024.10831926",
+      "featured": false
+    },
+    {
+      "year": "2023",
+      "category": "conference",
+      "title": "Exploring the Mental State Intersection by Brain-Computer Interfaces, Cellular Automata and Biofeedback",
+      "venue": "IEEE EUROCON 2023, 461–466",
+      "doi": "10.1109/EUROCON56442.2023.10198964",
+      "href": "https://doi.org/10.1109/EUROCON56442.2023.10198964",
+      "featured": false
+    },
+    {
+      "year": "2023",
+      "category": "conference",
+      "title": "Combining Mental States Recognition and Machine Learning for Neurorehabilitation",
+      "venue": "IEEE SMC 2023, 3848–3853",
+      "doi": "10.1109/SMC53992.2023.10394347",
+      "href": "https://doi.org/10.1109/SMC53992.2023.10394347",
+      "featured": false
+    },
+    {
+      "year": "2023",
+      "category": "conference",
+      "title": "Time-to-Event Interpretable Machine Learning for Multiple Sclerosis Worsening Prediction: Results from iDPP@CLEF 2023",
+      "venue": "CLEF 2023, CEUR Workshop Proceedings, Vol. 3497, 1272–1285",
+      "href": "https://ceur-ws.org/Vol-3497/paper-103.pdf",
+      "featured": false
+    },
+    {
+      "year": "2023",
+      "category": "conference",
+      "title": "A Pareto-Optimality-Based Approach for Selecting the Best Machine Learning Models in Mild Cognitive Impairment Prediction",
+      "venue": "IEEE SMC 2023, 3822–3827",
+      "doi": "10.1109/SMC53992.2023.10394057",
+      "href": "https://doi.org/10.1109/SMC53992.2023.10394057",
+      "featured": false
+    },
+    {
+      "year": "2023",
+      "category": "conference",
+      "title": "Predicting Human Emotions using EEG-based Brain Computer Interface and Interpretable Machine Learning",
+      "venue": "Ital-IA 2023, CEUR Workshop Proceedings, Vol. 3486",
+      "href": "https://ceur-ws.org/Vol-3486/160.pdf",
+      "featured": false
+    },
+    {
+      "year": "2022",
+      "category": "conference",
+      "title": "Brain Computer Interface: Deep Learning Approach to Predict Human Emotion Recognition",
+      "venue": "IEEE SMC 2022, 2689–2694",
+      "doi": "10.1109/SMC53654.2022.9945554",
+      "href": "https://doi.org/10.1109/SMC53654.2022.9945554",
+      "featured": false
+    },
+    {
+      "year": "2022",
+      "category": "conference",
+      "title": "An Artificial Neural Network Model to Assess Nutritional Factors Associated with Frailty in the Aging Population from Southern Italy",
+      "venue": "IEEE SMC 2022, 3228–3233",
+      "doi": "10.1109/SMC53654.2022.9945542",
+      "href": "https://doi.org/10.1109/SMC53654.2022.9945542",
+      "featured": false
+    },
+    {
+      "year": "2022",
+      "category": "conference",
+      "title": "CPU-side comparison for Key Agreement between Tree Parity Machines and standard Cryptographic Primitives",
+      "venue": "IEEE DESSERT 2022, 1–6",
+      "doi": "10.1109/DESSERT58054.2022.10018797",
+      "href": "https://doi.org/10.1109/DESSERT58054.2022.10018797",
+      "featured": false
+    },
+    {
+      "year": "2022",
+      "category": "conference",
+      "title": "Blockchain and AI to Build an Alzheimer’s Risk Calculator",
+      "venue": "ICWE 2022, Springer, 432–436",
+      "doi": "10.1007/978-3-031-09917-5_31",
+      "href": "https://doi.org/10.1007/978-3-031-09917-5_31",
+      "featured": false
+    }
+  ]
+}
