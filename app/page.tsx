@@ -115,7 +115,7 @@ export default function Home() {
   const loc = (value: { en: string; it: string }) => localize(value, language);
 
   return (
-    <main>
+    <main className="portfolio-home">
       <script
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(profileStructuredData).replace(/</g, "\\u003c"),
@@ -182,6 +182,9 @@ export default function Home() {
             <Link className="button button-text" href="/publications">
               {loc(content.hero.secondaryAction)} <span aria-hidden="true">→</span>
             </Link>
+          </div>
+          <div className="hero-profiles">
+            {profileLinks.map((profile, index) => <ProfileLink key={index} profile={profile} />)}
           </div>
         </div>
 
@@ -338,6 +341,10 @@ export default function Home() {
               ))}
             </div>
           </div>
+          <figcaption className="hero-art-caption">
+            <span>{loc(content.research.kicker)}</span>
+            <span>{content.profile.laboratory}</span>
+          </figcaption>
         </figure>
       </section>
 

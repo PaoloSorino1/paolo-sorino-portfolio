@@ -3,6 +3,8 @@ import "@fontsource/poppins/400.css";
 import "@fontsource/poppins/500.css";
 import "@fontsource/poppins/600.css";
 import "./globals.css";
+import "./visual-refresh.css";
+import "./section-refresh.css";
 import { LanguageProvider } from "./language-context";
 import { initialPortfolio as content } from "./portfolio-content";
 import {
