@@ -5,6 +5,8 @@ import { FormEvent, useEffect, useMemo, useState } from "react";
 import publicationContent from "../../content/publications.json";
 import siteContent from "../../content/site.json";
 import type { Publication, PublicationCategory } from "../publications";
+import { initialPortfolio, validatePortfolio, type PortfolioContent } from "../portfolio-content";
+import { PortfolioEditor, contentSections, type ContentSectionId } from "./portfolio-editor";
 import styles from "./admin.module.css";
 
 const GITHUB_API = "https://api.github.com";
@@ -12,6 +14,7 @@ const REPOSITORY = "PaoloSorino1/paolo-sorino-portfolio";
 const BRANCH = "main";
 const PUBLICATIONS_PATH = "content/publications.json";
 const SITE_CONTENT_PATH = "content/site.json";
+const PORTFOLIO_PATH = "content/portfolio.json";
 const CV_REPOSITORY_PATH = "public/documents/Paolo-Sorino-CV.pdf";
 const CV_PUBLIC_PATH = "/documents/Paolo-Sorino-CV.pdf";
 const MAX_CV_BYTES = 8 * 1024 * 1024;
@@ -302,7 +305,12 @@ export default function AdminPage() {
     useState<ManagedPublication[]>(initialPublications);
   const [settings, setSettings] =
     useState<SiteContent>(initialSiteContent);
-  const [tab, setTab] = useState<"publications" | "cv">("publications");
+  const [tab, setTab] = useState<"publications" | "cv" | ContentSectionId>("profile");
+  const [portfolio, setPortfolio] = useState<PortfolioContent>(initialPortfolio);
+  const [savedPortfolio, setSavedPortfolio] = useState<PortfolioContent>(initialPortfolio);
+  const [portfolioSha, setPortfolioSha] = useState<string | null>(null);
+  const [dirtySections, setDirtySections] = useState<Set<ContentSectionId>>(new Set());
+  const [editorRevision, setEditorRevision] = useState(0);
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState<
     "all" | "journal" | "conference" | "featured"
@@ -318,17 +326,18 @@ export default function AdminPage() {
   const [cvDirty, setCvDirty] = useState(false);
   const [status, setStatus] = useState<StatusMessage>(null);
 
-  const hasUnsavedChanges = publicationsDirty || cvDirty;
+  const hasUnsavedChanges = publicationsDirty || cvDirty || dirtySections.size > 0;
+  const selectedSection = contentSections.find((section) => section.id === tab);
 
   useEffect(() => {
     function warnBeforeLeaving(event: BeforeUnloadEvent) {
-      if (!hasUnsavedChanges) return;
+      if (!hasUnsavedChanges && !busy) return;
       event.preventDefault();
     }
 
     window.addEventListener("beforeunload", warnBeforeLeaving);
     return () => window.removeEventListener("beforeunload", warnBeforeLeaving);
-  }, [hasUnsavedChanges]);
+  }, [hasUnsavedChanges, busy]);
 
   const counts = useMemo(
     () => ({
@@ -389,9 +398,10 @@ export default function AdminPage() {
         );
       }
 
-      const [publicationFile, siteFile] = await Promise.all([
+      const [publicationFile, siteFile, portfolioFile] = await Promise.all([
         readRepositoryFile(cleanToken, PUBLICATIONS_PATH),
         readRepositoryFile(cleanToken, SITE_CONTENT_PATH),
+        readRepositoryFile(cleanToken, PORTFOLIO_PATH),
       ]);
       const remotePublications = JSON.parse(
         decodeBase64Text(publicationFile.content),
@@ -399,6 +409,11 @@ export default function AdminPage() {
       const remoteSiteContent = JSON.parse(
         decodeBase64Text(siteFile.content),
       ) as SiteContent;
+      const remotePortfolio: unknown = JSON.parse(decodeBase64Text(portfolioFile.content));
+      const portfolioErrors = validatePortfolio(remotePortfolio);
+      if (portfolioErrors.length) {
+        throw new Error(`Il file dei contenuti non è compatibile: ${portfolioErrors.slice(0, 3).join(" ")}`);
+      }
 
       setPublications(
         remotePublications.publications.map((publication, index) =>
@@ -409,6 +424,11 @@ export default function AdminPage() {
       setSettings(remoteSiteContent);
       setPublicationsSha(publicationFile.sha);
       setSiteContentSha(siteFile.sha);
+      setPortfolio(remotePortfolio as PortfolioContent);
+      setSavedPortfolio(remotePortfolio as PortfolioContent);
+      setPortfolioSha(portfolioFile.sha);
+      setDirtySections(new Set());
+      setEditorRevision((revision) => revision + 1);
       setToken(cleanToken);
       setUser(profile);
       setPublicationsDirty(false);
@@ -432,6 +452,7 @@ export default function AdminPage() {
   }
 
   function disconnect() {
+    if (busy) return;
     if (
       hasUnsavedChanges &&
       !window.confirm("Vuoi uscire senza salvare le modifiche?")
@@ -444,8 +465,49 @@ export default function AdminPage() {
     setCvUpload(null);
     setPublicationsSha(null);
     setSiteContentSha(null);
+    setPortfolioSha(null);
+    setDirtySections(new Set());
     setPublicationsDirty(false);
     setCvDirty(false);
+  }
+
+  function updatePortfolio(next: PortfolioContent) {
+    if (busy || tab === "cv" || tab === "publications") return;
+    setPortfolio(next);
+    setDirtySections((current) => new Set(current).add(tab));
+  }
+
+  async function savePortfolio() {
+    if (busy || !portfolioSha) return;
+    const errors = validatePortfolio(portfolio);
+    if (errors.length) {
+      setStatus({ kind: "error", text: `Controlla i campi: ${errors.slice(0, 5).join(" ")}` });
+      return;
+    }
+    setBusy(true);
+    setStatus({ kind: "notice", text: "Salvataggio dei contenuti bilingui su GitHub…" });
+    try {
+      const result = await writeRepositoryFile(token, PORTFOLIO_PATH,
+        encodeBase64Text(`${JSON.stringify(portfolio, null, 2)}\n`),
+        `Update portfolio content (${Array.from(dirtySections).join(", ")})`, portfolioSha);
+      if (!result.content?.sha) throw new Error("Salvataggio ricevuto senza versione del file. Ricarica i dati prima di modificarli ancora.");
+      setPortfolioSha(result.content.sha);
+      setSavedPortfolio(portfolio);
+      setDirtySections(new Set());
+      setStatus({ kind: "success", text: "Contenuti salvati. La pubblicazione sarà visibile quando GitHub Actions avrà completato il deployment." });
+    } catch (error) {
+      setStatus({ kind: "error", text: error instanceof Error ? error.message : "Salvataggio dei contenuti non riuscito." });
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  function discardPortfolio() {
+    if (busy || !window.confirm("Annullare tutte le modifiche ai contenuti non ancora salvate? Pubblicazioni e CV non saranno modificati.")) return;
+    setPortfolio(savedPortfolio);
+    setDirtySections(new Set());
+    setEditorRevision((revision) => revision + 1);
+    setStatus({ kind: "notice", text: "Contenuti ripristinati all’ultima versione caricata o salvata." });
   }
 
   function addPublication() {
@@ -697,7 +759,7 @@ export default function AdminPage() {
                 <span className={styles.brandMark} aria-hidden="true">
                   PS
                 </span>
-                <p>Portfolio Manager</p>
+                <p>Portfolio · Content Studio</p>
               </div>
               <h1>
                 Aggiorna il portfolio,
@@ -705,8 +767,8 @@ export default function AdminPage() {
                 <em>senza modificare codice.</em>
               </h1>
               <span>
-                Pubblicazioni, contenuti in evidenza e curriculum vengono
-                salvati direttamente nella repository ufficiale.
+                Un unico spazio per bio, ricerca, progetti, didattica,
+                pubblicazioni e curriculum. In inglese e in italiano.
               </span>
             </div>
 
@@ -717,6 +779,7 @@ export default function AdminPage() {
                   autoCapitalize="none"
                   autoComplete="off"
                   className={styles.input}
+                  disabled={busy}
                   id="github-token"
                   onChange={(event) => setToken(event.target.value)}
                   placeholder="github_pat_…"
@@ -768,7 +831,7 @@ export default function AdminPage() {
             PS
           </span>
           <div>
-            <p>Portfolio Manager</p>
+            <p>Portfolio · Content Studio</p>
             <span>Repository · {REPOSITORY}</span>
           </div>
         </div>
@@ -794,11 +857,11 @@ export default function AdminPage() {
         <section className={styles.dashboardIntro}>
           <div>
             <p className={styles.eyebrow}>Content dashboard</p>
-            <h1>Gestione portfolio</h1>
+            <h1>Il tuo profilo, aggiornato.</h1>
           </div>
           <p>
-            Ogni salvataggio crea una modifica tracciata su GitHub. Il sito si
-            aggiorna automaticamente al termine del workflow Pages.
+            Scegli una sezione, modifica i contenuti e pubblica quando sei pronto.
+            Ogni salvataggio è tracciato su GitHub.
           </p>
         </section>
 
@@ -817,24 +880,32 @@ export default function AdminPage() {
           </div>
         </section>
 
-        <nav className={styles.tabs} aria-label="Sezioni dashboard">
-          <button
-            className={`${styles.tab} ${tab === "publications" ? styles.tabActive : ""}`}
-            disabled={busy}
-            onClick={() => setTab("publications")}
-            type="button"
-          >
-            Pubblicazioni
-          </button>
-          <button
-            className={`${styles.tab} ${tab === "cv" ? styles.tabActive : ""}`}
-            disabled={busy}
-            onClick={() => setTab("cv")}
-            type="button"
-          >
-            Curriculum
-          </button>
-        </nav>
+        <div className={styles.studioLayout}>
+          <aside className={styles.studioSidebar}>
+            <p className={styles.sidebarLabel}>Contenuti del sito</p>
+            <nav className={styles.sidebarNav} aria-label="Sezioni dashboard">
+              {contentSections.map((section) => (
+                <button key={section.id} type="button" disabled={busy}
+                  className={`${styles.sidebarButton} ${tab === section.id ? styles.sidebarButtonActive : ""}`}
+                  aria-current={tab === section.id ? "page" : undefined}
+                  onClick={() => setTab(section.id)}>
+                  {section.label}
+                  {dirtySections.has(section.id) && <span className={styles.sidebarDot} aria-label="Modifiche non salvate" />}
+                </button>
+              ))}
+              <p className={styles.sidebarLabel}>Archivio e documenti</p>
+              <button type="button" disabled={busy} onClick={() => setTab("publications")}
+                className={`${styles.sidebarButton} ${tab === "publications" ? styles.sidebarButtonActive : ""}`}
+                aria-current={tab === "publications" ? "page" : undefined}>Pubblicazioni {publicationsDirty && <span className={styles.sidebarDot} aria-label="Modifiche non salvate" />}</button>
+              <button type="button" disabled={busy} onClick={() => setTab("cv")}
+                className={`${styles.sidebarButton} ${tab === "cv" ? styles.sidebarButtonActive : ""}`}
+                aria-current={tab === "cv" ? "page" : undefined}>Curriculum PDF {cvDirty && <span className={styles.sidebarDot} aria-label="Modifiche non salvate" />}</button>
+            </nav>
+            <p className={styles.sidebarFootnote}>Accesso autorizzato da GitHub. Il token non viene memorizzato dalla dashboard.</p>
+            <a className={styles.inlineLink} href={`https://github.com/${REPOSITORY}/actions`} target="_blank" rel="noreferrer">Stato pubblicazione ↗</a>
+          </aside>
+          <div className={styles.studioMain} aria-busy={busy}>
+          {status && <p className={styles[status.kind]} role="status">{status.text}</p>}
 
         {tab === "publications" ? (
           <section className={styles.panel}>
@@ -1065,7 +1136,7 @@ export default function AdminPage() {
             </div>
             </fieldset>
           </section>
-        ) : (
+        ) : tab === "cv" ? (
           <section className={styles.panel}>
             <div className={styles.panelHeading}>
               <div>
@@ -1125,13 +1196,28 @@ export default function AdminPage() {
             </div>
             </fieldset>
           </section>
-        )}
-
-        {status && (
-          <p className={styles[status.kind]} role="status">
-            {status.text}
-          </p>
-        )}
+        ) : selectedSection ? (
+          <section className={styles.panel}>
+            <div className={styles.panelHeading}><div>
+              <p className={styles.eyebrow}>Editor bilingue · EN / IT</p>
+              <h2>{selectedSection.label}</h2>
+              <p>{selectedSection.note}</p>
+            </div></div>
+            <fieldset className={styles.editorFieldset} disabled={busy}>
+              <PortfolioEditor key={`${tab}-${editorRevision}`} portfolio={portfolio} section={selectedSection.id} onChange={updatePortfolio} />
+            </fieldset>
+            <div className={`${styles.panelFooter} ${styles.stickySave}`}>
+              <div><strong>{dirtySections.size ? `${dirtySections.size} sezioni da salvare` : "Tutte le modifiche salvate"}</strong>
+              <p>Il salvataggio include tutte le sezioni editoriali modificate. CV e pubblicazioni si salvano separatamente.</p></div>
+              <div className={styles.repeatActions}>
+                <button type="button" className={styles.ghostButton} disabled={busy || !dirtySections.size} onClick={discardPortfolio}>Annulla modifiche</button>
+                <button type="button" className={styles.primaryButton} disabled={busy || !dirtySections.size} onClick={savePortfolio}>{busy ? "Salvataggio…" : "Salva contenuti"}</button>
+              </div>
+            </div>
+          </section>
+        ) : null}
+          </div>
+        </div>
       </div>
     </main>
   );

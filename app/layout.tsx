@@ -4,6 +4,7 @@ import "@fontsource/poppins/500.css";
 import "@fontsource/poppins/600.css";
 import "./globals.css";
 import { LanguageProvider } from "./language-context";
+import { initialPortfolio as content } from "./portfolio-content";
 import {
   SITE_DESCRIPTION,
   SITE_NAME,
@@ -16,27 +17,20 @@ const publicBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 export const metadata: Metadata = {
   metadataBase: new URL(`${SITE_URL}/`),
   title: {
-    default: "Paolo Sorino, PhD | AI, XAI & Human-Centred Healthcare",
-    template: "%s | Paolo Sorino",
+    default: content.seo.title.en,
+    template: `%s | ${content.profile.name}`,
   },
   description: SITE_DESCRIPTION,
-  keywords: [
-    "Paolo Sorino",
-    "Explainable AI",
-    "Healthcare AI",
-    "Human-Machine Interaction",
-    "Clinical Decision Support",
-    "Politecnico di Bari",
-  ],
-  authors: [{ name: "Paolo Sorino" }],
-  creator: "Paolo Sorino",
-  publisher: "Paolo Sorino",
+  keywords: content.seo.keywords.map((keyword) => keyword.value),
+  authors: [{ name: content.profile.name }],
+  creator: content.profile.name,
+  publisher: content.profile.name,
   category: "Research portfolio",
   alternates: {
     canonical: `${SITE_URL}/`,
   },
   verification: {
-    google: "69fLE0UGtd9lMi02uq6oHv27KFSOb6sVY2P0ZOGMyfM",
+    google: content.seo.googleVerification,
   },
   robots: {
     index: true,
@@ -59,7 +53,7 @@ export const metadata: Metadata = {
     shortcut: `${publicBasePath}/favicon-ps.svg`,
   },
   openGraph: {
-    title: "Paolo Sorino, PhD | Research Portfolio",
+    title: content.seo.title.en,
     description: SITE_DESCRIPTION,
     type: "website",
     url: `${SITE_URL}/`,
@@ -71,15 +65,14 @@ export const metadata: Metadata = {
         url: SOCIAL_IMAGE_URL,
         width: 1400,
         height: 933,
-        alt: "Paolo Sorino research portfolio — AI and human-centred healthcare",
+        alt: content.seo.socialImageAlt.en,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Paolo Sorino, PhD | Research Portfolio",
-    description:
-      "Explainable, human-centred artificial intelligence for healthcare.",
+    title: content.seo.title.en,
+    description: content.seo.description.en,
     images: [SOCIAL_IMAGE_URL],
   },
 };

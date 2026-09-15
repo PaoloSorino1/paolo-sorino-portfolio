@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { initialPortfolio as content } from "../portfolio-content";
 import {
   SITE_NAME,
   SITE_URL,
@@ -6,16 +7,14 @@ import {
 } from "../site-config";
 
 export const metadata: Metadata = {
-  title: "Publications",
-  description:
-    "Complete scientific publication list of Paolo Sorino, with verified DOI and official publisher links. Elenco completo delle pubblicazioni scientifiche con DOI verificati.",
+  title: content.seo.publicationsTitle.en,
+  description: content.seo.publicationsDescription.en,
   alternates: {
     canonical: `${SITE_URL}/publications/`,
   },
   openGraph: {
-    title: "Publications | Paolo Sorino",
-    description:
-      "Complete scientific publication list of Paolo Sorino, with verified DOI and official publisher links.",
+    title: `${content.seo.publicationsTitle.en} | ${content.profile.name}`,
+    description: content.seo.publicationsDescription.en,
     type: "website",
     url: `${SITE_URL}/publications/`,
     siteName: SITE_NAME,
@@ -26,15 +25,14 @@ export const metadata: Metadata = {
         url: SOCIAL_IMAGE_URL,
         width: 1400,
         height: 933,
-        alt: "Scientific publications by Paolo Sorino",
+        alt: `${content.seo.publicationsTitle.en} — ${content.profile.name}`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Publications | Paolo Sorino",
-    description:
-      "Complete scientific publication list with verified DOI and official publisher links.",
+    title: `${content.seo.publicationsTitle.en} | ${content.profile.name}`,
+    description: content.seo.publicationsDescription.en,
     images: [SOCIAL_IMAGE_URL],
   },
 };

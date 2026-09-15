@@ -1,0 +1,848 @@
+{
+  "profile": {
+    "name": "Paolo Sorino",
+    "givenName": "Paolo",
+    "familyName": "Sorino",
+    "suffix": "PhD",
+    "initials": "PS",
+    "role": {
+      "en": "Postdoctoral Researcher",
+      "it": "Ricercatore postdoc"
+    },
+    "email": "paolo.sorino@poliba.it",
+    "affiliation": {
+      "en": "Politecnico di Bari",
+      "it": "Politecnico di Bari"
+    },
+    "affiliationUrl": "https://www.poliba.it/",
+    "department": {
+      "en": "Department of Electrical and Information Engineering",
+      "it": "Dipartimento di Ingegneria Elettrica e dell’Informazione"
+    },
+    "laboratory": "SisInfLab",
+    "institutionalUrl": "https://sisinflab.poliba.it/people/paolo-sorino/",
+    "portrait": "/assets/paolo-sorino-portrait-cutout-hero-v4.png",
+    "portraitAlt": {
+      "en": "Paolo Sorino during a scientific presentation",
+      "it": "Paolo Sorino durante una presentazione scientifica"
+    },
+    "links": [
+      {
+        "label": "ORCID",
+        "href": "https://orcid.org/0000-0002-9081-2648",
+        "icon": "/brands/orcid.svg",
+        "inPublications": true
+      },
+      {
+        "label": "Scholar",
+        "href": "https://scholar.google.com/citations?user=VjT72dQAAAAJ",
+        "icon": "/brands/google-scholar.svg",
+        "inPublications": true
+      },
+      {
+        "label": "Scopus",
+        "href": "https://www.scopus.com/authid/detail.uri?authorId=57211783669",
+        "icon": "/brands/scopus.svg",
+        "inPublications": true
+      },
+      {
+        "label": "GitHub",
+        "href": "https://github.com/PaoloSorino1",
+        "icon": "/brands/github.svg",
+        "inPublications": false
+      },
+      {
+        "label": "LinkedIn",
+        "href": "https://www.linkedin.com/in/paolo-s-17499a1ab/",
+        "icon": "/brands/linkedin.svg",
+        "inPublications": false
+      }
+    ],
+    "expertise": [
+      {
+        "label": {
+          "en": "Artificial Intelligence in Healthcare",
+          "it": "Artificial Intelligence in Healthcare"
+        }
+      },
+      {
+        "label": {
+          "en": "Explainable Artificial Intelligence",
+          "it": "Explainable Artificial Intelligence"
+        }
+      },
+      {
+        "label": {
+          "en": "Machine Learning",
+          "it": "Machine learning"
+        }
+      },
+      {
+        "label": {
+          "en": "Human-Machine Interaction",
+          "it": "Human-Machine Interaction"
+        }
+      },
+      {
+        "label": {
+          "en": "Clinical Decision Support Systems",
+          "it": "Clinical Decision Support Systems"
+        }
+      }
+    ],
+    "copyrightYear": "2026"
+  },
+  "hero": {
+    "title": {
+      "en": "Postdoctoral",
+      "it": "Ricercatore"
+    },
+    "titleAccent": {
+      "en": "Researcher",
+      "it": "Postdoc"
+    },
+    "statement": {
+      "en": "Designing explainable, human-centred AI for healthcare.",
+      "it": "Progetto sistemi di IA spiegabili e centrati sulle persone per la sanità."
+    },
+    "primaryAction": {
+      "en": "Explore research",
+      "it": "Esplora la ricerca"
+    },
+    "secondaryAction": {
+      "en": "View publications",
+      "it": "Vedi le pubblicazioni"
+    },
+    "topics": [
+      {
+        "label": {
+          "en": "AI in Healthcare",
+          "it": "IA per la sanità"
+        }
+      },
+      {
+        "label": {
+          "en": "Machine Learning",
+          "it": "Machine learning"
+        }
+      },
+      {
+        "label": {
+          "en": "Explainable AI",
+          "it": "IA spiegabile"
+        }
+      },
+      {
+        "label": {
+          "en": "Human–Machine Interaction",
+          "it": "Interazione uomo–macchina"
+        }
+      },
+      {
+        "label": {
+          "en": "Clinical Decision Support",
+          "it": "Supporto alle decisioni cliniche"
+        }
+      }
+    ]
+  },
+  "about": {
+    "kicker": {
+      "en": "About",
+      "it": "Profilo"
+    },
+    "title": {
+      "en": "Research at the intersection of",
+      "it": "Ricerca all’intersezione tra"
+    },
+    "titleAccent": {
+      "en": "intelligence, health, and people.",
+      "it": "intelligenza, salute e persone."
+    },
+    "paragraphs": [
+      {
+        "text": {
+          "en": "I am a postdoctoral researcher at the Department of Electrical and Information Engineering of Politecnico di Bari, and a member of SisInfLab.",
+          "it": "Sono ricercatore postdoc presso il Dipartimento di Ingegneria Elettrica e dell’Informazione del Politecnico di Bari e membro del SisInfLab."
+        }
+      },
+      {
+        "text": {
+          "en": "My work connects artificial intelligence with real healthcare needs: building predictive methods, making their reasoning understandable, and designing interaction models that support informed human decisions.",
+          "it": "La mia ricerca collega l’intelligenza artificiale ai bisogni concreti della sanità: sviluppo metodi predittivi, ne rendo comprensibile il ragionamento e progetto modelli di interazione che supportano decisioni umane consapevoli."
+        }
+      }
+    ],
+    "linkLabel": {
+      "en": "View institutional profile",
+      "it": "Vedi il profilo istituzionale"
+    }
+  },
+  "research": {
+    "kicker": {
+      "en": "Research focus",
+      "it": "Ambiti di ricerca"
+    },
+    "title": {
+      "en": "Three connected perspectives.",
+      "it": "Tre prospettive connesse."
+    },
+    "description": {
+      "en": "From model development to explanation and interaction, each line of research is grounded in responsible, clinically meaningful use.",
+      "it": "Dallo sviluppo dei modelli alla spiegazione e all’interazione, ogni linea di ricerca è orientata a un uso responsabile e clinicamente significativo."
+    },
+    "items": [
+      {
+        "number": "01",
+        "title": {
+          "en": "Explainable AI in Healthcare",
+          "it": "IA spiegabile in sanità"
+        },
+        "description": {
+          "en": "Interpretable machine learning and deep learning methods that make clinical predictions transparent, inspectable, and actionable.",
+          "it": "Metodi interpretabili di machine learning e deep learning che rendono le predizioni cliniche trasparenti, verificabili e utilizzabili."
+        }
+      },
+      {
+        "number": "02",
+        "title": {
+          "en": "AI for Clinical Decision Support",
+          "it": "IA per il supporto alle decisioni cliniche"
+        },
+        "description": {
+          "en": "Human-centred predictive systems for risk assessment, patient stratification, and evidence-informed clinical workflows.",
+          "it": "Sistemi predittivi centrati sulle persone per la valutazione del rischio, la stratificazione dei pazienti e i flussi clinici basati sulle evidenze."
+        }
+      },
+      {
+        "number": "03",
+        "title": {
+          "en": "Human–Machine Interaction",
+          "it": "Interazione uomo–macchina"
+        },
+        "description": {
+          "en": "Interfaces and interaction models that help people understand, question, and confidently use intelligent systems.",
+          "it": "Interfacce e modelli di interazione che aiutano le persone a comprendere, interrogare e usare con consapevolezza i sistemi intelligenti."
+        }
+      }
+    ],
+    "secondaryLabel": {
+      "en": "Secondary research lines",
+      "it": "Linee di ricerca complementari"
+    },
+    "secondaryDescription": {
+      "en": "Graph learning & knowledge graphs · Multimodal and privacy-aware AI · Brain–computer interfaces & biosignals",
+      "it": "Graph learning e knowledge graph · IA multimodale e attenta alla privacy · Interfacce cervello–computer e biosignali"
+    }
+  },
+  "projects": {
+    "kicker": {
+      "en": "Research projects",
+      "it": "Progetti di ricerca"
+    },
+    "title": {
+      "en": "From methods to deployed research.",
+      "it": "Dai metodi alla ricerca applicata."
+    },
+    "description": {
+      "en": "I contribute to interdisciplinary projects where AI must remain scientifically rigorous, understandable, and useful to the people who rely on it.",
+      "it": "Contribuisco a progetti interdisciplinari nei quali l’IA deve restare scientificamente rigorosa, comprensibile e utile alle persone che la utilizzano."
+    },
+    "note": {
+      "en": "Additional collaborations include LIFE, MISTRAL, and DEMETRA.",
+      "it": "Ulteriori collaborazioni includono LIFE, MISTRAL e DEMETRA."
+    },
+    "items": [
+      {
+        "year": {
+          "en": "2026",
+          "it": "2026"
+        },
+        "name": {
+          "en": "ISCRA-C · CINECA HPC",
+          "it": "ISCRA-C · CINECA HPC"
+        },
+        "role": {
+          "en": "Principal Investigator",
+          "it": "Responsabile scientifico"
+        },
+        "description": {
+          "en": "Competitive allocation of national high-performance computing resources for large-scale research in artificial intelligence and data science.",
+          "it": "Assegnazione competitiva di risorse nazionali di calcolo ad alte prestazioni per attività di ricerca su larga scala in intelligenza artificiale e data science."
+        },
+        "accent": {
+          "en": "Competitive grant",
+          "it": "Finanziamento competitivo"
+        }
+      },
+      {
+        "year": {
+          "en": "2024—present",
+          "it": "2024—oggi"
+        },
+        "name": {
+          "en": "CALLIOPE · One Health",
+          "it": "CALLIOPE · One Health"
+        },
+        "role": {
+          "en": "Work-Package Leader",
+          "it": "Responsabile del work package"
+        },
+        "description": {
+          "en": "Technical and scientific coordination of AI, federated learning, XAI, intelligent robotics, sensing, and the integrated One Health platform.",
+          "it": "Coordinamento tecnico e scientifico di IA, federated learning, XAI, robotica intelligente, sensing e della piattaforma integrata One Health."
+        },
+        "accent": {
+          "en": "Healthcare AI · XAI",
+          "it": "IA per la sanità · XAI"
+        }
+      },
+      {
+        "year": {
+          "en": "2024—2025",
+          "it": "2024—2025"
+        },
+        "name": {
+          "en": "OMIBREED",
+          "it": "OMIBREED"
+        },
+        "role": {
+          "en": "Work-Package Leader",
+          "it": "Responsabile del work package"
+        },
+        "description": {
+          "en": "AI and explainability pipelines connecting genotype, phenotype, and multi-omics data for biomarker discovery and varietal classification.",
+          "it": "Pipeline di IA e spiegabilità che collegano dati genotipici, fenotipici e multi-omici per la scoperta di biomarcatori e la classificazione varietale."
+        },
+        "accent": {
+          "en": "AI · Multi-omics",
+          "it": "IA · Multi-omica"
+        }
+      },
+      {
+        "year": {
+          "en": "2023—2025",
+          "it": "2023—2025"
+        },
+        "name": {
+          "en": "REACH-XY",
+          "it": "REACH-XY"
+        },
+        "role": {
+          "en": "Work-Package Leader",
+          "it": "Responsabile del work package"
+        },
+        "description": {
+          "en": "AI/XAI methods and interactive systems for early detection, biological treatments, and collaborative research in plant health.",
+          "it": "Metodi di IA/XAI e sistemi interattivi per la diagnosi precoce, i trattamenti biologici e la ricerca collaborativa nella salute delle piante."
+        },
+        "accent": {
+          "en": "XAI · Interactive systems",
+          "it": "XAI · Sistemi interattivi"
+        }
+      }
+    ]
+  },
+  "teaching": {
+    "kicker": {
+      "en": "Teaching & supervision",
+      "it": "Didattica e supervisione"
+    },
+    "title": {
+      "en": "Making complex ideas",
+      "it": "Trasformare idee complesse"
+    },
+    "titleAccent": {
+      "en": "work in practice.",
+      "it": "in soluzioni concrete."
+    },
+    "description": {
+      "en": "Teaching connects my research to the next generation of engineers: from machine learning foundations to software design and applied artificial intelligence.",
+      "it": "La didattica collega la mia ricerca alla prossima generazione di ingegneri: dai fondamenti del machine learning alla progettazione del software e all’intelligenza artificiale applicata."
+    },
+    "items": [
+      {
+        "period": {
+          "en": "2025—2026",
+          "it": "2025—2026"
+        },
+        "role": {
+          "en": "Adjunct Professor",
+          "it": "Docente a contratto"
+        },
+        "course": {
+          "en": "Software Design Laboratory",
+          "it": "Laboratorio di Progettazione del Software"
+        },
+        "context": {
+          "en": "Bachelor’s degree in Medical Systems Engineering · Politecnico di Bari",
+          "it": "Laurea in Ingegneria dei Sistemi Medicali · Politecnico di Bari"
+        }
+      },
+      {
+        "period": {
+          "en": "2026",
+          "it": "2026"
+        },
+        "role": {
+          "en": "Adjunct Professor · Module E",
+          "it": "Docente a contratto · Modulo E"
+        },
+        "course": {
+          "en": "2nd-Level Master’s Degree in Artificial Intelligence and Data Science",
+          "it": "Master di II livello in Intelligenza Artificiale e Data Science"
+        },
+        "context": {
+          "en": "Politecnico di Bari · 200 hours of lectures, laboratory sessions, and tutoring",
+          "it": "Politecnico di Bari · 200 ore di lezioni, laboratori e tutoraggio"
+        }
+      },
+      {
+        "period": {
+          "en": "2022—2025",
+          "it": "2022—2025"
+        },
+        "role": {
+          "en": "Assistant Lecturer",
+          "it": "Assistente alla docenza"
+        },
+        "course": {
+          "en": "Foundations of Machine Learning",
+          "it": "Fondamenti di Machine Learning"
+        },
+        "context": {
+          "en": "Master’s degree in Computer Engineering · Politecnico di Bari",
+          "it": "Laurea magistrale in Ingegneria Informatica · Politecnico di Bari"
+        }
+      }
+    ],
+    "stats": [
+      {
+        "value": "200+",
+        "label": {
+          "en": "Hours of specialist training",
+          "it": "Ore di formazione specialistica"
+        }
+      },
+      {
+        "value": "25+",
+        "label": {
+          "en": "Bachelor’s and Master’s theses supervised",
+          "it": "Tesi di laurea e laurea magistrale supervisionate"
+        }
+      }
+    ]
+  },
+  "service": {
+    "kicker": {
+      "en": "Academic service",
+      "it": "Servizio accademico"
+    },
+    "title": {
+      "en": "Contributing beyond publications.",
+      "it": "Contribuire oltre le pubblicazioni."
+    },
+    "items": [
+      {
+        "label": {
+          "en": "Editorial board · 2026—present",
+          "it": "Comitato editoriale · 2026—oggi"
+        },
+        "title": {
+          "en": "Associate Editor",
+          "it": "Associate Editor"
+        },
+        "description": {
+          "en": "IEEE Journal of Biomedical and Health Informatics (J-BHI) · Public Health Informatics Section · Q1 journal.",
+          "it": "IEEE Journal of Biomedical and Health Informatics (J-BHI) · Sezione Public Health Informatics · Rivista scientifica Q1."
+        },
+        "highlight": true
+      },
+      {
+        "label": {
+          "en": "Editorial",
+          "it": "Attività editoriale"
+        },
+        "title": {
+          "en": "Guest Editor",
+          "it": "Guest Editor"
+        },
+        "description": {
+          "en": "Sensors Special Issue on Advances in Sensorized AI-Driven Intelligent Systems in Healthcare and Beyond.",
+          "it": "Special Issue di Sensors “Advances in Sensorized AI-Driven Intelligent Systems in Healthcare and Beyond”."
+        },
+        "highlight": false
+      },
+      {
+        "label": {
+          "en": "Research community",
+          "it": "Comunità scientifica"
+        },
+        "title": {
+          "en": "International engagement",
+          "it": "Impegno internazionale"
+        },
+        "description": {
+          "en": "Invited lectures, workshop organization, programme committees, and session leadership across AI, HMI, and healthcare research.",
+          "it": "Lezioni su invito, organizzazione di workshop, comitati di programma e coordinamento di sessioni scientifiche su IA, HMI e ricerca sanitaria."
+        },
+        "highlight": false
+      },
+      {
+        "label": {
+          "en": "Innovation",
+          "it": "Innovazione"
+        },
+        "title": {
+          "en": "Granted patent",
+          "it": "Brevetto concesso"
+        },
+        "description": {
+          "en": "Machine-learning method for validating NAFLD diagnosis without imaging technologies.",
+          "it": "Metodo di machine learning per validare la diagnosi di NAFLD senza tecnologie di imaging."
+        },
+        "highlight": false
+      }
+    ]
+  },
+  "talks": {
+    "kicker": {
+      "en": "Invited talks & lectures",
+      "it": "Invited talk e lezioni"
+    },
+    "description": {
+      "en": "International invitations spanning explainable healthcare AI, human–machine systems, and brain–computer interaction.",
+      "it": "Inviti internazionali sui temi dell’IA spiegabile per la sanità, dei sistemi uomo–macchina e delle interfacce cervello–computer."
+    },
+    "items": [
+      {
+        "year": "2026",
+        "event": {
+          "en": "ISACT 2026 · IEEE ICHMS 2026",
+          "it": "ISACT 2026 · IEEE ICHMS 2026"
+        },
+        "title": {
+          "en": "AI for BCI with Applications",
+          "it": "AI for BCI with Applications"
+        },
+        "context": {
+          "en": "Nanyang Technological University, Singapore · 1–3 July 2026",
+          "it": "Nanyang Technological University, Singapore · 1–3 luglio 2026"
+        },
+        "href": "https://isact-org.github.io/"
+      },
+      {
+        "year": "2026",
+        "event": {
+          "en": "WOA 2026 · Mini-School Lecture",
+          "it": "WOA 2026 · Mini-School Lecture"
+        },
+        "title": {
+          "en": "Artificial Intelligence and Explainable AI in Clinical Decision Support Systems: Innovation, Interpretability, and Trust",
+          "it": "Artificial Intelligence and Explainable AI in Clinical Decision Support Systems: Innovation, Interpretability, and Trust"
+        },
+        "context": {
+          "en": "27th Workshop “From Objects to Agents” · Salerno · 17 June 2026",
+          "it": "27° Workshop “From Objects to Agents” · Salerno · 17 giugno 2026"
+        },
+        "href": "https://sites.google.com/view/woa2026"
+      },
+      {
+        "year": "2025",
+        "event": {
+          "en": "IEEE SMC · 15th BMI Systems Workshop",
+          "it": "IEEE SMC · 15th BMI Systems Workshop"
+        },
+        "title": {
+          "en": "Brain Computer Interfaces for Neural Games",
+          "it": "Brain Computer Interfaces for Neural Games"
+        },
+        "context": {
+          "en": "Special event: Integrative Approaches to EEG Signal Analysis",
+          "it": "Evento speciale: approcci integrati all’analisi dei segnali EEG"
+        },
+        "href": "https://sites.google.com/view/smc-bmi-workshop2025/"
+      },
+      {
+        "year": "2024",
+        "event": {
+          "en": "ISACT 2024 · IEEE SMC Society",
+          "it": "ISACT 2024 · IEEE SMC Society"
+        },
+        "title": {
+          "en": "Artificial Intelligence for Brain-Computer Interaction",
+          "it": "Artificial Intelligence for Brain-Computer Interaction"
+        },
+        "context": {
+          "en": "Hosted by University of Naples Federico II · 10–13 December 2024",
+          "it": "Ospitato dall’Università degli Studi di Napoli Federico II · 10–13 dicembre 2024"
+        },
+        "href": "https://isact-org.github.io/"
+      },
+      {
+        "year": "2022",
+        "event": {
+          "en": "IEEE BHI-BSN 2022 · Invited Speech",
+          "it": "IEEE BHI-BSN 2022 · Invited Speech"
+        },
+        "title": {
+          "en": "Real-Time Music Composition Based on AI-Driven Emotion Recognition",
+          "it": "Real-Time Music Composition Based on AI-Driven Emotion Recognition"
+        },
+        "context": {
+          "en": "Workshop on enabling technologies for paediatric rehabilitation · Ioannina, Greece · 27–30 September 2022",
+          "it": "Workshop sulle tecnologie abilitanti per la riabilitazione pediatrica · Ioannina, Grecia · 27–30 settembre 2022"
+        },
+        "href": ""
+      }
+    ]
+  },
+  "contact": {
+    "kicker": {
+      "en": "Let’s connect",
+      "it": "Contatti"
+    },
+    "title": {
+      "en": "Interested in explainable,",
+      "it": "Ti interessa un’IA spiegabile,"
+    },
+    "titleSecondLine": {
+      "en": "human-centred",
+      "it": "centrata sulle persone"
+    },
+    "titleAccent": {
+      "en": "healthcare AI?",
+      "it": "per la sanità?"
+    },
+    "description": {
+      "en": "I am open to research collaborations, invited talks, and projects that bring transparent AI into meaningful real-world settings.",
+      "it": "Sono disponibile per collaborazioni di ricerca, invited talk e progetti che portino un’IA trasparente in contesti reali e significativi."
+    },
+    "cvLabel": {
+      "en": "Download full CV",
+      "it": "Scarica il CV completo"
+    },
+    "footerAffiliation": {
+      "en": "Politecnico di Bari · SisInfLab",
+      "it": "Politecnico di Bari · SisInfLab"
+    }
+  },
+  "metrics": {
+    "label": {
+      "en": "Academic highlights",
+      "it": "Principali risultati accademici"
+    },
+    "publicationsLabel": {
+      "en": "Scientific publications",
+      "it": "Pubblicazioni scientifiche"
+    },
+    "items": [
+      {
+        "value": "25+",
+        "label": {
+          "en": "Supervised theses",
+          "it": "Tesi supervisionate"
+        }
+      },
+      {
+        "value": "6+",
+        "label": {
+          "en": "Research projects",
+          "it": "Progetti di ricerca"
+        }
+      },
+      {
+        "value": "01",
+        "label": {
+          "en": "Granted national patent",
+          "it": "Brevetto nazionale concesso"
+        }
+      }
+    ]
+  },
+  "publicationsPage": {
+    "selectedKicker": {
+      "en": "Selected publications",
+      "it": "Pubblicazioni selezionate"
+    },
+    "selectedTitle": {
+      "en": "Research, made readable.",
+      "it": "Ricerca, resa comprensibile."
+    },
+    "completeListLabel": {
+      "en": "Complete publication list",
+      "it": "Elenco completo delle pubblicazioni"
+    },
+    "kicker": {
+      "en": "Complete bibliography",
+      "it": "Bibliografia completa"
+    },
+    "title": {
+      "en": "Publications,",
+      "it": "Pubblicazioni,"
+    },
+    "titleAccent": {
+      "en": "with direct access.",
+      "it": "con accesso diretto."
+    },
+    "description": {
+      "en": "The complete publication list from my current academic CV. Every DOI opens the canonical publication record; entries without a DOI point to the official proceedings page.",
+      "it": "L’elenco completo delle pubblicazioni tratto dal mio CV accademico aggiornato. Ogni DOI apre il record canonico della pubblicazione; le voci prive di DOI rimandano alla pagina ufficiale degli atti."
+    },
+    "footer": {
+      "en": "Bibliography based on the current academic CV. DOI and publisher links have been individually verified.",
+      "it": "Bibliografia basata sul CV accademico aggiornato. I DOI e i collegamenti agli editori sono stati verificati singolarmente."
+    }
+  },
+  "seo": {
+    "siteUrl": "https://paolosorino1.github.io/paolo-sorino-portfolio",
+    "siteName": {
+      "en": "Paolo Sorino — Research Portfolio",
+      "it": "Paolo Sorino — Portfolio di ricerca"
+    },
+    "title": {
+      "en": "Paolo Sorino, PhD | AI, XAI & Human-Centred Healthcare",
+      "it": "Paolo Sorino, PhD | IA, XAI e sanità centrata sulle persone"
+    },
+    "description": {
+      "en": "Research portfolio of Paolo Sorino, Postdoctoral Researcher at Politecnico di Bari. Explainable AI, artificial intelligence for healthcare, human-machine interaction, projects, teaching, and publications.",
+      "it": "Portfolio di ricerca di Paolo Sorino, ricercatore postdoc al Politecnico di Bari. IA spiegabile, intelligenza artificiale per la sanità, interazione uomo–macchina, progetti, didattica e pubblicazioni."
+    },
+    "personDescription": {
+      "en": "Researcher in explainable artificial intelligence, artificial intelligence for healthcare, human-machine interaction, and clinical decision support systems.",
+      "it": "Ricercatore in intelligenza artificiale spiegabile, IA per la sanità, interazione uomo–macchina e sistemi di supporto alle decisioni cliniche."
+    },
+    "socialImage": "/assets/editorial-scientific-collage-v2.webp",
+    "socialImageAlt": {
+      "en": "Paolo Sorino research portfolio — AI and human-centred healthcare",
+      "it": "Portfolio di ricerca di Paolo Sorino — IA e sanità centrata sulle persone"
+    },
+    "publicationsTitle": {
+      "en": "Publications",
+      "it": "Pubblicazioni"
+    },
+    "publicationsDescription": {
+      "en": "Complete scientific publication list of Paolo Sorino, with verified DOI and official publisher links.",
+      "it": "Elenco completo delle pubblicazioni scientifiche di Paolo Sorino, con DOI verificati e collegamenti ufficiali agli editori."
+    },
+    "keywords": [
+      {
+        "value": "Paolo Sorino"
+      },
+      {
+        "value": "Explainable AI"
+      },
+      {
+        "value": "Healthcare AI"
+      },
+      {
+        "value": "Human-Machine Interaction"
+      },
+      {
+        "value": "Clinical Decision Support"
+      },
+      {
+        "value": "Politecnico di Bari"
+      }
+    ],
+    "googleVerification": "69fLE0UGtd9lMi02uq6oHv27KFSOb6sVY2P0ZOGMyfM"
+  },
+  "copy": {
+    "About": {
+      "en": "About",
+      "it": "Profilo"
+    },
+    "Academic profiles": {
+      "en": "Academic profiles",
+      "it": "Profili accademici"
+    },
+    "Back to portfolio": {
+      "en": "Back to portfolio",
+      "it": "Torna al portfolio"
+    },
+    "Conference & workshop papers": {
+      "en": "Conference & workshop papers",
+      "it": "Articoli in conferenze e workshop"
+    },
+    "Conference & workshop publications": {
+      "en": "Conference & workshop publications",
+      "it": "Pubblicazioni in conferenze e workshop"
+    },
+    "Conference paper": {
+      "en": "Conference paper",
+      "it": "Articolo in conferenza"
+    },
+    "Conferences & workshops": {
+      "en": "Conferences & workshops",
+      "it": "Conferenze e workshop"
+    },
+    "Email": {
+      "en": "Email",
+      "it": "Invia un’e-mail a"
+    },
+    "Home": {
+      "en": "Home",
+      "it": "Pagina iniziale"
+    },
+    "Journal article": {
+      "en": "Journal article",
+      "it": "Articolo su rivista"
+    },
+    "Journal articles": {
+      "en": "Journal articles",
+      "it": "Articoli su rivista"
+    },
+    "Official record": {
+      "en": "Official record",
+      "it": "Record ufficiale"
+    },
+    "Open the event website": {
+      "en": "Open the event website",
+      "it": "Apri il sito dell’evento"
+    },
+    "Primary navigation": {
+      "en": "Primary navigation",
+      "it": "Navigazione principale"
+    },
+    "Projects": {
+      "en": "Projects",
+      "it": "Progetti"
+    },
+    "Publication categories": {
+      "en": "Publication categories",
+      "it": "Categorie delle pubblicazioni"
+    },
+    "Publication overview": {
+      "en": "Publication overview",
+      "it": "Panoramica delle pubblicazioni"
+    },
+    "Publication period": {
+      "en": "Publication period",
+      "it": "Periodo di pubblicazione"
+    },
+    "Publications": {
+      "en": "Publications",
+      "it": "Pubblicazioni"
+    },
+    "Publisher page": {
+      "en": "Publisher page",
+      "it": "Pagina dell’editore"
+    },
+    "Research": {
+      "en": "Research",
+      "it": "Ricerca"
+    },
+    "Return to portfolio": {
+      "en": "Return to portfolio",
+      "it": "Torna al portfolio"
+    },
+    "Teaching": {
+      "en": "Teaching",
+      "it": "Didattica"
+    },
+    "records": {
+      "en": "records",
+      "it": "voci"
+    }
+  }
+}

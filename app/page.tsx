@@ -8,6 +8,7 @@ import { translate } from "./translations";
 import { useLanguage } from "./language-context";
 import { featuredPublications, publicationCount } from "./publications";
 import siteContent from "../content/site.json";
+import { initialPortfolio as content, localize, publicAsset } from "./portfolio-content";
 import {
   PROFILE_IMAGE_URL,
   PROFILE_LINKS,
@@ -15,10 +16,6 @@ import {
   SITE_NAME,
   SITE_URL,
 } from "./site-config";
-
-const publicBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-const publicAsset = (path: string) => `${publicBasePath}${path}`;
-
 const profileStructuredData = {
   "@context": "https://schema.org",
   "@type": "ProfilePage",
@@ -29,190 +26,26 @@ const profileStructuredData = {
   inLanguage: ["en", "it"],
   mainEntity: {
     "@type": "Person",
-    "@id": `${SITE_URL}/#paolo-sorino`,
-    name: "Paolo Sorino",
-    givenName: "Paolo",
-    familyName: "Sorino",
-    honorificSuffix: "PhD",
+    "@id": `${SITE_URL}/#person`,
+    name: content.profile.name,
+    givenName: content.profile.givenName,
+    familyName: content.profile.familyName,
+    honorificSuffix: content.profile.suffix,
     url: `${SITE_URL}/`,
     image: PROFILE_IMAGE_URL,
-    jobTitle: "Postdoctoral Researcher",
-    description:
-      "Researcher in explainable artificial intelligence, artificial intelligence for healthcare, human-machine interaction, and clinical decision support systems.",
+    jobTitle: content.profile.role.en,
+    description: content.seo.personDescription.en,
     affiliation: {
       "@type": "CollegeOrUniversity",
-      name: "Politecnico di Bari",
-      url: "https://www.poliba.it/",
+      name: content.profile.affiliation.en,
+      url: content.profile.affiliationUrl,
     },
     sameAs: PROFILE_LINKS,
-    knowsAbout: [
-      "Artificial Intelligence in Healthcare",
-      "Explainable Artificial Intelligence",
-      "Machine Learning",
-      "Human-Machine Interaction",
-      "Clinical Decision Support Systems",
-    ],
+    knowsAbout: content.profile.expertise.map((item) => item.label.en),
   },
 };
 
-const profileLinks = [
-  {
-    label: "ORCID",
-    href: "https://orcid.org/0000-0002-9081-2648",
-    icon: publicAsset("/brands/orcid.svg"),
-  },
-  {
-    label: "Scholar",
-    href: "https://scholar.google.com/citations?user=VjT72dQAAAAJ",
-    icon: publicAsset("/brands/google-scholar.svg"),
-  },
-  {
-    label: "Scopus",
-    href: "https://www.scopus.com/authid/detail.uri?authorId=57211783669",
-    icon: publicAsset("/brands/scopus.svg"),
-  },
-  {
-    label: "GitHub",
-    href: "https://github.com/PaoloSorino1",
-    icon: publicAsset("/brands/github.svg"),
-  },
-  {
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/in/paolo-s-17499a1ab/",
-    icon: publicAsset("/brands/linkedin.svg"),
-  },
-];
-
-const heroTopics = [
-  "AI in Healthcare",
-  "Machine Learning",
-  "Explainable AI",
-  "Human–Machine Interaction",
-  "Clinical Decision Support",
-];
-
-const primaryResearch = [
-  {
-    number: "01",
-    title: "Explainable AI in Healthcare",
-    description:
-      "Interpretable machine learning and deep learning methods that make clinical predictions transparent, inspectable, and actionable.",
-  },
-  {
-    number: "02",
-    title: "AI for Clinical Decision Support",
-    description:
-      "Human-centred predictive systems for risk assessment, patient stratification, and evidence-informed clinical workflows.",
-  },
-  {
-    number: "03",
-    title: "Human–Machine Interaction",
-    description:
-      "Interfaces and interaction models that help people understand, question, and confidently use intelligent systems.",
-  },
-];
-
-const projects = [
-  {
-    year: "2026",
-    name: "ISCRA-C · CINECA HPC",
-    role: "Principal Investigator",
-    description:
-      "Competitive allocation of national high-performance computing resources for large-scale research in artificial intelligence and data science.",
-    accent: "Competitive grant",
-  },
-  {
-    year: "2024—present",
-    name: "CALLIOPE · One Health",
-    role: "Work-Package Leader",
-    description:
-      "Technical and scientific coordination of AI, federated learning, XAI, intelligent robotics, sensing, and the integrated One Health platform.",
-    accent: "Healthcare AI · XAI",
-  },
-  {
-    year: "2024—2025",
-    name: "OMIBREED",
-    role: "Work-Package Leader",
-    description:
-      "AI and explainability pipelines connecting genotype, phenotype, and multi-omics data for biomarker discovery and varietal classification.",
-    accent: "AI · Multi-omics",
-  },
-  {
-    year: "2023—2025",
-    name: "REACH-XY",
-    role: "Work-Package Leader",
-    description:
-      "AI/XAI methods and interactive systems for early detection, biological treatments, and collaborative research in plant health.",
-    accent: "XAI · Interactive systems",
-  },
-];
-
-const teaching = [
-  {
-    period: "2025—2026",
-    role: "Adjunct Professor",
-    course: "Software Design Laboratory",
-    context:
-      "Bachelor’s degree in Medical Systems Engineering · Politecnico di Bari",
-  },
-  {
-    period: "2026",
-    role: "Adjunct Professor · Module E",
-    course:
-      "2nd-Level Master’s Degree in Artificial Intelligence and Data Science",
-    context:
-      "Politecnico di Bari · 200 hours of lectures, laboratory sessions, and tutoring",
-  },
-  {
-    period: "2022—2025",
-    role: "Assistant Lecturer",
-    course: "Foundations of Machine Learning",
-    context: "Master’s degree in Computer Engineering · Politecnico di Bari",
-  },
-];
-
-const invitedTalks = [
-  {
-    year: "2026",
-    event: "ISACT 2026 · IEEE ICHMS 2026",
-    title: "AI for BCI with Applications",
-    context:
-      "Nanyang Technological University, Singapore · 1–3 July 2026",
-    href: "https://isact-org.github.io/",
-  },
-  {
-    year: "2026",
-    event: "WOA 2026 · Mini-School Lecture",
-    title:
-      "Artificial Intelligence and Explainable AI in Clinical Decision Support Systems: Innovation, Interpretability, and Trust",
-    context: "27th Workshop “From Objects to Agents” · Salerno · 17 June 2026",
-    href: "https://sites.google.com/view/woa2026",
-  },
-  {
-    year: "2025",
-    event: "IEEE SMC · 15th BMI Systems Workshop",
-    title: "Brain Computer Interfaces for Neural Games",
-    context:
-      "Special event: Integrative Approaches to EEG Signal Analysis",
-    href: "https://sites.google.com/view/smc-bmi-workshop2025/",
-  },
-  {
-    year: "2024",
-    event: "ISACT 2024 · IEEE SMC Society",
-    title: "Artificial Intelligence for Brain-Computer Interaction",
-    context:
-      "Hosted by University of Naples Federico II · 10–13 December 2024",
-    href: "https://isact-org.github.io/",
-  },
-  {
-    year: "2022",
-    event: "IEEE BHI-BSN 2022 · Invited Speech",
-    title:
-      "Real-Time Music Composition Based on AI-Driven Emotion Recognition",
-    context:
-      "Workshop on enabling technologies for paediatric rehabilitation · Ioannina, Greece · 27–30 September 2022",
-  },
-];
+const profileLinks = content.profile.links.filter((profile) => profile.href);
 
 function ProfileLink({
   profile,
@@ -222,10 +55,12 @@ function ProfileLink({
   showArrow?: boolean;
 }) {
   return (
-    <a href={profile.href} rel="noreferrer" target="_blank">
-      <span className="profile-icon" aria-hidden="true">
-        <Image alt="" height={22} src={profile.icon} width={22} />
-      </span>
+    <a href={publicAsset(profile.href)} rel="noreferrer" target="_blank">
+      {profile.icon ? (
+        <span className="profile-icon" aria-hidden="true">
+          <Image alt="" height={22} src={publicAsset(profile.icon)} unoptimized width={22} />
+        </span>
+      ) : null}
       <span className="profile-label">{profile.label}</span>
       {showArrow ? (
         <span className="profile-arrow" aria-hidden="true">
@@ -277,6 +112,7 @@ function ResearchIcon({ number }: { number: string }) {
 export default function Home() {
   const { language } = useLanguage();
   const t = (text: string) => translate(language, text);
+  const loc = (value: { en: string; it: string }) => localize(value, language);
 
   return (
     <main>
@@ -291,15 +127,13 @@ export default function Home() {
           className="brand"
           href="#top"
           aria-label={
-            language === "it"
-              ? "Paolo Sorino — Pagina iniziale"
-              : "Paolo Sorino — Home"
+            `${content.profile.name} — ${t("Home")}`
           }
         >
           <span className="brand-mark" aria-hidden="true">
-            PS
+            {content.profile.initials}
           </span>
-          <span className="brand-name">Paolo Sorino</span>
+          <span className="brand-name">{content.profile.name}</span>
         </a>
 
         <nav className="main-nav" aria-label={t("Primary navigation")}>
@@ -313,9 +147,9 @@ export default function Home() {
         <div className="header-tools">
           <LanguageSwitch />
           <a
-            aria-label={t("Email Paolo Sorino")}
+            aria-label={`${t("Email")} ${content.profile.name}`}
             className="header-cta"
-            href="mailto:paolo.sorino@poliba.it"
+            href={`mailto:${content.profile.email}`}
           >
             <MailIcon />
           </a>
@@ -327,20 +161,26 @@ export default function Home() {
         <span className="hero-orbit" aria-hidden="true" />
         <div className="hero-copy">
           <h1>
-            <span className="eyebrow hero-identity">Paolo Sorino, PhD</span>
-            <span className="hero-name">{t("Postdoctoral")}</span>
-            <em>{t("Researcher")}</em>
+            <span className="eyebrow hero-identity">{[content.profile.name, content.profile.suffix].filter(Boolean).join(", ")}</span>
+            <span className="hero-name">{loc(content.hero.title)}</span>
+            <em>{loc(content.hero.titleAccent)}</em>
           </h1>
           <p className="hero-statement">
-            {t("Designing explainable, human-centred AI for healthcare.")}
+            {loc(content.hero.statement)}
+          </p>
+          <p className="hero-affiliation" title={loc(content.profile.department)}>
+            {content.profile.affiliationUrl ? (
+              <a href={publicAsset(content.profile.affiliationUrl)} rel="noreferrer" target="_blank">{loc(content.profile.affiliation)}</a>
+            ) : loc(content.profile.affiliation)}
+            {content.profile.laboratory ? <span> · {content.profile.laboratory}</span> : null}
           </p>
 
           <div className="hero-actions">
             <a className="button button-primary" href="#research">
-              {t("Explore research")} <span aria-hidden="true">→</span>
+              {loc(content.hero.primaryAction)} <span aria-hidden="true">→</span>
             </a>
             <Link className="button button-text" href="/publications">
-              {t("View publications")} <span aria-hidden="true">→</span>
+              {loc(content.hero.secondaryAction)} <span aria-hidden="true">→</span>
             </Link>
           </div>
         </div>
@@ -476,25 +316,24 @@ export default function Home() {
               </g>
             </svg>
             <div className="hero-portrait-layer">
-              <Image
+              {content.profile.portrait ? <Image
                 alt={
-                  language === "it"
-                    ? "Paolo Sorino durante una presentazione scientifica"
-                    : "Paolo Sorino during a scientific presentation"
+                  loc(content.profile.portraitAlt)
                 }
                 fill
                 priority
                 sizes="(max-width: 560px) 78vw, (max-width: 1080px) 520px, 32vw"
-                src={publicAsset("/assets/paolo-sorino-portrait-cutout-hero-v4.png")}
-              />
+                src={publicAsset(content.profile.portrait)}
+                unoptimized
+              /> : null}
             </div>
             <div className="hero-topic-bubbles">
-              {heroTopics.map((topic, index) => (
+              {content.hero.topics.map((topic, index) => (
                 <span
                   className={`hero-topic-bubble hero-topic-bubble-${index + 1}`}
-                  key={topic}
+                  key={index}
                 >
-                  {t(topic)}
+                  {loc(topic.label)}
                 </span>
               ))}
             </div>
@@ -505,90 +344,68 @@ export default function Home() {
       <section className="research section-shell" id="research">
         <div className="section-heading">
           <div>
-            <p className="section-kicker">{t("Research focus")}</p>
-            <h2>{t("Three connected perspectives.")}</h2>
+            <p className="section-kicker">{loc(content.research.kicker)}</p>
+            <h2>{loc(content.research.title)}</h2>
           </div>
           <p>
-            {t(
-              "From model development to explanation and interaction, each line of research is grounded in responsible, clinically meaningful use.",
-            )}
+            {loc(content.research.description)}
           </p>
         </div>
 
         <div className="research-grid">
-          {primaryResearch.map((item) => (
-            <article className="research-card" key={item.number}>
+          {content.research.items.map((item, index) => (
+            <article className="research-card" key={index}>
               <div className="research-card-topline">
                 <span className="research-card-icon">
                   <ResearchIcon number={item.number} />
                 </span>
                 <span className="card-number">{item.number}</span>
               </div>
-              <h3>{t(item.title)}</h3>
-              <p>{t(item.description)}</p>
+              <h3>{loc(item.title)}</h3>
+              <p>{loc(item.description)}</p>
             </article>
           ))}
         </div>
 
         <div className="secondary-lines">
-          <span>{t("Secondary research lines")}</span>
+          <span>{loc(content.research.secondaryLabel)}</span>
           <p>
-            {t(
-              "Graph learning & knowledge graphs · Multimodal and privacy-aware AI · Brain–computer interfaces & biosignals",
-            )}
+            {loc(content.research.secondaryDescription)}
           </p>
         </div>
       </section>
 
       <section
         className="metrics section-shell"
-        aria-label={t("Academic highlights")}
+        aria-label={loc(content.metrics.label)}
       >
         <div>
           <strong>{publicationCount}</strong>
-          <span>{t("Scientific publications")}</span>
+          <span>{loc(content.metrics.publicationsLabel)}</span>
         </div>
-        <div>
-          <strong>25+</strong>
-          <span>{t("Supervised theses")}</span>
-        </div>
-        <div>
-          <strong>6+</strong>
-          <span>{t("Research projects")}</span>
-        </div>
-        <div>
-          <strong>01</strong>
-          <span>{t("Granted national patent")}</span>
-        </div>
+        {content.metrics.items.map((item, index) => (
+          <div key={index}><strong>{item.value}</strong><span>{loc(item.label)}</span></div>
+        ))}
       </section>
 
       <section className="about section-shell" id="about">
-        <p className="section-kicker">{t("About")}</p>
+        <p className="section-kicker">{loc(content.about.kicker)}</p>
         <div className="about-grid">
           <h2>
-            {t("Research at the intersection of")}{" "}
-            <em>{t("intelligence, health, and people.")}</em>
+            {loc(content.about.title)}{" "}
+            <em>{loc(content.about.titleAccent)}</em>
           </h2>
           <div className="about-copy">
-            <p>
-              {t(
-                "I am a postdoctoral researcher at the Department of Electrical and Information Engineering of Politecnico di Bari, and a member of SisInfLab.",
-              )}
-            </p>
-            <p>
-              {t(
-                "My work connects artificial intelligence with real healthcare needs: building predictive methods, making their reasoning understandable, and designing interaction models that support informed human decisions.",
-              )}
-            </p>
-            <a
+            {content.about.paragraphs.map((paragraph, index) => <p key={index}>{loc(paragraph.text)}</p>)}
+            {content.profile.institutionalUrl ? <a
               className="inline-link"
-              href="https://sisinflab.poliba.it/people/paolo-sorino/"
+              href={publicAsset(content.profile.institutionalUrl)}
               rel="noreferrer"
               target="_blank"
             >
-              {t("View institutional profile")}{" "}
+              {loc(content.about.linkLabel)}{" "}
               <span aria-hidden="true">↗</span>
-            </a>
+            </a> : null}
           </div>
         </div>
       </section>
@@ -596,35 +413,31 @@ export default function Home() {
       <section className="projects section-shell" id="projects">
         <div className="section-heading projects-heading">
           <div>
-            <p className="section-kicker">{t("Research projects")}</p>
-            <h2>{t("From methods to deployed research.")}</h2>
+            <p className="section-kicker">{loc(content.projects.kicker)}</p>
+            <h2>{loc(content.projects.title)}</h2>
           </div>
           <div>
             <p>
-              {t(
-                "I contribute to interdisciplinary projects where AI must remain scientifically rigorous, understandable, and useful to the people who rely on it.",
-              )}
+              {loc(content.projects.description)}
             </p>
             <p className="project-note">
-              {t(
-                "Additional collaborations include LIFE, MISTRAL, and DEMETRA.",
-              )}
+              {loc(content.projects.note)}
             </p>
           </div>
         </div>
 
         <div className="projects-list">
-          {projects.map((project) => (
-            <article className="project-row" key={project.name}>
+          {content.projects.items.map((project, index) => (
+            <article className="project-row" key={index}>
               <div className="project-meta">
-                <span>{t(project.year)}</span>
-                <small>{t(project.accent)}</small>
+                <span>{loc(project.year)}</span>
+                <small>{loc(project.accent)}</small>
               </div>
               <div>
-                <h3>{project.name}</h3>
-                <p className="project-role">{t(project.role)}</p>
+                <h3>{loc(project.name)}</h3>
+                <p className="project-role">{loc(project.role)}</p>
               </div>
-              <p className="project-description">{t(project.description)}</p>
+              <p className="project-description">{loc(project.description)}</p>
             </article>
           ))}
         </div>
@@ -634,14 +447,14 @@ export default function Home() {
         <div className="section-shell">
           <div className="publications-topline">
             <div>
-              <p className="section-kicker">{t("Selected publications")}</p>
-              <h2>{t("Research, made readable.")}</h2>
+              <p className="section-kicker">{loc(content.publicationsPage.selectedKicker)}</p>
+              <h2>{loc(content.publicationsPage.selectedTitle)}</h2>
             </div>
             <Link
               className="button button-light"
               href="/publications"
             >
-              {t("Complete publication list")}{" "}
+              {loc(content.publicationsPage.completeListLabel)}{" "}
               <span aria-hidden="true">→</span>
             </Link>
           </div>
@@ -650,7 +463,7 @@ export default function Home() {
             {featuredPublications.map((publication) => (
               <a
                 className="publication-row"
-                href={publication.href}
+                href={publicAsset(publication.href)}
                 key={publication.title}
                 rel="noreferrer"
                 target="_blank"
@@ -683,39 +496,30 @@ export default function Home() {
 
       <section className="teaching section-shell" id="teaching">
         <div className="teaching-intro">
-          <p className="section-kicker">{t("Teaching & supervision")}</p>
+          <p className="section-kicker">{loc(content.teaching.kicker)}</p>
           <h2>
-            {t("Making complex ideas")} <em>{t("work in practice.")}</em>
+            {loc(content.teaching.title)} <em>{loc(content.teaching.titleAccent)}</em>
           </h2>
           <p>
-            {t(
-              "Teaching connects my research to the next generation of engineers: from machine learning foundations to software design and applied artificial intelligence.",
-            )}
+            {loc(content.teaching.description)}
           </p>
         </div>
 
         <div className="teaching-list">
-          {teaching.map((item) => (
-            <article key={`${item.period}-${item.course}`}>
-              <span>{item.period}</span>
+          {content.teaching.items.map((item, index) => (
+            <article key={index}>
+              <span>{loc(item.period)}</span>
               <div>
-                <p>{t(item.role)}</p>
-                <h3>{t(item.course)}</h3>
-                <small>{t(item.context)}</small>
+                <p>{loc(item.role)}</p>
+                <h3>{loc(item.course)}</h3>
+                <small>{loc(item.context)}</small>
               </div>
             </article>
           ))}
           <div className="teaching-stats">
-            <div>
-              <strong>200+</strong>
-              <span>{t("Hours of specialist training")}</span>
-            </div>
-            <div>
-              <strong>25+</strong>
-              <span>
-                {t("Bachelor’s and Master’s theses supervised")}
-              </span>
-            </div>
+            {content.teaching.stats.map((item, index) => (
+              <div key={index}><strong>{item.value}</strong><span>{loc(item.label)}</span></div>
+            ))}
           </div>
         </div>
       </section>
@@ -723,83 +527,47 @@ export default function Home() {
       <section className="service">
         <div className="section-shell service-grid">
           <div>
-            <p className="section-kicker">{t("Academic service")}</p>
-            <h2>{t("Contributing beyond publications.")}</h2>
+            <p className="section-kicker">{loc(content.service.kicker)}</p>
+            <h2>{loc(content.service.title)}</h2>
           </div>
           <div className="service-items">
-            <article className="service-item-highlight">
-              <span>
-                {t("Editorial board")} · {t("2026—present")}
-              </span>
-              <h3>{t("Associate Editor")}</h3>
-              <p>
-                {t(
-                  "IEEE Journal of Biomedical and Health Informatics (J-BHI) · Public Health Informatics Section · Q1 journal.",
-                )}
-              </p>
-            </article>
-            <article>
-              <span>{t("Editorial")}</span>
-              <h3>{t("Guest Editor")}</h3>
-              <p>
-                Sensors Special Issue on Advances in Sensorized AI-Driven
-                Intelligent Systems in Healthcare and Beyond.
-              </p>
-            </article>
-            <article>
-              <span>{t("Research community")}</span>
-              <h3>{t("International engagement")}</h3>
-              <p>
-                {t(
-                  "Invited lectures, workshop organization, programme committees, and session leadership across AI, HMI, and healthcare research.",
-                )}
-              </p>
-            </article>
-            <article>
-              <span>{t("Innovation")}</span>
-              <h3>{t("Granted patent")}</h3>
-              <p>
-                {t(
-                  "Machine-learning method for validating NAFLD diagnosis without imaging technologies.",
-                )}
-              </p>
-            </article>
+            {content.service.items.map((item, index) => (
+              <article key={index} className={item.highlight ? "service-item-highlight" : undefined}>
+                <span>{loc(item.label)}</span><h3>{loc(item.title)}</h3><p>{loc(item.description)}</p>
+              </article>
+            ))}
           </div>
 
           <div className="invited-talks">
             <div className="invited-talks-intro">
               <p className="section-kicker">
-                {t("Invited talks & lectures")}
+                {loc(content.talks.kicker)}
               </p>
               <p>
-                {t(
-                  "International invitations spanning explainable healthcare AI, human–machine systems, and brain–computer interaction.",
-                )}
+                {loc(content.talks.description)}
               </p>
             </div>
 
             <div className="invited-talks-list">
-              {invitedTalks.map((talk) => (
+              {content.talks.items.map((talk, index) => (
                 <article
                   className="invited-talk"
-                  key={`${talk.year}-${talk.title}`}
+                  key={index}
                 >
                   <span className="invited-talk-year">{talk.year}</span>
                   <div>
-                    <p className="invited-talk-event">{talk.event}</p>
-                    <h3>{talk.title}</h3>
+                    <p className="invited-talk-event">{loc(talk.event)}</p>
+                    <h3>{loc(talk.title)}</h3>
                     <p className="invited-talk-context">
-                      {t(talk.context)}
+                      {loc(talk.context)}
                     </p>
                   </div>
                   {talk.href ? (
                     <a
                       className="invited-talk-link"
-                      href={talk.href}
+                      href={publicAsset(talk.href)}
                       aria-label={
-                        language === "it"
-                          ? `Apri il sito web di ${talk.event}`
-                          : `Open the ${talk.event} website`
+                        `${t("Open the event website")}: ${loc(talk.event)}`
                       }
                       rel="noreferrer"
                       target="_blank"
@@ -822,28 +590,26 @@ export default function Home() {
       </section>
 
       <section className="contact section-shell" id="contact">
-        <p className="section-kicker">{t("Let’s connect")}</p>
+        <p className="section-kicker">{loc(content.contact.kicker)}</p>
         <div className="contact-main">
           <h2>
-            {t("Interested in explainable,")}
+            {loc(content.contact.title)}
             <br />
-            {t("human-centred")} <em>{t("healthcare AI?")}</em>
+            {loc(content.contact.titleSecondLine)} <em>{loc(content.contact.titleAccent)}</em>
           </h2>
           <div>
             <p>
-              {t(
-                "I am open to research collaborations, invited talks, and projects that bring transparent AI into meaningful real-world settings.",
-              )}
+              {loc(content.contact.description)}
             </p>
-            <a className="contact-email" href="mailto:paolo.sorino@poliba.it">
-              paolo.sorino@poliba.it <span aria-hidden="true">↗</span>
+            <a className="contact-email" href={`mailto:${content.profile.email}`}>
+              {content.profile.email} <span aria-hidden="true">↗</span>
             </a>
             <a
               className="button button-primary cv-button"
               href={publicAsset(siteContent.cvFile)}
               download
             >
-              {t("Download full CV")} <span aria-hidden="true">↓</span>
+              {loc(content.contact.cvLabel)} <span aria-hidden="true">↓</span>
             </a>
             <p className="cv-meta">
               {language === "it" ? siteContent.cvMetaIt : siteContent.cvMetaEn}
@@ -854,19 +620,19 @@ export default function Home() {
         <footer className="site-footer">
           <div>
             <span className="brand-mark" aria-hidden="true">
-              PS
+            {content.profile.initials}
             </span>
             <p>
-              Paolo Sorino, PhD
-              <small>Politecnico di Bari · SisInfLab</small>
+              {[content.profile.name, content.profile.suffix].filter(Boolean).join(", ")}
+              <small>{loc(content.contact.footerAffiliation)}</small>
             </p>
           </div>
           <div className="footer-links">
-            {profileLinks.map((profile) => (
-              <ProfileLink key={profile.label} profile={profile} />
+            {profileLinks.map((profile, index) => (
+              <ProfileLink key={index} profile={profile} />
             ))}
           </div>
-          <p className="copyright">© 2026 Paolo Sorino</p>
+          <p className="copyright">© {content.profile.copyrightYear} {content.profile.name}</p>
         </footer>
       </section>
     </main>

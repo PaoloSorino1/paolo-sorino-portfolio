@@ -6,6 +6,7 @@ import { LanguageSwitch } from "../language-switch";
 import { useLanguage } from "../language-context";
 import { MailIcon } from "../mail-icon";
 import { translate } from "../translations";
+import { initialPortfolio as content, localize, publicAsset } from "../portfolio-content";
 import {
   conferencePublications,
   journalPublications,
@@ -14,26 +15,7 @@ import {
   type Publication,
 } from "../publications";
 
-const publicBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-const publicAsset = (path: string) => `${publicBasePath}${path}`;
-
-const profileLinks = [
-  {
-    label: "ORCID",
-    href: "https://orcid.org/0000-0002-9081-2648",
-    icon: publicAsset("/brands/orcid.svg"),
-  },
-  {
-    label: "Scholar",
-    href: "https://scholar.google.com/citations?user=VjT72dQAAAAJ",
-    icon: publicAsset("/brands/google-scholar.svg"),
-  },
-  {
-    label: "Scopus",
-    href: "https://www.scopus.com/authid/detail.uri?authorId=57211783669",
-    icon: publicAsset("/brands/scopus.svg"),
-  },
-];
+const profileLinks = content.profile.links.filter((profile) => profile.inPublications && profile.href);
 
 function PublicationGroup({
   id,
@@ -62,7 +44,7 @@ function PublicationGroup({
         {publications.map((publication, index) => (
           <a
             className="bibliography-row"
-            href={publication.href}
+            href={publicAsset(publication.href)}
             key={publication.title}
             rel="noreferrer"
             target="_blank"
@@ -92,6 +74,7 @@ function PublicationGroup({
 export default function PublicationsPage() {
   const { language } = useLanguage();
   const t = (text: string) => translate(language, text);
+  const loc = (value: { en: string; it: string }) => localize(value, language);
 
   return (
     <main className="bibliography-page">
@@ -100,15 +83,13 @@ export default function PublicationsPage() {
           className="brand"
           href="/"
           aria-label={
-            language === "it"
-              ? "Paolo Sorino — Pagina iniziale"
-              : "Paolo Sorino — Home"
+            `${content.profile.name} — ${t("Home")}`
           }
         >
           <span className="brand-mark" aria-hidden="true">
-            PS
+            {content.profile.initials}
           </span>
-          <span className="brand-name">Paolo Sorino</span>
+          <span className="brand-name">{content.profile.name}</span>
         </Link>
 
         <nav className="main-nav" aria-label={t("Primary navigation")}>
@@ -124,9 +105,9 @@ export default function PublicationsPage() {
         <div className="header-tools">
           <LanguageSwitch />
           <a
-            aria-label={t("Email Paolo Sorino")}
+            aria-label={`${t("Email")} ${content.profile.name}`}
             className="header-cta"
-            href="mailto:paolo.sorino@poliba.it"
+            href={`mailto:${content.profile.email}`}
           >
             <MailIcon />
           </a>
@@ -138,30 +119,28 @@ export default function PublicationsPage() {
           <span aria-hidden="true">←</span> {t("Back to portfolio")}
         </Link>
         <div>
-          <p className="section-kicker">{t("Complete bibliography")}</p>
+          <p className="section-kicker">{loc(content.publicationsPage.kicker)}</p>
           <h1>
-            {t("Publications,")}
+            {loc(content.publicationsPage.title)}
             <br />
-            <em>{t("with direct access.")}</em>
+            <em>{loc(content.publicationsPage.titleAccent)}</em>
           </h1>
         </div>
         <div className="bibliography-intro">
           <p>
-            {t(
-              "The complete publication list from my current academic CV. Every DOI opens the canonical publication record; entries without a DOI point to the official proceedings page.",
-            )}
+            {loc(content.publicationsPage.description)}
           </p>
           <div className="profile-links" aria-label={t("Academic profiles")}>
-            {profileLinks.map((profile) => (
+            {profileLinks.map((profile, index) => (
               <a
-                href={profile.href}
-                key={profile.label}
+                href={publicAsset(profile.href)}
+                key={index}
                 rel="noreferrer"
                 target="_blank"
               >
-                <span className="profile-icon" aria-hidden="true">
-                  <Image alt="" height={22} src={profile.icon} width={22} />
-                </span>
+                {profile.icon ? <span className="profile-icon" aria-hidden="true">
+                  <Image alt="" height={22} src={publicAsset(profile.icon)} unoptimized width={22} />
+                </span> : null}
                 <span className="profile-label">{profile.label}</span>
                 <span className="profile-arrow" aria-hidden="true">
                   ↗
@@ -185,7 +164,7 @@ export default function PublicationsPage() {
       >
         <div>
           <strong>{publicationCount}</strong>
-          <span>{t("Scientific publications")}</span>
+          <span>{loc(content.metrics.publicationsLabel)}</span>
         </div>
         <div>
           <strong>{journalPublications.length}</strong>
@@ -218,9 +197,7 @@ export default function PublicationsPage() {
 
       <footer className="bibliography-footer section-shell">
         <p>
-          {t(
-            "Bibliography based on the current academic CV. DOI and publisher links have been individually verified.",
-          )}
+          {loc(content.publicationsPage.footer)}
         </p>
         <Link href="/">
           {t("Return to portfolio")} <span aria-hidden="true">→</span>

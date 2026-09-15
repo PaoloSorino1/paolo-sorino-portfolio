@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { SITE_URL } from "../site-config";
 
 export const metadata: Metadata = {
-  title: "Portfolio Manager",
-  description: "Private content manager for Paolo Sorino's portfolio.",
+  title: "Content Studio",
+  description: "GitHub-authorized content management for this research portfolio.",
   alternates: {
     canonical: `${SITE_URL}/admin/`,
   },
