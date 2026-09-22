@@ -520,6 +520,21 @@
           "it": "Metodo di machine learning per validare la diagnosi di NAFLD senza tecnologie di imaging."
         },
         "highlight": false
+      },
+      {
+        "label": {
+          "en": "Innovation",
+          "it": "Innovazione"
+        },
+        "title": {
+          "en": "Granted patent",
+          "it": "Brevetto concesso"
+        },
+        "description": {
+          "en": "Method for neural control of self-propelled devices",
+          "it": "Metodo per il pilotaggio neurale di dispositivi semoventi"
+        },
+        "highlight": false
       }
     ]
   },
