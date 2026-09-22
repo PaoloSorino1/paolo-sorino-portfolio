@@ -82,7 +82,7 @@ function isSafeUrl(value: string, allowLocal: boolean): boolean {
 }
 
 /** Reject malformed saved data before it can break a static production build. */
-export function validatePortfolio(value: unknown): string[] {
+export function validatePortfolio(value: unknown, mode: "publish" | "draft" = "publish"): string[] {
   const errors: string[] = [];
   const check = (candidate: unknown, reference: JsonValue, path: string): void => {
     if (errors.length >= 30) return;
@@ -102,6 +102,8 @@ export function validatePortfolio(value: unknown): string[] {
       return;
     }
     if (typeof candidate !== typeof reference) { errors.push(`${path}: tipo di valore non valido.`); return; }
+    // Drafts can contain unfinished text; publishing always uses full validation.
+    if (mode === "draft") return;
     if (typeof candidate !== "string") return;
     if (candidate.length > 16000) errors.push(`${path}: testo troppo lungo (massimo 16.000 caratteri).`);
     if (/<\s*\/?\s*[a-z][^>]*>/i.test(candidate)) errors.push(`${path}: inserisci testo semplice, senza tag HTML.`);
@@ -110,7 +112,7 @@ export function validatePortfolio(value: unknown): string[] {
     if (/url$/i.test(field) && !isSafeUrl(candidate, false)) errors.push(`${path}: usa un URL http(s) completo e valido.`);
   };
   check(value, initialPortfolio, "");
-  if (!isRecord(value)) return errors;
+  if (mode === "draft" || !isRecord(value)) return errors;
   if (isRecord(value.profile)) {
     if (typeof value.profile.name === "string" && !value.profile.name.trim()) errors.push("profile.name: il nome è obbligatorio.");
     if (typeof value.profile.email === "string" && !/^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(value.profile.email)) errors.push("profile.email: inserisci un indirizzo e-mail valido.");

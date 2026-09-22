@@ -7,9 +7,9 @@ import siteContent from "../../content/site.json";
 import type { Publication, PublicationCategory } from "../publications";
 import { initialPortfolio, validatePortfolio, type PortfolioContent } from "../portfolio-content";
 import { PortfolioEditor, contentSections, type ContentSectionId } from "./portfolio-editor";
+import { githubRequest, GitHubApiError } from "./github-client";
 import styles from "./admin.module.css";
 
-const GITHUB_API = "https://api.github.com";
 const REPOSITORY = "PaoloSorino1/paolo-sorino-portfolio";
 const BRANCH = "main";
 const PUBLICATIONS_PATH = "content/publications.json";
@@ -18,6 +18,7 @@ const PORTFOLIO_PATH = "content/portfolio.json";
 const CV_REPOSITORY_PATH = "public/documents/Paolo-Sorino-CV.pdf";
 const CV_PUBLIC_PATH = "/documents/Paolo-Sorino-CV.pdf";
 const MAX_CV_BYTES = 8 * 1024 * 1024;
+const NEW_TOKEN_URL = "https://github.com/settings/personal-access-tokens/new?name=Portfolio+Content+Studio&target_name=PaoloSorino1&expires_in=90&contents=write";
 
 type ManagedPublication = Publication & {
   _clientId: string;
@@ -64,7 +65,21 @@ type GitHubWriteResult = {
 type StatusMessage = {
   kind: "error" | "success" | "notice";
   text: string;
+  details?: string;
 } | null;
+
+function errorStatus(error: unknown, fallback: string): StatusMessage {
+  return { kind: "error", text: error instanceof Error ? error.message : fallback,
+    ...(error instanceof GitHubApiError ? { details: error.details } : {}) };
+}
+
+function StatusNotice({ status }: { status: StatusMessage }) {
+  if (!status) return null;
+  return <div className={styles[status.kind]}>
+    <p role={status.kind === "error" ? "alert" : "status"} style={{ margin: 0 }}>{status.text}</p>
+    {status.details && <details className={styles.diagnostics}><summary>Dettagli tecnici · senza token</summary><pre>{status.details}</pre></details>}
+  </div>;
+}
 
 function toManagedPublication(
   publication: Publication,
@@ -91,41 +106,6 @@ function pathForApi(path: string) {
     .split("/")
     .map((segment) => encodeURIComponent(segment))
     .join("/");
-}
-
-async function githubRequest<T>(
-  token: string,
-  path: string,
-  init: RequestInit = {},
-): Promise<T> {
-  const headers = new Headers(init.headers);
-  if (!headers.has("Accept")) {
-    headers.set("Accept", "application/vnd.github+json");
-  }
-  headers.set("Authorization", `Bearer ${token}`);
-  headers.set("X-GitHub-Api-Version", "2026-03-10");
-
-  const response = await fetch(`${GITHUB_API}${path}`, {
-    ...init,
-    headers,
-  });
-
-  const payload = (await response.json().catch(() => null)) as
-    | { message?: string }
-    | null;
-
-  if (!response.ok) {
-    if (response.status === 409) {
-      throw new Error(
-        "I dati su GitHub sono cambiati dopo il tuo accesso. Esci, accedi di nuovo e ripeti la modifica.",
-      );
-    }
-    throw new Error(
-      payload?.message ?? `GitHub ha risposto con errore ${response.status}.`,
-    );
-  }
-
-  return payload as T;
 }
 
 function decodeBase64Text(value: string) {
@@ -168,7 +148,7 @@ async function repositoryFileSha(token: string, path: string) {
   try {
     return (await readRepositoryFile(token, path)).sha;
   } catch (error) {
-    if (error instanceof Error && error.message === "Not Found") {
+    if (error instanceof GitHubApiError && error.status === 404) {
       return undefined;
     }
     throw error;
@@ -325,6 +305,7 @@ export default function AdminPage() {
   const [publicationsDirty, setPublicationsDirty] = useState(false);
   const [cvDirty, setCvDirty] = useState(false);
   const [status, setStatus] = useState<StatusMessage>(null);
+  const [replacementToken, setReplacementToken] = useState("");
 
   const hasUnsavedChanges = publicationsDirty || cvDirty || dirtySections.size > 0;
   const selectedSection = contentSections.find((section) => section.id === tab);
@@ -394,7 +375,7 @@ export default function AdminPage() {
 
       if (!repository.permissions?.push) {
         throw new Error(
-          "Il token non dispone del permesso di scrittura su questa repository.",
+          `L’account @${profile.login} non risulta autorizzato a modificare ${REPOSITORY}. Usa il token dell’account proprietario o di un collaboratore autorizzato.`,
         );
       }
 
@@ -434,18 +415,12 @@ export default function AdminPage() {
       setPublicationsDirty(false);
       setCvDirty(false);
       setStatus({
-        kind: "success",
-        text: "Accesso verificato. I dati più recenti sono stati caricati da GitHub.",
+        kind: "notice",
+        text: `Account @${profile.login} collegato. Dati caricati da GitHub; il permesso di scrittura del token sarà verificato al salvataggio.`,
       });
     } catch (error) {
       setUser(null);
-      setStatus({
-        kind: "error",
-        text:
-          error instanceof Error
-            ? error.message
-            : "Impossibile verificare l’accesso GitHub.",
-      });
+      setStatus(errorStatus(error, "Impossibile verificare l’accesso GitHub."));
     } finally {
       setBusy(false);
     }
@@ -460,6 +435,7 @@ export default function AdminPage() {
       return;
     }
     setToken("");
+    setReplacementToken("");
     setUser(null);
     setStatus(null);
     setCvUpload(null);
@@ -469,6 +445,109 @@ export default function AdminPage() {
     setDirtySections(new Set());
     setPublicationsDirty(false);
     setCvDirty(false);
+  }
+
+  async function replaceToken(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (busy) return;
+    const candidate = replacementToken.trim();
+    if (!candidate) {
+      setStatus({ kind: "error", text: "Inserisci il nuovo token GitHub." });
+      return;
+    }
+    setBusy(true);
+    try {
+      const [profile, repository] = await Promise.all([
+        githubRequest<GitHubUser>(candidate, "/user"),
+        githubRequest<GitHubRepository>(candidate, `/repos/${REPOSITORY}`),
+      ]);
+      if (!repository.permissions?.push) {
+        throw new Error(`L’account @${profile.login} non risulta autorizzato a modificare ${REPOSITORY}. Il token precedente e le modifiche locali sono stati conservati.`);
+      }
+      setToken(candidate);
+      setUser(profile);
+      setReplacementToken("");
+      setStatus({ kind: "notice", text: `Nuovo token attivo per @${profile.login}. Le modifiche locali sono state conservate. Premi Salva nella sezione da aggiornare: GitHub verificherà allora il permesso di scrittura.` });
+    } catch (error) {
+      setStatus(errorStatus(error, "Impossibile sostituire il token. Le modifiche locali sono state conservate."));
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  function downloadDraft() {
+    const draft = {
+      format: "paolo-portfolio-draft-v1",
+      repository: REPOSITORY,
+      branch: BRANCH,
+      exportedAt: new Date().toISOString(),
+      baseShas: { portfolio: portfolioSha, publications: publicationsSha, site: siteContentSha },
+      portfolio,
+      publications: publications.map((publication) => ({
+        year: publication.year, category: publication.category, title: publication.title,
+        venue: publication.venue, href: publication.href, doi: publication.doi ?? "",
+        featured: publication.featured, focusEn: publication.focusEn, focusIt: publication.focusIt,
+      })),
+      settings,
+      pendingCvName: cvUpload?.name ?? null,
+    };
+    const url = URL.createObjectURL(new Blob([JSON.stringify(draft, null, 2)], { type: "application/json" }));
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "portfolio-bozza.json";
+    link.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  async function restoreDraft(file: File | null) {
+    if (!file || busy) return;
+    if (file.size > 4 * 1024 * 1024) {
+      setStatus({ kind: "error", text: "La bozza supera 4 MB. Scegli il file JSON scaricato dalla dashboard." });
+      return;
+    }
+    setBusy(true);
+    try {
+      const draft = JSON.parse(await file.text());
+      if (!draft || draft.format !== "paolo-portfolio-draft-v1" || draft.repository !== REPOSITORY || draft.branch !== BRANCH) {
+        throw new Error("Questo file non è una bozza compatibile con il portfolio.");
+      }
+      if (draft.baseShas?.portfolio !== portfolioSha || draft.baseShas?.publications !== publicationsSha || draft.baseShas?.site !== siteContentSha) {
+        throw new Error("La bozza parte da una versione diversa dei file GitHub. Per evitare di sovrascrivere aggiornamenti, confronta il JSON con i dati attuali e riporta le modifiche desiderate. Nessun dato locale è stato sostituito.");
+      }
+      const portfolioErrors = validatePortfolio(draft.portfolio, "draft");
+      if (portfolioErrors.length) throw new Error(`Contenuti della bozza non validi: ${portfolioErrors.slice(0, 3).join(" ")}`);
+      if (!Array.isArray(draft.publications) || draft.publications.length > 1000 || draft.publications.some((item: unknown) => {
+        if (!item || typeof item !== "object" || Array.isArray(item)) return true;
+        const record = item as Record<string, unknown>;
+        return ["year", "title", "venue", "href"].some((key) => typeof record[key] !== "string") ||
+          !["journal", "conference"].includes(String(record.category)) ||
+          ["doi", "focusEn", "focusIt"].some((key) => record[key] !== undefined && typeof record[key] !== "string") ||
+          (record.featured !== undefined && typeof record.featured !== "boolean");
+      })) throw new Error("L’elenco pubblicazioni della bozza non ha una struttura valida.");
+      const draftSettings = draft.settings;
+      if (!draftSettings || ["cvFile", "cvMetaEn", "cvMetaIt"].some((key) => typeof draftSettings[key] !== "string") ||
+        !draftSettings.cvFile.startsWith("/") || draftSettings.cvFile.startsWith("//") || /[\\\u0000-\u0020]/.test(draftSettings.cvFile) ||
+        draftSettings.cvFile.split(/[/?#]/).some((part: string) => part === "." || part === "..")) {
+        throw new Error("Le impostazioni CV della bozza non sono valide.");
+      }
+      if (hasUnsavedChanges && !window.confirm("Sostituire le modifiche locali con questa bozza? GitHub non verrà modificato.")) return;
+      setPortfolio(draft.portfolio as PortfolioContent);
+      setPublications((draft.publications as Publication[]).map((publication, index) => toManagedPublication(publication, `draft-${index}`)));
+      setSettings({ cvFile: draftSettings.cvFile, cvMetaEn: draftSettings.cvMetaEn, cvMetaIt: draftSettings.cvMetaIt });
+      setDirtySections(new Set(contentSections.map((section) => section.id)));
+      setEditorRevision((revision) => revision + 1);
+      setExpandedPublicationIds(new Set());
+      setQuery("");
+      setFilter("all");
+      setPublicationsDirty(true);
+      setCvDirty(true);
+      setCvUpload(null);
+      setStatus({ kind: "notice", text: "Bozza ripristinata solo nella dashboard. Salva separatamente le sezioni che vuoi pubblicare." + (draft.pendingCvName ? " Il PDF non è incluso nella bozza: selezionalo nuovamente prima di salvare il CV." : "") });
+    } catch (error) {
+      setStatus(errorStatus(error, "Impossibile leggere la bozza. I dati locali non sono stati modificati."));
+    } finally {
+      setBusy(false);
+    }
   }
 
   function updatePortfolio(next: PortfolioContent) {
@@ -490,13 +569,13 @@ export default function AdminPage() {
       const result = await writeRepositoryFile(token, PORTFOLIO_PATH,
         encodeBase64Text(`${JSON.stringify(portfolio, null, 2)}\n`),
         `Update portfolio content (${Array.from(dirtySections).join(", ")})`, portfolioSha);
-      if (!result.content?.sha) throw new Error("Salvataggio ricevuto senza versione del file. Ricarica i dati prima di modificarli ancora.");
+      if (!result.content?.sha) throw new Error("Risposta priva della versione del file. Conserva la bozza e verifica i commit su GitHub prima di riprovare: il salvataggio potrebbe essere avvenuto.");
       setPortfolioSha(result.content.sha);
       setSavedPortfolio(portfolio);
       setDirtySections(new Set());
       setStatus({ kind: "success", text: "Contenuti salvati. La pubblicazione sarà visibile quando GitHub Actions avrà completato il deployment." });
     } catch (error) {
-      setStatus({ kind: "error", text: error instanceof Error ? error.message : "Salvataggio dei contenuti non riuscito." });
+      setStatus(errorStatus(error, "Salvataggio dei contenuti non riuscito."));
     } finally {
       setBusy(false);
     }
@@ -591,10 +670,11 @@ export default function AdminPage() {
   }
 
   async function savePublications() {
+    if (busy) return;
     if (!publicationsSha) {
       setStatus({
         kind: "error",
-        text: "Versione dell’archivio non disponibile. Esci e accedi nuovamente.",
+        text: "Versione dell’archivio non disponibile. Scarica la bozza prima di ricaricare la dashboard.",
       });
       return;
     }
@@ -622,26 +702,21 @@ export default function AdminPage() {
         `Update portfolio publications (${ordered.length} records)`,
         publicationsSha,
       );
+      if (!result.content?.sha) throw new Error("Risposta priva della versione del file. Conserva la bozza e verifica i commit su GitHub prima di riprovare: il salvataggio potrebbe essere avvenuto.");
       setPublications(
         ordered.map((publication, index) =>
           toManagedPublication(publication, `saved-${index}`),
         ),
       );
       setExpandedPublicationIds(new Set());
-      setPublicationsSha(result.content?.sha ?? publicationsSha);
+      setPublicationsSha(result.content.sha);
       setPublicationsDirty(false);
       setStatus({
         kind: "success",
         text: `Salvate ${ordered.length} pubblicazioni. GitHub Actions sta aggiornando il sito.`,
       });
     } catch (error) {
-      setStatus({
-        kind: "error",
-        text:
-          error instanceof Error
-            ? error.message
-            : "Salvataggio delle pubblicazioni non riuscito.",
-      });
+      setStatus(errorStatus(error, "Salvataggio delle pubblicazioni non riuscito."));
     } finally {
       setBusy(false);
     }
@@ -681,10 +756,11 @@ export default function AdminPage() {
   }
 
   async function saveCv() {
+    if (busy) return;
     if (!siteContentSha) {
       setStatus({
         kind: "error",
-        text: "Versione delle impostazioni non disponibile. Esci e accedi nuovamente.",
+        text: "Versione delle impostazioni non disponibile. Scarica la bozza prima di ricaricare la dashboard.",
       });
       return;
     }
@@ -699,6 +775,7 @@ export default function AdminPage() {
 
     setBusy(true);
     setStatus({ kind: "notice", text: "Aggiornamento del CV in corso…" });
+    let pdfUploaded = false;
 
     try {
       let nextSettings = { ...settings };
@@ -707,13 +784,15 @@ export default function AdminPage() {
         const sha = await repositoryFileSha(token, CV_REPOSITORY_PATH);
         const fileBytes = new Uint8Array(await cvUpload.arrayBuffer());
 
-        await writeRepositoryFile(
+        const pdfResult = await writeRepositoryFile(
           token,
           CV_REPOSITORY_PATH,
           bytesToBase64(fileBytes),
           "Upload updated academic CV",
           sha,
         );
+        if (!pdfResult.content?.sha) throw new Error("Risposta PDF priva della versione del file. Conserva la bozza e verifica i commit su GitHub prima di riprovare.");
+        pdfUploaded = true;
         nextSettings = {
           ...nextSettings,
           cvFile: `${CV_PUBLIC_PATH}?v=${Date.now()}`,
@@ -727,9 +806,10 @@ export default function AdminPage() {
         "Update portfolio CV settings",
         siteContentSha,
       );
+      if (!settingsResult.content?.sha) throw new Error("Risposta priva della versione delle impostazioni. Conserva la bozza e verifica i commit su GitHub prima di riprovare.");
 
       setSettings(nextSettings);
-      setSiteContentSha(settingsResult.content?.sha ?? siteContentSha);
+      setSiteContentSha(settingsResult.content.sha);
       setCvUpload(null);
       setCvDirty(false);
       setStatus({
@@ -737,13 +817,8 @@ export default function AdminPage() {
         text: "CV aggiornato. GitHub Actions sta pubblicando la nuova versione.",
       });
     } catch (error) {
-      setStatus({
-        kind: "error",
-        text:
-          error instanceof Error
-            ? error.message
-            : "Aggiornamento del CV non riuscito.",
-      });
+      const failure = errorStatus(error, "Aggiornamento del CV non riuscito.");
+      setStatus(pdfUploaded && failure ? { ...failure, text: `Il PDF è stato caricato su GitHub, ma il salvataggio delle impostazioni CV non è confermato. ${failure.text}` } : failure);
     } finally {
       setBusy(false);
     }
@@ -791,13 +866,14 @@ export default function AdminPage() {
               <p className={styles.loginHint}>
                 Crea il token nelle{" "}
                 <a
-                  href="https://github.com/settings/personal-access-tokens/new"
+                  href={NEW_TOKEN_URL}
                   rel="noreferrer"
                   target="_blank"
                 >
                   impostazioni GitHub
                 </a>
-                : seleziona soltanto la repository <strong>{REPOSITORY}</strong>
+                : verifica <strong>Resource owner: PaoloSorino1</strong>,
+                {" "}seleziona soltanto la repository <strong>{REPOSITORY}</strong>
                 {" "}e abilita <strong>Contents: Read and write</strong>.
               </p>
               <button className={styles.primaryButton} disabled={busy} type="submit">
@@ -811,11 +887,7 @@ export default function AdminPage() {
                   scrive nei file del sito.
                 </span>
               </div>
-              {status && (
-                <p className={styles[status.kind]} role="status">
-                  {status.text}
-                </p>
-              )}
+              <StatusNotice status={status} />
             </form>
           </section>
         </div>
@@ -840,7 +912,7 @@ export default function AdminPage() {
             Apri il portfolio ↗
           </Link>
           <div className={styles.userMeta}>
-            <span>{user.name ?? user.login}</span>
+            <span>@{user.login}</span>
             <button
               className={styles.ghostButton}
               disabled={busy}
@@ -880,6 +952,37 @@ export default function AdminPage() {
           </div>
         </section>
 
+        <details className={styles.connectionTools}>
+          <summary>Connessione e bozze · @{user.login}</summary>
+          <div className={styles.connectionGrid}>
+            <form onSubmit={replaceToken}>
+              <p className={styles.fieldHint}>
+                Repository: <strong>{REPOSITORY}</strong> · Branch: <strong>{BRANCH}</strong>.
+                Puoi cambiare token mantenendo le modifiche aperte.
+              </p>
+              <label className={styles.label} htmlFor="replacement-token">Nuovo token GitHub
+                <input id="replacement-token" type="password" autoComplete="off" autoCapitalize="none"
+                  spellCheck={false} className={styles.input} value={replacementToken} disabled={busy}
+                  onChange={(event) => setReplacementToken(event.target.value)} placeholder="github_pat_…" />
+              </label>
+              <div className={styles.connectionActions}>
+                <button className={styles.secondaryButton} type="submit" disabled={busy || !replacementToken.trim()}>Usa nuovo token</button>
+                <a className={styles.inlineLink} href={NEW_TOKEN_URL} target="_blank" rel="noreferrer">Crea token su GitHub ↗</a>
+              </div>
+              <p className={styles.fieldHint}>Resource owner: PaoloSorino1 · Only select repositories: paolo-sorino-portfolio · Contents: Read and write. La scrittura viene verificata da GitHub quando salvi.</p>
+            </form>
+            <div>
+              <p className={styles.fieldHint}>Conserva una copia delle modifiche prima di ricaricare o uscire. Il file contiene i testi della dashboard, senza il token e senza il PDF del CV.</p>
+              <button className={styles.secondaryButton} type="button" disabled={busy} onClick={downloadDraft}>Scarica bozza</button>
+              <label className={`${styles.label} ${styles.draftRestore}`}>Ripristina bozza
+                <input type="file" accept=".json,application/json" aria-label="Ripristina bozza" disabled={busy}
+                  className={styles.input} onChange={(event) => { const file = event.target.files?.[0] ?? null; event.target.value = ""; void restoreDraft(file); }} />
+              </label>
+              <p className={styles.fieldHint}>Il ripristino è locale e richiede la stessa versione dei file GitHub. Per un nuovo CV seleziona di nuovo il PDF.</p>
+            </div>
+          </div>
+        </details>
+
         <div className={styles.studioLayout}>
           <aside className={styles.studioSidebar}>
             <p className={styles.sidebarLabel}>Contenuti del sito</p>
@@ -905,7 +1008,7 @@ export default function AdminPage() {
             <a className={styles.inlineLink} href={`https://github.com/${REPOSITORY}/actions`} target="_blank" rel="noreferrer">Stato pubblicazione ↗</a>
           </aside>
           <div className={styles.studioMain} aria-busy={busy}>
-          {status && <p className={styles[status.kind]} role="status">{status.text}</p>}
+          <StatusNotice status={status} />
 
         {tab === "publications" ? (
           <section className={styles.panel}>

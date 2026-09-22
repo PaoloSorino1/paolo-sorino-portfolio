@@ -1367,3 +1367,80 @@
   opacity: 0.78;
   pointer-events: none;
 }
+
+.connectionTools {
+  min-width: 0;
+  margin: 0 0 24px;
+  padding: 18px 22px;
+  border: 1px solid var(--admin-line);
+  border-radius: 18px;
+  background: var(--admin-paper);
+  overflow-wrap: anywhere;
+}
+
+.connectionTools > summary {
+  cursor: pointer;
+  color: var(--admin-blue-dark);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.connectionGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+  margin-top: 16px;
+}
+
+.connectionGrid > * {
+  min-width: 0;
+}
+
+.connectionActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.draftRestore {
+  margin-top: 18px;
+}
+
+.connectionTools input[type="file"] {
+  width: 100%;
+  min-width: 0;
+}
+
+.diagnostics {
+  margin-top: 12px;
+  font-size: 12px;
+}
+
+.diagnostics summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.diagnostics pre {
+  margin: 10px 0 0;
+  padding: 12px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.65);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+@media (max-width: 700px) {
+  .connectionGrid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .connectionTools {
+    padding: 16px;
+  }
+}
