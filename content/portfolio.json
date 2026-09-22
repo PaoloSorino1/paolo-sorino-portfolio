@@ -363,8 +363,8 @@
     "items": [
       {
         "period": {
-          "en": "2025—2026",
-          "it": "2025—2026"
+          "en": "2026",
+          "it": "2026"
         },
         "role": {
           "en": "Adjunct Professor",
@@ -413,6 +413,24 @@
         "context": {
           "en": "Master’s degree in Computer Engineering · Politecnico di Bari",
           "it": "Laurea magistrale in Ingegneria Informatica · Politecnico di Bari"
+        }
+      },
+      {
+        "period": {
+          "en": "2026",
+          "it": "2026"
+        },
+        "role": {
+          "en": "Adjunct Professor",
+          "it": "Docente a contratto"
+        },
+        "course": {
+          "en": "Fundamentals of Generative Artificial Intelligence",
+          "it": "Fondamenti di Intelligenza Artificiale Generativa "
+        },
+        "context": {
+          "en": "Bachelor’s degree in Design · Politecnico di Bari",
+          "it": "Laurea in Design · Politecnico di Bari"
         }
       }
     ],
