@@ -367,6 +367,24 @@
           "it": "2026"
         },
         "role": {
+          "en": "Professor",
+          "it": "Professore"
+        },
+        "course": {
+          "en": "Fundamentals of Information Security \nand Data Privacy",
+          "it": "Fondamenti di sicurezza delle informazioni e protezione dei dati"
+        },
+        "context": {
+          "en": "PhD Degree Course",
+          "it": "Corso di Dottorato"
+        }
+      },
+      {
+        "period": {
+          "en": "2026",
+          "it": "2026"
+        },
+        "role": {
           "en": "Adjunct Professor",
           "it": "Docente a contratto"
         },
