@@ -207,6 +207,24 @@
     {
       "year": "2026",
       "category": "conference",
+      "title": "Privacy-Preserving Federated Data Analytics for Healthcare via Fully Homomorphic Encryption",
+      "venue": "2026 IEEE Smart World Congress (SWC)",
+      "doi": "10.1109/SWC69865.2026.11764045",
+      "href": "https://doi.org/10.1109/SWC69865.2026.11764045",
+      "featured": false
+    },
+    {
+      "year": "2026",
+      "category": "conference",
+      "title": "A Federated Learning Architecture for Privacy-Preserving Network Intrusion Detection Across Distributed SOCs",
+      "venue": "2026 IEEE Smart World Congress (SWC)",
+      "doi": "10.1109/SWC69865.2026.11764085",
+      "href": "https://doi.org/10.1109/SWC69865.2026.11764085",
+      "featured": false
+    },
+    {
+      "year": "2026",
+      "category": "conference",
       "title": "Passenger experience on an automated shuttle service: a survey study on a real test ride in Italy",
       "venue": "Transportation Research Procedia, 95, 808–815",
       "doi": "10.1016/j.trpro.2026.02.102",
